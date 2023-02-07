@@ -1,30 +1,45 @@
 import React, { useState } from "react";
-import { useCSVReader } from "react-papaparse";
+import { useCSVReader, usePapaParse } from "react-papaparse";
 
 export default function CSVReader() {
   const { CSVReader } = useCSVReader();
+  const { readString } = usePapaParse();
 
   // State to store parsed data
   const [parsedData, setParsedData] = useState([]);
-
   //State to store table Column name
   const [tableRows, setTableRows] = useState([]);
-
   //State to store the values
   const [values, setValues] = useState([]);
+  const [csvString, setcsvString] = useState("");
+
+  
 
   return (
     <>
       <CSVReader
+        
         onUploadAccepted={(results) => {
-          console.log(results);
+          
 
+          const cvstr = `${results}`;
+
+          readString(cvstr, {
+            header: true,
+            worker: true,
+            complete: (rresults) => {
+              console.log(rresults);
+            },
+          });
+
+          // console.log(results);
+          
           const rowsArray = [];
           const valuesArray = [];
 
           // Iterating data to get column name and their values
           results.data.map((d) => {
-            rowsArray.push(Object.keys(d));
+            rowsArray.push(Object.values(d));
             valuesArray.push(Object.values(d));
           });
 
@@ -38,6 +53,7 @@ export default function CSVReader() {
           setValues(valuesArray);
         }}
       >
+
         {({ getRootProps, acceptedFile, ProgressBar, getRemoveFileProps }) => (
           <>
             <div>
