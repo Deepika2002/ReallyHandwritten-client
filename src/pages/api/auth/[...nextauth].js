@@ -1,28 +1,21 @@
+
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
-import clientPromise from "../../../lib/mongodb"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import prisma from "../../../../prisma/prisma"
 
-export const authOptions = {
-  // Configure one or more authentication providers
-  adapter: MongoDBAdapter(clientPromise),
+export default NextAuth({
+  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code"
-        }
-      }
     }),
-    // ...add more providers here
   ],
-  pages:{
-      signIn: '/auth/signin'
-  }
-}
-
-export default NextAuth(authOptions)
+  callbacks: {
+    async session({ session, token, user }) {
+      session.user.id = user.id;
+      return session;
+    },
+  },
+});

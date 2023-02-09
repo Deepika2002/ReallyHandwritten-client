@@ -1,36 +1,23 @@
 import React from 'react'
+import { useSession, getSession } from "next-auth/react"
 import { useRouter } from 'next/router'
-import { useSession, signIn, signOut } from 'next-auth/react'
 
-const Home = () => {
-	const { data: session } = useSession()
 
-	const { push, asPath } = useRouter()
+export default function Index() {
 
-	const handleSignOut = async () => {
-		const data = await signOut({ redirect: false, callbackUrl: '/auth/signin' })
+	const { push } = useRouter()
 
-		push(data.url)
-	}
+	const { data: session, status } = useSession()
 
-	const handleSignIn = () => push(`/auth/signin?callbackUrl=${asPath}`)
+  if (status === "loading") {
+    return <p>Loading...</p>
+  }
+
+  if (status === "unauthenticated") {
+    push('/login');
+  }
 
 	return (
-		<div placeItems='center' gridRowGap='1rem'>
-			{session ? (
-				<>
-					<div>Signed in as {session.user.email}</div>
-					<button onClick={handleSignOut}>Sign out</button>
-				</>
-			) : (
-				<>
-					<div>You are not signed in</div>
-
-					<button onClick={handleSignIn}>Sign in</button>
-				</>
-			)}
-		</div>
+		<div>index</div>
 	)
 }
-
-export default Home

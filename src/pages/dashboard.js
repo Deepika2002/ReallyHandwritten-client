@@ -14,6 +14,10 @@ import {
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import UploadCSV from '../components/uploadCSV'
+import { useSession, getSession } from "next-auth/react"
+import { useRouter } from 'next/router'
+
+
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -33,8 +37,20 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Dashboard() {
+
+  const { push } = useRouter()
+
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { data: session, status } = useSession()
+
+  if (status === "loading") {
+    return <p>Loading...</p>
+  }
+
+  if (status === "unauthenticated") {
+    push('/login');
+  }
 
   return (
     <>
