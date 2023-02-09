@@ -52,6 +52,9 @@ export default function Dashboard() {
     push('/login');
   }
 
+
+  
+
   return (
     <>
       {/*
@@ -63,6 +66,9 @@ export default function Dashboard() {
         ```
       */}
       <div>
+
+      
+
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-40 md:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -267,6 +273,9 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+
+
+
 
           <main className="flex-1">
             <UploadCSV/>

@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,
-    domains: ['images.unsplash.com', 'tailwindui.com'],
+    domains: ['images.unsplash.com', 'tailwindui.com', 'lh3.googleusercontent.com'],
   },
 }
 

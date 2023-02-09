@@ -40,6 +40,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  notes          Note[] //add note reference
 }
 
 model VerificationToken {
@@ -47,4 +48,12 @@ model VerificationToken {
   token      String   @unique
   expires    DateTime
   @@unique([identifier, token])
+}
+
+model Note {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  body Json?
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([id, userId])
 }
