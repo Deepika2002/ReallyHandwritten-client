@@ -23,7 +23,6 @@ export default function UploadCSV() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(valuesArray),
-        
       });
     } catch (error) {
       console.error(error);
