@@ -53,7 +53,7 @@ export default function UploadCSV() {
         {({ getRootProps, acceptedFile, ProgressBar, getRemoveFileProps }) => (
           <>
             <div>
-              <div className="px-4 sm:px-6 lg:px-8">
+              <div className="-mt-16 px-4 sm:px-6 lg:px-8">
                 <div className="sm:flex sm:items-center">
                   <div className="sm:flex-auto">
                     <h1 className="text-xl font-semibold text-gray-900">
