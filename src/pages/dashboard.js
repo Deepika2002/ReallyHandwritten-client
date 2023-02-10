@@ -16,6 +16,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import UploadCSV from '../components/uploadCSV'
 import { useSession, getSession, signOut } from "next-auth/react"
 import { useRouter } from 'next/router'
+// import NewTable from '../components/newTable'
 
 
 
@@ -280,6 +281,7 @@ export default function Dashboard() {
 
           <main className="flex-1">
             <UploadCSV/>
+            {/* <NewTable/> */}
             
           </main>
         </div>

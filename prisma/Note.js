@@ -19,7 +19,7 @@ export const getNoteByID = async (id) => {
 export const createNote = async (body, session) => {
   const newNote = await prisma.note.create({
     data: {
-      randomArray: body,
+      body,
       user: { connect: { email: session?.user?.email } },
     },
   });
