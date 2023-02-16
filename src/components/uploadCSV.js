@@ -36,7 +36,7 @@ export default function UploadCSV() {
           // Iterating data to get column name and their values
           results.data.map((data) => {
             rowsArray.push(Object.values(data));
-            valuesArray.push(Object.values(data));
+            valuesArray.push(Object.values([data]));
           });
           
           setValues(valuesArray);

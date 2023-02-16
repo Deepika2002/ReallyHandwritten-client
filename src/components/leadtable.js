@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Templates from './selectTemplates'
 import useSWR from 'swr'
+import NewTable from './newTable'
 {/* Table Headers static text */ }
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
@@ -60,6 +61,7 @@ export default function LeadTable(valuesArray) {
                                     ))}
                                 </tbody>
                             </table> */}
+                            <NewTable/>
                         </div>
                     </div>
                 </div>

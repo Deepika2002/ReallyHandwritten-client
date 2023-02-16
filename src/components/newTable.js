@@ -6,6 +6,9 @@ export default function NewTable() {
   const { data, error } = useSWR("/api/getnotes", fetcher);
 
   console.log(data);
+  const result = data[0].body.map((subArray) =>
+  subArray.map((innerArray) => innerArray.join(', '))
+);
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
@@ -43,50 +46,36 @@ export default function NewTable() {
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <table className="min-w-full divide-y divide-gray-300">
-              <thead className="bg-gray-50">
-                   
-                   <tr>
-                       <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                           First Name
-                       </th>
-                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                           Last Name
-                       </th>
-                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                           Mailing Address
-                       </th>
-                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                           Phone Number
-                       </th>
-                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                           Email
-                       </th>
-                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                           Signed Agent
-                       </th>
-                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                           Template
-                       </th>
-                       <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                           Status
-                       </th>
-
-
-                   </tr>
-               </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
-                  {data?.map((flow) => (
-                    <tr key={flow.id}>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{flow.id}</td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                        {flow.title}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{flow.url}</td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{flow.createdAt}</td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{flow.published}</td>
-                    </tr>
-                  ))}
-                </tbody>
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th scope="col" className="px-3 py-4 text-left text-sm font-semibold text-gray-900 ">
+                      ID
+                    </th>
+                    <th scope="col" className="px-3 py-4 text-left text-sm font-semibold text-gray-900">
+                      NAME
+                    </th>
+                    <th scope="col" className="px-3 py-4 text-left text-sm font-semibold text-gray-900">
+                      URL
+                    </th>
+                    <th scope="col" className="px-3 py-4 text-left text-sm font-semibold text-gray-900">
+                      CREATED ON
+                    </th>
+                    <th scope="col" className="px-3 py-4 text-left text-sm font-semibold text-gray-900">
+                      STATUS
+                    </th>
+                    
+                    
+                  </tr>
+                </thead>
+                <tbody>
+        {data[0].body.slice(1).map((row, index) => (
+          <tr key={index}>
+            {row[0].map((cell, index) => (
+              <td key={index}>{cell}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
               </table>
             </div>
           </div>

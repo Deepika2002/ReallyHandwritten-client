@@ -52,8 +52,17 @@ model VerificationToken {
 
 model Note {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
-  body Json?
+  body  body[]
   userId String?
   user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([id, userId])
+}
+
+type body {
+  firstName String
+  lastName  String
+  address   String
+  phone     String?
+  email     String
+  agent     String
 }
