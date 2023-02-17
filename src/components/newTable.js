@@ -6,9 +6,14 @@ export default function NewTable() {
   const { data, error } = useSWR("/api/getnotes", fetcher);
 
   console.log(data);
-  const result = data[0].body.map((subArray) =>
-  subArray.map((innerArray) => innerArray.join(', '))
-);
+  if (data && data[0]) {
+    const result = data[0].body.map((subArray) =>
+      subArray.map((innerArray) => innerArray.join(', '))
+    );
+    // ... do something with the result
+  } else {
+    // handle the case when data is undefined
+  }
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
@@ -67,15 +72,18 @@ export default function NewTable() {
                     
                   </tr>
                 </thead>
+                {data ? (
                 <tbody>
-        {data[0].body.slice(1).map((row, index) => (
-          <tr key={index}>
-            {row[0].map((cell, index) => (
-              <td key={index}>{cell}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
+                {data?.[0]?.body?.slice(1).map((row, index) => (
+   <tr key={index}>
+      {row[0].map((cell, index) => (
+         <td key={index}>{cell}</td>
+      ))}
+   </tr>
+))}
+      </tbody>) : (
+  <p>Loading...</p>
+)}
               </table>
             </div>
           </div>
