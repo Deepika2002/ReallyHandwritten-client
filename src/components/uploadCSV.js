@@ -30,6 +30,7 @@ export default function UploadCSV() {
   };
 
   return (
+    <>
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <CSVReader
         onUploadAccepted={(results) => {
@@ -91,5 +92,6 @@ export default function UploadCSV() {
         )}
       </CSVReader>
     </div>
+    </>
   );
 }
