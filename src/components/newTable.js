@@ -81,9 +81,7 @@ export default function NewTable() {
       ))}
    </tr>
 ))}
-      </tbody>) : (
-  <p>Loading...</p>
-)}
+      </tbody>) : ""}
               </table>
             </div>
           </div>

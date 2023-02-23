@@ -6,11 +6,11 @@ export default function Contacts() {
   return (
     <div>
          <SidebarHeader />
-      <main className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <UploadCSV />
         
 
-      </main>
+      </div>
     </div>
   )
 }
