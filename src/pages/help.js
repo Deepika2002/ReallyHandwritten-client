@@ -9,7 +9,7 @@ export default function Contacts() {
       <main className="flex-1">
             <div className="py-6">
               <div className="px-4 sm:px-6 lg:px-8">
-                <h1 className="text-2xl font-semibold text-gray-900">All Contacts</h1>
+                <h1 className="text-2xl font-semibold text-gray-900">Help</h1>
               </div>
               <div className=" px-4 sm:px-6 lg:px-8">
                 {/* Replace with your content */}
