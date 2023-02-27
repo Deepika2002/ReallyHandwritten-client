@@ -1,11 +1,12 @@
 import { useState, useRef } from "react";
 import csv from "csvtojson";
 import Datatable from "./datatable";
+import { XCircleIcon, CheckCircleIcon } from "@heroicons/react/20/solid";
+import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 
 export default function Csvtojson() {
-
   const [csvData, setCsvData] = useState("");
-  const [people, setpeople] = useState(null);
+  const [contacts, setcontacts] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [dragging, setDragging] = useState(false);
   const [filename, setFilename] = useState("");
@@ -15,12 +16,29 @@ export default function Csvtojson() {
 
   const handleRemoveFile = async (event) => {
     event.preventDefault();
-    setCsvData('');
-    setpeople(null);
+    setCsvData("");
+    setcontacts(null);
     setErrorMessage(null);
     setFilename(null);
-    inputRef.current.value = '';
+    inputRef.current.value = "";
+  };
+
+  async function handleSave() {
+    
+    console.log(JSON.stringify(contacts ))
+
+    const response = await fetch('/api/contacts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      
+      body: JSON.stringify(contacts)
+    });
+    const { result } = await response.json();
+    console.log(result);
   }
+
 
   const handleCsvUpload = async (file) => {
     if (!file || !file.name.endsWith(".csv")) {
@@ -38,24 +56,24 @@ export default function Csvtojson() {
 
       if (jsonArray.length === 0) {
         setErrorMessage("CSV file is empty");
-        setpeople(null);
+        setcontacts(null);
         return;
       }
       const headers = Object.keys(jsonArray[0]);
-      const requiredHeaders = ["name", "phone", "email", "address", "agent"]; // Replace with your own required headers
+      const requiredHeaders = ["firstname", "lastname", "phone", "email", "address", "agent"]; // Replace with your own required headers
       const missingHeaders = requiredHeaders.filter(
         (header) => !headers.includes(header)
       );
       if (missingHeaders.length > 0) {
         setErrorMessage(`Missing headers: ${missingHeaders.join(", ")}`);
-        setpeople(null);
+        setcontacts(null);
         return;
       }
       setErrorMessage(null);
-      setpeople(jsonArray);
+      setcontacts(jsonArray);
     } catch (error) {
       setErrorMessage("Error converting CSV to JSON");
-      setpeople(null);
+      setcontacts(null);
     }
   };
 
@@ -140,16 +158,23 @@ export default function Csvtojson() {
           <p className="pl-1 text-lg">or drag and drop</p>
         </div>
         <p className="mt-2 text-xs text-gray-500">CSV files up to 10MB</p>
+        <p className="mt-10 text-sm text-indigo-500 underline">
+          <a href="/import-contacts-example.csv" download={true}>
+            Download example csv file
+          </a>
+        </p>
+      </div>
 
-        {filename && (
-          <div className="mt-10 flex items-center justify-center">
+      {/* {filename && (
+          <div className="mt-16 flex items-center justify-center">
+            
             <span className="text-lg text">{filename}</span>
             <button
-              className="ml-4 flex items-center justify-center text-red-600"
+              className="ml-4 flex items-center justify-center text-red-600 text-sm"
               onClick={handleRemoveFile}
             >
               <svg
-                className="h-5 w-5 mr-1"
+                className="h-4 w-4 mr-1"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={1.5}
@@ -166,13 +191,91 @@ export default function Csvtojson() {
               Delete
             </button>
           </div>
-        )}
+        )} */}
 
-        {errorMessage && <p>{errorMessage}</p>}
-        {/* {people && <pre>{JSON.stringify(people, null, 2)}</pre>} */}
-      </div>
+      {errorMessage && (
+        <div className="mt-10 rounded-md bg-red-50 p-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <XCircleIcon
+                className="h-5 w-5 text-red-400"
+                aria-hidden="true"
+              />
+            </div>
+            <div className="ml-3">
+              <h3 className="text-md font-medium text-red-800">
+                Error uploading the file:{" "}
+                <span className="font-bold underline">{filename}</span>
+              </h3>
 
-      {people && <Datatable people={people} />}
+              <div className="mt-2 text-sm text-red-700">
+                <ul role="list" className="list-disc space-y-1 pl-5">
+                  <li>{errorMessage}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {filename && !errorMessage && (
+        <div className="rounded-md bg-green-50 p-4 mt-10 ">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <CheckCircleIcon
+                className="h-5 w-5 text-green-500"
+                aria-hidden="true"
+              />
+            </div>
+            <div className="ml-3">
+              <h3 className="text-md font-medium text-green-800">
+                Your file has been uploaded:{" "}
+                <span className="font-bold underline">{filename}</span>
+              </h3>
+
+              <div className="mt-3 text-sm text-green-700">
+                <ul role="list" className="list-disc space-y-1 pl-5">
+                  <li>
+                    Checkout the &apos;Preview&apos; table below and Click on
+                    the &apos;Import Contacts&apos; button to save the contacts
+                    to your account.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {contacts && (
+        <div className="flex flex-col mt-16">
+          <div className="sm:flex sm:items-center">
+            <div className="sm:flex-auto">
+              <h1 className="text-base font-semibold leading-6 text-gray-900">
+                Preview
+              </h1>
+              <p className="mt-2 text-sm text-gray-700">
+                A list of all the contacts in the file you&apos;ve uploaded.
+              </p>
+            </div>
+            <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+              <button
+                className="mt-3 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                
+                onClick={handleSave}
+              >
+                <ArrowDownTrayIcon
+                  className="-ml-1 mr-2 h-5 w-5"
+                  aria-hidden="true"
+                />
+                Import Contacts
+              </button>
+            </div>
+          </div>
+
+          <Datatable contacts={contacts} />
+        </div>
+      )}
     </>
   );
 }

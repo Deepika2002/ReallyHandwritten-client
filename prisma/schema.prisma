@@ -40,7 +40,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  notes          Note[] //add note reference
+  contacts      Contact[] //add note reference
 }
 
 model VerificationToken {
@@ -50,19 +50,15 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Note {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  body  body[]
-  userId String?
-  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Contact {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  firstname   String
+  lastname    String 
+  address     String
+  phone       String?
+  email       String
+  agent       String
+  userId      String?
+  user    User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([id, userId])
-}
-
-type body {
-  firstName String
-  lastName  String
-  address   String
-  phone     String?
-  email     String
-  agent     String
 }
