@@ -33,7 +33,7 @@ async function saveMyData(contacts, session) {
       email: obj.email,
       address: obj.address,
       agent: obj.agent,
-      userId: session?.user?.email
+      userId: session?.user?.id
     })),
   });
   return result;
