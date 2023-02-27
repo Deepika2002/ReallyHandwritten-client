@@ -1,10 +1,8 @@
 import React from "react";
 import Sidebarheader from "../components/sidebarheader";
-
+import Csvtojson from "../components/csvtojson"
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import UploadCSV from "../components/uploadCSV";
-import NewTable from "../components/uploadCSV";
 
 const tabs = [
   { name: "Import CSV", dataTarget: "#ss", current: true },
@@ -34,7 +32,7 @@ export default function Import() {
               {/* Replace with your content */}
               <div className="px-4 sm:px-6 lg:px-8">
 
-                <div>
+                <div className="py-4">
                   <div className="sm:hidden">
                     <label htmlFor="tabs" className="sr-only">
                       Select a tab
@@ -82,8 +80,9 @@ export default function Import() {
                   </div>
 
                   {showme ? (
-                    <div className="w-full bg-white rounded-md shadow">
-                      <UploadCSV />
+                    <div>
+                      <Csvtojson />
+                      
                     </div>
                   ) : (
                     <div className="w-full">

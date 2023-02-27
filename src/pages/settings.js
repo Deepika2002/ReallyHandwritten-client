@@ -1,5 +1,5 @@
 import React from 'react'
-import Sidebarheader from '../components/sidebarHeader'
+import Sidebarheader from '../components/sidebarheader'
 
 export default function Settings() {
   return (

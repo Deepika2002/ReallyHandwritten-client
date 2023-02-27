@@ -3,12 +3,11 @@ import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   Bars3BottomLeftIcon,
   BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
+  Cog6ToothIcon,
   HomeIcon,
-  InboxIcon,
-  UsersIcon,
+  ArrowDownTrayIcon,
+  UserGroupIcon,
+  QuestionMarkCircleIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
@@ -17,10 +16,10 @@ import { useRouter } from 'next/router';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: false },
-  { name: 'Contacts', href: '/contacts', icon: UsersIcon, current: false },
-  { name: 'Import', href: '/import', icon: FolderIcon, current: false },
-  { name: 'Settings', href: '/settings', icon: CalendarIcon, current: false },
-  { name: 'Help', href: '/help', icon: CalendarIcon, current: false } 
+  { name: 'All Contacts', href: '/contacts', icon: UserGroupIcon, current: false },
+  { name: 'Import Contacts', href: '/import', icon: ArrowDownTrayIcon, current: false },
+  { name: 'Settings', href: '/settings', icon: Cog6ToothIcon, current: false },
+  { name: 'Help', href: '/help', icon: QuestionMarkCircleIcon, current: false } 
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -158,7 +157,7 @@ export default function Sidebarheader() {
                     href={item.href}
                     className={classNames(
                       item.current ? 'bg-white text-indigo-500 border-l-4 border-indigo-500' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 ',
-                      'group flex items-center px-3 py-2 text-sm font-medium'
+                      'group flex items-center px-4 py-2 text-sm font-medium border-l-4'
                     )}
                   >
                     <item.icon
