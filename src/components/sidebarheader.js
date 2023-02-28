@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: false },
-  { name: 'All Contacts', href: '/contacts', icon: UserGroupIcon, current: false },
+  { name: 'All Contacts', href: '/allcontacts', icon: UserGroupIcon, current: false },
   { name: 'Import Contacts', href: '/import', icon: ArrowDownTrayIcon, current: false },
   { name: 'Settings', href: '/settings', icon: Cog6ToothIcon, current: false },
   { name: 'Help', href: '/help', icon: QuestionMarkCircleIcon, current: false } 
