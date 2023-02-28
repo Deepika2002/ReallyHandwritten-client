@@ -27,7 +27,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-papaparse": "^4.1.0",
-    "swr": "^2.0.3"
+    "swr": "^2.0.4"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
