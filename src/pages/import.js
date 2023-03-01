@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebarheader from "../components/sidebarheader";
 import Csvtojson from "../components/csvtojson"
+import { XCircleIcon } from "@heroicons/react/20/solid";
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
@@ -24,10 +25,18 @@ export default function Import() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  
+  
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!firstName || !lastName || !phone || !email || !address || !agent) {
+      setErrorMessage("Please fill in all required fields");
+      return;
+    }
 
     setIsLoading(true);
     let contacts = [{
@@ -71,7 +80,8 @@ export default function Import() {
 
     setIsLoading(false);
   };
-
+  
+  
   return (
     <>
       <Sidebarheader />
@@ -163,10 +173,11 @@ export default function Import() {
                                 className="block text-sm font-medium text-gray-700"
 
                               >
-                                First name
+                                First name<span className="text-base text-red-800"> *</span>
                               </label>
                               <input
                                 type="text"
+                                required
                                 value={firstName}
                                 onChange={(event) => setFirstName(event.target.value)}
                                 name="first-name"
@@ -182,10 +193,11 @@ export default function Import() {
                                 className="block text-sm font-medium text-gray-700"
 
                               >
-                                Last name
+                                Last name<span className="text-base text-red-800"> *</span>
                               </label>
                               <input
                                 type="text"
+                                required
                                 value={lastName}
                                 onChange={(event) => setLastName(event.target.value)}
                                 name="last-name"
@@ -199,10 +211,11 @@ export default function Import() {
                                 htmlFor="phone"
                                 className="block text-sm font-medium text-gray-700"
                               >
-                                Phone Number
+                                Phone Number<span className="text-base text-red-800"> *</span>
                               </label>
                               <input
                                 type="tel"
+                                required
                                 value={phone}
                                 onChange={(event) => setPhone(event.target.value)}
                                 name="phone"
@@ -217,10 +230,11 @@ export default function Import() {
                                 htmlFor="email-address"
                                 className="block text-sm font-medium text-gray-700"
                               >
-                                Email address
+                                Email address<span className="text-base text-red-800"> *</span>
                               </label>
                               <input
                                 type="email"
+                                required
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
                                 name="email-address"
@@ -236,10 +250,11 @@ export default function Import() {
                                 className="block text-sm font-medium text-gray-700"
 
                               >
-                                Address
+                                Address<span className="text-base text-red-800"> *</span>
                               </label>
                               <input
                                 type="address"
+                                required
                                 value={address}
                                 onChange={(event) => setAddress(event.target.value)}
                                 name="address"
@@ -254,10 +269,11 @@ export default function Import() {
                                 className="block text-sm font-medium text-gray-700"
 
                               >
-                                Signed Agent
+                                Signed Agent<span className="text-base text-red-800"> *</span>
                               </label>
                               <input
                                 type="agent"
+                                required
                                 value={agent}
                                 onChange={(event) => setAgent(event.target.value)}
                                 name="agent"
@@ -273,11 +289,35 @@ export default function Import() {
                         <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                           <button
                             type="submit"
+                            
                             disabled={isLoading}
                             className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                           >
                             {isLoading ? 'Saving...' : 'Save'}
                           </button>
+                          {errorMessage && (
+  <div className="mt-10 rounded-md bg-red-50 p-4">
+  <div className="flex">
+    <div className="flex-shrink-0">
+      <XCircleIcon
+        className="h-5 w-5 text-red-400"
+        aria-hidden="true"
+      />
+    </div>
+    <div className="ml-3">
+      <h3 className="text-md font-medium text-red-800">
+        Error updating the details:
+      </h3>
+
+      <div className="mt-2 text-sm text-red-700">
+        <ul role="list" className="list-disc space-y-1 pl-5">
+          <li>{errorMessage}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+)}
 
                         </div>
                       </div>
