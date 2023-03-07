@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Template from "../components/templates";
 
 export default function Cruddatatable(props) {
   const { contacts } = props;
@@ -67,9 +66,6 @@ export default function Cruddatatable(props) {
                       Status
                     </th>
                     <th scope="col" className="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pr-6">
-                      Template
-                    </th>
-                    <th scope="col" className="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pr-6">
                       Actions
                     </th>
                   </tr>
@@ -97,16 +93,7 @@ export default function Cruddatatable(props) {
                           pending
                         </span>
                       </td>
-                      <td className="whitespace-nowrap py-4 px-3 text-sm  font-medium sm:pr-6">
-                        <a onClick={(event) => {
-                          click(event)
-                        }} href="#" className="text-indigo-600 hover:text-indigo-900 mr-4">
-                          {visible && (
-                            <Template />
-                          )
-                          }Select
-                        </a>
-                      </td>
+                      
                       <td className="whitespace-nowrap py-4 px-3 text-sm  font-medium sm:pr-6">
                         <a href="#" className="text-indigo-600 hover:text-indigo-900 mr-4">
                           Edit
