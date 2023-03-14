@@ -26,7 +26,7 @@ export default function Import() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
- const [data,setData]= useState([]);
+  const [data, setData] = useState([]);
 
 
 
@@ -179,7 +179,7 @@ export default function Import() {
                               </label>
                               <input
                                 type="text"
-                                
+
                                 value={firstName}
                                 onChange={(event) => setFirstName(event.target.value)}
                                 name="first-name"
@@ -199,7 +199,7 @@ export default function Import() {
                               </label>
                               <input
                                 type="text"
-                                
+
                                 value={lastName}
                                 onChange={(event) => setLastName(event.target.value)}
                                 name="last-name"
@@ -217,7 +217,7 @@ export default function Import() {
                               </label>
                               <input
                                 type="tel"
-                                
+
                                 value={phone}
                                 onChange={(event) => setPhone(event.target.value)}
                                 name="phone"
@@ -236,7 +236,7 @@ export default function Import() {
                               </label>
                               <input
                                 type="email"
-                                
+
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
                                 name="email-address"
@@ -256,7 +256,7 @@ export default function Import() {
                               </label>
                               <input
                                 type="address"
-                                
+
                                 value={address}
                                 onChange={(event) => setAddress(event.target.value)}
                                 name="address"
@@ -275,7 +275,7 @@ export default function Import() {
                               </label>
                               <input
                                 type="agent"
-                                
+
                                 value={agent}
                                 onChange={(event) => setAgent(event.target.value)}
                                 name="agent"
@@ -291,7 +291,7 @@ export default function Import() {
                         <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                           <button
                             type="submit"
-                      
+
 
                             disabled={isLoading}
                             className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -320,8 +320,8 @@ export default function Import() {
                                   </div>
                                 </div>
                               </div>
-                            </div>)} 
-                           
+                            </div>)}
+
 
 
                         </div>
