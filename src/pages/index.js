@@ -203,9 +203,11 @@ export default function Home() {
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <a href="#">
                 <span className="sr-only">Your Company</span>
-                <img
-                  className="h-8 w-auto sm:h-10"
-                  src="https://tailwindui.com/img/logos/mark.svg?from-color=purple&from-shade=600&to-color=indigo&to-shade=600&toShade=600"
+                <Image
+                  className="h-16 w-auto sm:h-16"
+                  src="/assets/really-handwritten-favicon.png"
+                  width="300"
+                  height="300"
                   alt=""
                 />
               </a>
@@ -287,7 +289,7 @@ export default function Home() {
               </Link>
               <Link
                 href="/register"
-                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-red-900 from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
               >
                 Register
               </Link>
@@ -391,7 +393,7 @@ export default function Home() {
                 <div className="mt-10 flex items-center gap-x-6">
                   <a
                     href="#"
-                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
                   >
                     Learn More
                   </a>
@@ -458,7 +460,7 @@ export default function Home() {
                     <div className="mt-6">
                       <a
                         href="#"
-                        className="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                        className="inline-flex rounded-md border border-transparent bg-red-900  bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900 hover:bg-red-900"
                       >
                         Get started
                       </a>
@@ -494,7 +496,7 @@ export default function Home() {
                     <div className="mt-6">
                       <a
                         href="#"
-                        className="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                        className="inline-flex rounded-md border border-transparent bg-red-900  bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900"
                       >
                         Get started
                       </a>
@@ -529,7 +531,7 @@ export default function Home() {
                     <div className="mt-6">
                       <a
                         href="#"
-                        className="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                        className="inline-flex rounded-md border border-transparent bg-red-900 from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900 "
                       >
                         Get started
                       </a>
@@ -565,7 +567,7 @@ export default function Home() {
                     <div className="mt-6">
                       <a
                         href="#"
-                        className="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                        className="inline-flex rounded-md border border-transparent bg-red-900 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900"
                       >
                         Get started
                       </a>
@@ -603,7 +605,7 @@ export default function Home() {
             {features.map((feature) => (
               <div key={feature.name}>
                 <dt className="text-base font-semibold leading-7 text-gray-900">
-                  <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+                  <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-red-900">
                     <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
                   </div>
                   {feature.name}
@@ -630,13 +632,13 @@ export default function Home() {
             <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
               <a
                 href="#"
-                className="flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                className="flex items-center justify-center rounded-md border border-transparent bg-red-900 from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
               >
                 Learn more
               </a>
               <a
                 href="#"
-                className="flex items-center justify-center rounded-md border border-transparent bg-indigo-50 px-4 py-3 text-base font-medium text-indigo-800 shadow-sm hover:bg-indigo-100"
+                className="flex items-center justify-center rounded-md border border-transparent bg-red-900 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-red-900"
               >
                 Get started
               </a>
@@ -726,7 +728,7 @@ export default function Home() {
                 <div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
                   <button
                     type="submit"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-900 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-red-900"
                   >
                     Subscribe
                   </button>
