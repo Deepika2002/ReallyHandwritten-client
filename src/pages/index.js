@@ -390,14 +390,14 @@ export default function Home() {
                 Send Heartfelt Handwritten Letters
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
-                We understand the importance of personal connection in business. That's why we've made it our mission to help businesses like yours create a lasting impression with your customers through the power of handwritten letters.
+                We understand the importance of personal connection in business. Thats why we've made it our mission to help businesses like yours create a lasting impression with your customers through the power of handwritten letters.
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
                   <a
                     href="#"
                     className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
                   >
-                    Learn More
+                    Get Started
                   </a>
                 </div>
               </div>
@@ -464,7 +464,7 @@ export default function Home() {
                         href="#"
                         className="inline-flex rounded-md border border-transparent bg-red-900  bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900 hover:bg-red-900"
                       >
-                        Get started
+                        Learn More
                       </a>
                     </div>
                   </div>
@@ -500,7 +500,7 @@ export default function Home() {
                         href="#"
                         className="inline-flex rounded-md border border-transparent bg-red-900  bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900"
                       >
-                        Get started
+                        Learn More
                       </a>
                     </div>
                   </div>
@@ -535,7 +535,7 @@ export default function Home() {
                         href="#"
                         className="inline-flex rounded-md border border-transparent bg-red-900 from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900 "
                       >
-                        Get started
+                        Learn More
                       </a>
                     </div>
                   </div>
@@ -571,7 +571,7 @@ export default function Home() {
                         href="#"
                         className="inline-flex rounded-md border border-transparent bg-red-900 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900"
                       >
-                        Get started
+                        Learn More
                       </a>
                     </div>
                   </div>
