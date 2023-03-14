@@ -202,7 +202,7 @@ export default function Home() {
           <div className="mx-auto flex max-w-7xl items-center justify-between p-6 md:justify-start md:space-x-10 lg:px-8">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <a href="#">
-                <span className="sr-only">Your Company</span>
+                <span className="sr-only">ReallyHandWritten</span>
                 <Image
                   className="h-16 w-auto sm:h-16"
                   src="/assets/really-handwritten-favicon.png"
@@ -213,7 +213,7 @@ export default function Home() {
               </a>
             </div>
             <div className="-my-2 -mr-2 md:hidden">
-              <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+              <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-900">
                 <span className="sr-only">Open menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </Popover.Button>
@@ -256,7 +256,7 @@ export default function Home() {
                                 href={item.href}
                                 className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
                               >
-                                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white sm:h-12 sm:w-12">
+                                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-red-900 text-white sm:h-12 sm:w-12">
                                   <item.icon className="h-6 w-6" aria-hidden="true" />
                                 </div>
                                 <div className="ml-4">
@@ -313,14 +313,16 @@ export default function Home() {
                 <div className="px-5 pt-5 pb-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <img
-                        className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/mark.svg?from-color=purple&from-shade=600&to-color=indigo&to-shade=600&toShade=600"
+                      <Image
+                        className="h-16 w-auto"
+                        src="/assets/really-handwritten-favicon.png"
+                  width="600"
+                  height="600"
                         alt="Your Company"
                       />
                     </div>
                     <div className="-mr-2">
-                      <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                      <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-900">
                         <span className="sr-only">Close menu</span>
                         <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                       </Popover.Button>
@@ -334,7 +336,7 @@ export default function Home() {
                           href={item.href}
                           className="-m-3 flex items-center rounded-lg p-3 hover:bg-gray-50"
                         >
-                          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+                          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-red-900 text-white">
                             <item.icon className="h-6 w-6" aria-hidden="true" />
                           </div>
                           <div className="ml-4 text-base font-medium text-gray-900">{item.name}</div>
@@ -358,7 +360,7 @@ export default function Home() {
                   <div className="mt-6">
                     <a
                       href="#"
-                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-900 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900"
                     >
                       Sign up
                     </a>
@@ -625,7 +627,7 @@ export default function Home() {
           <div className="mx-auto max-w-4xl py-16 px-6 sm:py-24 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">
             <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               <span className="block">Ready to get started?</span>
-              <span className="-mb-1 block bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text pb-1 text-transparent">
+              <span className="-mb-1 block bg-red-900 bg-clip-text pb-1 text-transparent">
                 Get in touch or create an account.
               </span>
             </h2>
