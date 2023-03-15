@@ -382,7 +382,7 @@ export default function Home() {
         {/* Hero section */}
     <div className="bg-white">
       <div className="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20">
-        <div className="flex mx-auto max-w-7xl pt-10 pb-24 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:py-20 lg:px-8">
+        <div className=" md:block lg:flex mx-auto max-w-7xl pt-10 pb-24 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:py-20 lg:px-8">
           <div className="px-6 lg:px-0 lg:pt-4">
             <div className="mx-auto max-w-2xl">
               <div className="max-w-lg">
@@ -405,8 +405,8 @@ export default function Home() {
             </div>
             
           </div>
-          <div>
-                <Image src="/assets/hand2.jpg" alt="me" width="640" height="640" />
+          <div >
+                <Image className='max-[730px]:pt-10' src="/assets/hand2.jpg" alt="me" width="640" height="640" />
                 
               </div>
           
