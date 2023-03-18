@@ -2,85 +2,26 @@ import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 
 import Image from 'next/image'
-import{
-  ArrowUturnLeftIcon,
+import { } from '@heroicons/react/24/outline'
+
+import {
+  ArrowPathIcon,
+  CloudArrowUpIcon, 
+  FingerPrintIcon, 
+  LockClosedIcon,
   Bars3Icon,
-  ChatBubbleBottomCenterTextIcon,
-  ChatBubbleOvalLeftEllipsisIcon,
-    ChatBubbleLeftRightIcon,
-  DocumentChartBarIcon,
   HeartIcon,
-  PencilSquareIcon, 
-  InboxIcon,
+  PencilSquareIcon,
   InboxArrowDownIcon,
   UserGroupIcon,
-  QuestionMarkCircleIcon,
-  SparklesIcon,
-  TrashIcon,
   UsersIcon,
+  CheckIcon,
   XMarkIcon,
   HandThumbUpIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon,ChevronRightIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
 
-const solutions = [
-  {
-    name: 'Inbox',
-    description: 'Get a better understanding of where your traffic is coming from.',
-    href: '#',
-    icon: InboxIcon,
-  },
-  {
-    name: 'Messaging',
-    description: 'Speak directly to your customers in a more meaningful way.',
-    href: '#',
-    icon: ChatBubbleBottomCenterTextIcon,
-  },
-  {
-    name: 'Live Chat',
-    description: "Your customers' data will be safe and secure.",
-    href: '#',
-    icon: ChatBubbleLeftRightIcon,
-  },
-  {
-    name: 'Knowledge Base',
-    description: "Connect with third-party tools that you're already using.",
-    href: '#',
-    icon: QuestionMarkCircleIcon,
-  },
-]
-const metrics = [
-  { id: 1, stat: '8K+', emphasis: 'Companies', rest: 'use laoreet amet lacus nibh integer quis.' },
-  { id: 2, stat: '25K+', emphasis: 'Countries around the globe', rest: 'lacus nibh integer quis.' },
-  { id: 3, stat: '98%', emphasis: 'Customer satisfaction', rest: 'laoreet amet lacus nibh integer quis.' },
-  { id: 4, stat: '12M+', emphasis: 'Issues resolved', rest: 'lacus nibh integer quis.' },
-]
 const footerNavigation = {
-  solutions: [
-    { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' },
-  ],
-  support: [
-    { name: 'Pricing', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
-    { name: 'API Status', href: '#' },
-  ],
-  company: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Partners', href: '#' },
-  ],
-  legal: [
-    { name: 'Claim', href: '#' },
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms', href: '#' },
-  ],
   social: [
     {
       name: 'Facebook',
@@ -108,48 +49,45 @@ const footerNavigation = {
         </svg>
       ),
     },
-    {
-      name: 'Twitter',
-      href: '#',
-      icon: (props) => (
-        <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-          <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-        </svg>
-      ),
-    },
-    {
-      name: 'GitHub',
-      href: '#',
-      icon: (props) => (
-        <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-          <path
-            fillRule="evenodd"
-            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-            clipRule="evenodd"
-          />
-        </svg>
-      ),
-    },
-    {
-      name: 'Dribbble',
-      href: '#',
-      icon: (props) => (
-        <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-          <path
-            fillRule="evenodd"
-            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-            clipRule="evenodd"
-          />
-        </svg>
-      ),
-    },
   ],
 }
 const stats = [
-  { id: 1, name: 'Increase Conversion Rates', value: '10%' },
-  { id: 2, name: 'Open Rates', value: '98%' },
-  { id: 3, name: 'Repeat Business', value: '60%' },
-  { id: 4, name: 'Customer Retention', value: '76%' },
+  { id: 1, name: 'Increased Response Rate', value: '500%' },
+  { id: 2, name: 'Open Rates', value: '99%' },
+  { id: 3, name: 'Increased Spend', value: '18%' },
+  { id: 4, name: 'Increase in Referrals', value: '600%' },
+]
+const mainFeatures = [
+  {
+    name: 'Personalization and Emotional Connection',
+    description:
+      'Handwritten letters provide an opportunity to create a personal and emotional connection with customers. Customers feel valued and appreciated when they receive a handwritten letter, and this can increase their loyalty to the brand.',
+    icon: CloudArrowUpIcon,
+  },
+  {
+    name: 'Higher Response Rates',
+    description:
+      'Handwritten letters have been shown to have a higher response rate than traditional printed letters or digital communications. This increased response rate can translate into higher sales, customer loyalty, and better ROI for the business.',
+    icon: LockClosedIcon,
+  },
+  {
+    name: 'Differentiation and Brand Awareness',
+    description:
+      'Handwritten letters are a unique and memorable way to communicate with customers. When done well, they can help to differentiate a brand and create a positive impression in the minds of customers. This can help to build brand awareness and increase the chances of repeat business.',
+    icon: ArrowPathIcon,
+  },
+  {
+    name: 'Customer Retention',
+    description:
+      'Handwritten letters can improve customer retention rates by showing customers that they are valued and appreciated. According to a study by the United States Postal Service, customers who receive handwritten notes are more likely to be loyal to a brand than those who do not. This increased loyalty can lead to higher customer lifetime value and better ROI for the business.',
+    icon: FingerPrintIcon,
+  },
+]
+const pricingFeatures = [
+  'No Contracts',
+  'No Subspcriptions',
+  'No Commitments',
+  'No Complications',
 ]
 const features = [
   {
@@ -204,10 +142,10 @@ export default function Home() {
               <a href="#">
                 <span className="sr-only">ReallyHandWritten</span>
                 <Image
-                  className="h-16 w-auto sm:h-16"
-                  src="/assets/really-handwritten-favicon.png"
-                  width="300"
-                  height="300"
+                  className="h-12 w-auto sm:h-12"
+                  src="/assets/rhw-logo.png"
+                  width="500"
+                  height="500"
                   alt=""
                 />
               </a>
@@ -219,68 +157,23 @@ export default function Home() {
               </Popover.Button>
             </div>
             <Popover.Group as="nav" className="hidden space-x-10 md:flex">
-              <Popover className="relative">
-                {({ open }) => (
-                  <>
-                    <Popover.Button
-                      className={classNames(
-                        open ? 'text-gray-900' : 'text-gray-500',
-                        'group inline-flex items-center rounded-md bg-white text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
-                      )}
-                    >
-                      <span>Solutions</span>
-                      <ChevronDownIcon
-                        className={classNames(
-                          open ? 'text-gray-600' : 'text-gray-400',
-                          'ml-2 h-5 w-5 group-hover:text-gray-500'
-                        )}
-                        aria-hidden="true"
-                      />
-                    </Popover.Button>
 
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute z-10 -ml-4 mt-3 w-screen max-w-md transform lg:left-1/2 lg:ml-0 lg:max-w-2xl lg:-translate-x-1/2">
-                        <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                          <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
-                            {solutions.map((item) => (
-                              <a
-                                key={item.name}
-                                href={item.href}
-                                className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50"
-                              >
-                                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-red-900 text-white sm:h-12 sm:w-12">
-                                  <item.icon className="h-6 w-6" aria-hidden="true" />
-                                </div>
-                                <div className="ml-4">
-                                  <p className="text-base font-medium text-gray-900">{item.name}</p>
-                                  <p className="mt-1 text-sm text-gray-500">{item.description}</p>
-                                </div>
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      </Popover.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Popover>
 
-              <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+              <a href="#integrations" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                Integrations
+              </a>
+
+
+
+
+              <a href="#pricing" className="text-base font-medium text-gray-500 hover:text-gray-900">
                 Pricing
               </a>
-              <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                Partners
+              <a href="#features" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                Features
               </a>
-              <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                Company
+              <a href="#about" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                About Us
               </a>
             </Popover.Group>
             <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
@@ -316,8 +209,8 @@ export default function Home() {
                       <Image
                         className="h-16 w-auto"
                         src="/assets/really-handwritten-favicon.png"
-                  width="600"
-                  height="600"
+                        width="600"
+                        height="600"
                         alt="Your Company"
                       />
                     </div>
@@ -329,32 +222,21 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="mt-6">
-                    <nav className="grid grid-cols-1 gap-7">
-                      {solutions.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className="-m-3 flex items-center rounded-lg p-3 hover:bg-gray-50"
-                        >
-                          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md bg-red-900 text-white">
-                            <item.icon className="h-6 w-6" aria-hidden="true" />
-                          </div>
-                          <div className="ml-4 text-base font-medium text-gray-900">{item.name}</div>
-                        </a>
-                      ))}
-                    </nav>
                   </div>
                 </div>
                 <div className="py-6 px-5">
                   <div className="grid grid-cols-2 gap-4">
                     <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                      Integrations
+                    </a>
+                    <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
                       Pricing
                     </a>
                     <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                      Partners
+                      Features
                     </a>
                     <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                      Company
+                      About Us
                     </a>
                   </div>
                   <div className="mt-6">
@@ -362,12 +244,12 @@ export default function Home() {
                       href="#"
                       className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-900 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900"
                     >
-                      Sign up
+                      Register
                     </a>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
                       Existing customer?
-                      <a href="#" className="text-gray-900">
-                        Sign in
+                      <a href="/login" className="text-gray-900">
+                        Log in
                       </a>
                     </p>
                   </div>
@@ -380,66 +262,99 @@ export default function Home() {
 
       <main>
         {/* Hero section */}
-    <div className="bg-white">
-      <div className="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20">
-        <div className=" md:block lg:flex mx-auto max-w-7xl pt-10 pb-24 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:py-20 lg:px-8">
-          <div className="px-6 lg:px-0 lg:pt-4">
-            <div className="mx-auto max-w-2xl">
-              <div className="max-w-lg">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                Send Heartfelt Handwritten Letters
-                </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
-                We understand the importance of personal connection in business. Thats why we've made it our mission to help businesses like yours create a lasting impression with your customers through the power of handwritten letters.
-                </p>
-                <div className="mt-10 flex items-center gap-x-6">
-                  <a
-                    href="#"
-                    className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
-                  >
-                    Get Started
-                  </a>
+        <div className="bg-white">
+          <div className="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20">
+            <div className=" md:block lg:flex mx-auto max-w-7xl pt-10 pb-24 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:py-20 lg:px-8">
+              <div className="px-6 lg:px-0 lg:pt-4">
+                <div className="mx-auto max-w-2xl">
+                  <div className="max-w-lg">
+                    <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                      Send Heartfelt Handwritten Letters
+                    </h1>
+                    <p className="mt-6 text-lg leading-8 text-gray-600">
+                      We understand the importance of personal connection in business. Thats why we've made it our mission to help businesses like yours create a lasting impression with your customers through the power of handwritten letters.
+                    </p>
+                    <div className="mt-10 flex items-center gap-x-6">
+                      <a
+                        href="#"
+                        className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
+                      >
+                        Get Started
+                      </a>
+                    </div>
+                  </div>
+
                 </div>
+
               </div>
-              
+              <div >
+                <Image className='max-[730px]:pt-8' src="/assets/bars.png" alt="me" width="640" height="640" />
+
+              </div>
+
             </div>
-            
+            <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32" />
           </div>
-          <div >
-                <Image className='max-[730px]:pt-10' src="/assets/hand2.jpg" alt="me" width="640" height="640" />
-                
-              </div>
-          
         </div>
-        <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-white sm:h-32" />
-      </div>
-    </div>
-  
+
 
 
         {/* Analytics */}
 
 
 
-    <div className="bg-gray-400/5  sm:py-32">
-      <div className=" rounded-md  mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:max-w-none">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Facts you cannot ignore.
-            </h2>
-            <p className="mt-4 text-lg leading-8 text-gray-600">
-            Benefits of handwritten letters for businesses.
-            </p>
-          </div>
-          <dl className="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.id} className="flex flex-col  p-8">
-                <dt className="text-sm font-semibold leading-6 text-gray-600">{stat.name}</dt>
-                <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">{stat.value}</dd>
+        <div className="bg-gray-400/5  sm:py-32">
+          <div className=" rounded-md  mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-2xl lg:max-w-none">
+              <div className="text-center">
+                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                  Facts you cannot ignore.
+                </h2>
+                <p className="mt-4 text-lg leading-8 text-gray-600">
+                  Benefits of handwritten letters for businesses.
+                </p>
               </div>
-            ))}
-          </dl>
+              <dl className="mt-16 grid grid-cols-2 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
+                {stats.map((stat) => (
+                  <div key={stat.id} className="flex flex-col  p-8">
+                    <dt className="text-sm font-semibold leading-6 text-gray-600">{stat.name}</dt>
+                    <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900">{stat.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        {/* Integrations */}
+        <div id='integrations' className="relative bg-white">
+      <div className="mx-auto  max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
+        <div className="px-6 pt-24 pb-24 sm:pb-32 lg:col-span-7 lg:px-0 lg:pt-48 lg:pb-56 xl:col-span-6">
+          <div className="mx-auto lg:mt-24 md:mt-2 max-w-2xl lg:mx-0">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Integrations
+            </h1>
+            <p className="mt-6 text-base leading-7 text-gray-600">
+            Our Zapier integration connects our handwritten letter-sending service to over 2,000 web applications, allowing clients to set up custom workflows that automate handwritten letter sending based on triggers. The integration is easy to set up and fully customizable, providing a powerful tool for saving time while maintaining a personal touch with customers.
+            </p>
+            <div className="mt-10 flex items-center gap-x-6">
+              <a
+                href="#"
+                className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Get started
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0">
+        <Image
+              src="/assets/integrations.png"
+              alt=""
+              height="1024"
+              width="1024"
+              className="mt-6 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:w-full md:w-full md:mx:auto sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
+            />
         </div>
       </div>
     </div>
@@ -447,184 +362,159 @@ export default function Home() {
 
 
         {/* Alternating Feature Sections */}
-        <div className="relative overflow-hidden pt-16 pb-24">
-          <div aria-hidden="true" className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-gray-100" />
-          <div className="relative">
-            <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-              <div className="mx-auto max-w-xl px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
-                <div>
-                  
-                  <div className="mt-6">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900">Personalization and Emotional Connection</h2>
-                    <p className="mt-4 text-lg text-gray-500">
-                    Handwritten letters provide an opportunity to create a personal and emotional connection with customers. Customers feel valued and appreciated when they receive a handwritten letter, and this can increase their loyalty to the brand.
-                    </p>
-                    <div className="mt-6">
-                      <a
-                        href="#"
-                        className="inline-flex rounded-md border border-transparent bg-red-900  bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900 hover:bg-red-900"
-                      >
-                        Learn More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-              <div className="mt-12 sm:mt-16 lg:mt-0">
-                <div className="-mr-48 pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">
-                  <Image
-                    className="w-full rounded-xl  ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                    src="/assets/hand4.jpg"
-                    width="400"
-                    height="400"
-                    alt="Inbox user interface"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-24">
-            <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-              <div className="mx-auto max-w-xl px-6 lg:col-start-2 lg:mx-0 lg:max-w-none lg:py-32 lg:px-0">
-                <div>
-                  <div className="mt-6">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-                    Higher Response Rates
-                    </h2>
-                    <p className="mt-4 text-lg text-gray-500">
-                    Handwritten letters have been shown to have a higher response rate than traditional printed letters or digital communications. This increased response rate can translate into higher sales, customer loyalty, and better ROI for the business.
-                    </p>
-                    <div className="mt-6">
-                      <a
-                        href="#"
-                        className="inline-flex rounded-md border border-transparent bg-red-900  bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900"
-                      >
-                        Learn More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
-                <div className="-ml-48 pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0">
-                  <Image
-                    className="w-full rounded-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
-                    src="/assets/hand1.jpg"
-                    width="400"
-                    height="400"
-                    alt="Customer profile user interface"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        
-        <div className="relative mt-24">
-            <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-              <div className="mx-auto max-w-xl px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0">
-                <div>
-                  
-                  <div className="mt-6">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900">Differentiation and Brand Awareness</h2>
-                    <p className="mt-4 text-lg text-gray-500">
-                    Handwritten letters are a unique and memorable way to communicate with customers. When done well, they can help to differentiate a brand and create a positive impression in the minds of customers. This can help to build brand awareness and increase the chances of repeat business.
-                    </p>
-                    <div className="mt-6">
-                      <a
-                        href="#"
-                        className="inline-flex rounded-md border border-transparent bg-red-900 from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900 "
-                      >
-                        Learn More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-              <div className="mt-12 sm:mt-16 lg:mt-0">
-                <div className="-mr-48 pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">
-                  <Image
-                    className="w-full rounded-xl  ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                    src="/assets/hand3.jpg"
-                    width="400"
-                    height="400"
-                    alt="Inbox user interface"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-24">
-            <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
-              <div className="mx-auto max-w-xl px-6 lg:col-start-2 lg:mx-0 lg:max-w-none lg:py-32 lg:px-0">
-                <div>
-                  <div className="mt-6">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-                    Customer Retention
-                    </h2>
-                    <p className="mt-4 text-lg text-gray-500">
-                    Handwritten letters can improve customer retention rates by showing customers that they are valued and appreciated. According to a study by the United States Postal Service, customers who receive handwritten notes are more likely to be loyal to a brand than those who don't. This increased loyalty can lead to higher customer lifetime value and better ROI for the business.
-                    </p>
-                    <div className="mt-6">
-                      <a
-                        href="#"
-                        className="inline-flex rounded-md border border-transparent bg-red-900 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900"
-                      >
-                        Learn More
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
-                <div className="-ml-48 pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0">
-                  <Image
-                    className="w-full rounded-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
-                    src="/assets/hand1.jpg"
-                    width="400"
-                    height="400"
-                    alt="Customer profile user interface"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-
-        
-
-        {/* Feature Section */}
 
 
-    <div className="bg-white py-24 sm:py-32">
+
+        <div className="bg-white py-24 sm:py-32">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-4xl lg:text-center">
+              <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Connect with Customers on a Deeper Level
+              </p>
+            </div>
+            <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+              <dl className="grid max-w-xl grid-cols-1 gap-y-10 gap-x-20 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+                {mainFeatures.map((feature) => (
+                  <div key={feature.name} className="relative pl-16">
+                    <dt className="text-lg font-semibold leading-7 text-gray-900">
+                      <div className="absolute top-0 left-0 flex h-10 w-10 items-center justify-center rounded-lg bg-red-900">
+                        <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                      </div>
+                      {feature.name}
+                    </dt>
+                    <dd className="mt-2 text-base leading-7 text-gray-600">{feature.description}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <div className="mt-20 flex items-center justify-center gap-x-6">
+              <a
+                href="#"
+                className="rounded-md bg-red-900 px-12 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Get started
+              </a>
+            </div>
+          </div>
+        </div>
+
+
+    <div id='pricing' className="bg-white py-16 sm:py-18">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Personalize with Pen
-          </h2>
-          <dl className="col-span-2 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2">
-            {features.map((feature) => (
-              <div key={feature.name}>
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-red-900">
-                    <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
-                  </div>
-                  {feature.name}
-                </dt>
-                <dd className="mt-1 text-base leading-7 text-gray-600">{feature.description}</dd>
+        <div className="mx-auto max-w-2xl sm:text-center">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Affordable Pricing, Authentic Sentiments</h2>
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+          We believe that personal touch should not be limited to big budgets. That's why we offer cost-effective pricing plan for our handwritten letters service. The pricing is designed to fit the budgets without breaking the bank.
+          </p>
+        </div>
+        <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+          <div className="p-8 sm:p-10 lg:flex-auto">
+            <h3 className="text-2xl font-bold tracking-tight text-gray-900">Experience the Unmatched Connection</h3>
+            <p className="mt-6 text-base leading-7 text-gray-600">
+            Simplify Your Pricing Woes - One Affordable Plan for Handwritten Letters
+            </p>
+            <div className="mt-10 flex items-center gap-x-4">
+              <h4 className="flex-none text-sm font-semibold leading-6 text-red-900">What we focus</h4>
+              <div className="h-px flex-auto bg-gray-100" />
+            </div>
+            <ul
+              role="list"
+              className="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6"
+            >
+              {pricingFeatures.map((feature) => (
+                <li key={feature} className="flex gap-x-3">
+                  <CheckIcon className="h-6 w-5 flex-none text-red-900" aria-hidden="true" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
+            <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
+              <div className="mx-auto max-w-xs px-8">
+                <p className="text-base font-semibold text-gray-600">Per Card</p>
+                <p className="mt-6 flex items-baseline justify-center gap-x-2">
+                  <span className="text-5xl font-bold tracking-tight text-gray-900">$3.90</span>
+                  <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
+                </p>
+                <a
+                  href="#"
+                  className="mt-10 block w-full rounded-md bg-red-900 px-12 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Get Now
+                </a>
+                
               </div>
-            ))}
-          </dl>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
 
 
+        {/* Feature Section */}
+
+
+        <div id='features' className="bg-white py-24 sm:py-32">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Personalize with Pen
+              </h2>
+              <dl className="col-span-2 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2">
+                {features.map((feature) => (
+                  <div key={feature.name}>
+                    <dt className="text-base font-semibold leading-7 text-gray-900">
+                      <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-red-900">
+                        <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                      </div>
+                      {feature.name}
+                    </dt>
+                    <dd className="mt-1 text-base leading-7 text-gray-600">{feature.description}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+        {/* About us */}
+    <div id='about' className="relative bg-white">
+      <div className="mx-auto  max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
+        <div className="px-6 pt-10 pb-24 sm:pb-32 lg:col-span-7 lg:px-0 lg:pt-48 lg:pb-56 xl:col-span-6">
+          <div className="mx-auto lg:mt-24 md:mt-2 max-w-2xl lg:mx-0">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              About Us
+            </h1>
+            <p className="mt-6 text-base leading-7 text-gray-600">
+            Powered by humans, not robots. Really Handwritten was created by the Weiss sisters out of Tampa, FL. The sisters, Micaela, Melanie and Meredith, all happened to be pregnant at the same time and were to be stay at home moms. Eager to continue to work while still spending valuable time with their newborns, Really Handwritten was born. Since then, the sisters have grown to help several businesses retain more clients, gain more referrals, and increase client retention through the power of handwritten notes.
+            </p>
+            <div className="mt-10 flex items-center gap-x-6">
+              <a
+                href="#"
+                className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Get started
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0">
+        <Image
+              src="/assets/Weiss_Sisters.jpg"
+              alt=""
+              height="1024"
+              width="1024"
+              className="mt-10 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:w-full md:w-full md:mx:auto sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
+            />
+        </div>
+      </div>
+    </div>
+
+
         {/* CTA Section */}
-        <div className="bg-white">
-          <div className="mx-auto max-w-4xl py-16 px-6 sm:py-24 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">
+        <div className="bg-gray-50">
+          <div className="mx-auto max-w-4xl pt-24 py-12 mt-10 px-6 sm:py-16 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">
             <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               <span className="block">Ready to get started?</span>
               <span className="-mb-1 block bg-red-900 bg-clip-text pb-1 text-transparent">
@@ -632,12 +522,6 @@ export default function Home() {
               </span>
             </h2>
             <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
-              <a
-                href="#"
-                className="flex items-center justify-center rounded-md border border-transparent bg-red-900 from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
-              >
-                Learn more
-              </a>
               <a
                 href="#"
                 className="flex items-center justify-center rounded-md border border-transparent bg-red-900 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-red-900"
@@ -654,90 +538,7 @@ export default function Home() {
           Footer
         </h2>
         <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 lg:px-8 lg:pt-24">
-          <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-            <div className="grid grid-cols-2 gap-8 xl:col-span-2">
-              <div className="md:grid md:grid-cols-2 md:gap-8">
-                <div>
-                  <h3 className="text-base font-medium text-gray-900">Solutions</h3>
-                  <ul role="list" className="mt-4 space-y-4">
-                    {footerNavigation.solutions.map((item) => (
-                      <li key={item.name}>
-                        <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mt-12 md:mt-0">
-                  <h3 className="text-base font-medium text-gray-900">Support</h3>
-                  <ul role="list" className="mt-4 space-y-4">
-                    {footerNavigation.support.map((item) => (
-                      <li key={item.name}>
-                        <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="md:grid md:grid-cols-2 md:gap-8">
-                <div>
-                  <h3 className="text-base font-medium text-gray-900">Company</h3>
-                  <ul role="list" className="mt-4 space-y-4">
-                    {footerNavigation.company.map((item) => (
-                      <li key={item.name}>
-                        <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mt-12 md:mt-0">
-                  <h3 className="text-base font-medium text-gray-900">Legal</h3>
-                  <ul role="list" className="mt-4 space-y-4">
-                    {footerNavigation.legal.map((item) => (
-                      <li key={item.name}>
-                        <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="mt-12 xl:mt-0">
-              <h3 className="text-base font-medium text-gray-900">Subscribe to our newsletter</h3>
-              <p className="mt-4 text-base text-gray-500">
-                The latest news, articles, and resources, sent to your inbox weekly.
-              </p>
-              <form className="mt-4 sm:flex sm:max-w-md">
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
-                </label>
-                <input
-                  type="email"
-                  name="email-address"
-                  id="email-address"
-                  autoComplete="email"
-                  required
-                  className="w-full min-w-0 appearance-none rounded-md border border-gray-300 bg-white py-2 px-4 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:placeholder-gray-400 focus:outline-none focus:ring-indigo-500"
-                  placeholder="Enter your email"
-                />
-                <div className="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                  <button
-                    type="submit"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-900 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-red-900"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+          
           <div className="mt-12 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
             <div className="flex space-x-6 md:order-2">
               {footerNavigation.social.map((item) => (
