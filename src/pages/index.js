@@ -11,6 +11,10 @@ import {
   LockClosedIcon,
   Bars3Icon,
   HeartIcon,
+  LinkIcon,
+  ChevronDoubleUpIcon,
+  MegaphoneIcon,
+  ArrowPathRoundedSquareIcon,
   PencilSquareIcon,
   InboxArrowDownIcon,
   UserGroupIcon,
@@ -62,25 +66,25 @@ const mainFeatures = [
     name: 'Personalization and Emotional Connection',
     description:
       'Handwritten letters provide an opportunity to create a personal and emotional connection with customers. Customers feel valued and appreciated when they receive a handwritten letter, and this can increase their loyalty to the brand.',
-    icon: CloudArrowUpIcon,
+    icon: LinkIcon,
   },
   {
     name: 'Higher Response Rates',
     description:
       'Handwritten letters have been shown to have a higher response rate than traditional printed letters or digital communications. This increased response rate can translate into higher sales, customer loyalty, and better ROI for the business.',
-    icon: LockClosedIcon,
+    icon: ChevronDoubleUpIcon,
   },
   {
     name: 'Differentiation and Brand Awareness',
     description:
       'Handwritten letters are a unique and memorable way to communicate with customers. When done well, they can help to differentiate a brand and create a positive impression in the minds of customers. This can help to build brand awareness and increase the chances of repeat business.',
-    icon: ArrowPathIcon,
+    icon: MegaphoneIcon,
   },
   {
     name: 'Customer Retention',
     description:
       'Handwritten letters can improve customer retention rates by showing customers that they are valued and appreciated. According to a study by the United States Postal Service, customers who receive handwritten notes are more likely to be loyal to a brand than those who do not. This increased loyalty can lead to higher customer lifetime value and better ROI for the business.',
-    icon: FingerPrintIcon,
+    icon: ArrowPathRoundedSquareIcon,
   },
 ]
 const pricingFeatures = [
