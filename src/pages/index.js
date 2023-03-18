@@ -226,16 +226,16 @@ export default function Home() {
                 </div>
                 <div className="py-6 px-5">
                   <div className="grid grid-cols-2 gap-4">
-                    <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                    <a href="#integrations" className="text-base font-medium text-gray-900 hover:text-gray-700">
                       Integrations
                     </a>
-                    <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                    <a href="#pricing" className="text-base font-medium text-gray-900 hover:text-gray-700">
                       Pricing
                     </a>
-                    <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                    <a href="#features" className="text-base font-medium text-gray-900 hover:text-gray-700">
                       Features
                     </a>
-                    <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                    <a href="#about" className="text-base font-medium text-gray-900 hover:text-gray-700">
                       About Us
                     </a>
                   </div>
