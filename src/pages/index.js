@@ -248,9 +248,9 @@ export default function Home() {
                     </a>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
                       Existing customer?
-                      <a href="/login" className="text-gray-900">
+                      <Link href="/login" className="text-gray-900">
                         Log in
-                      </a>
+                      </Link>
                     </p>
                   </div>
                 </div>
