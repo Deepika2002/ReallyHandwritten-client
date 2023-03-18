@@ -206,13 +206,13 @@ export default function Home() {
                 <div className="px-5 pt-5 pb-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <Image
-                        className="h-16 w-auto"
-                        src="/assets/really-handwritten-favicon.png"
-                        width="600"
-                        height="600"
-                        alt="Your Company"
-                      />
+                    <Image
+                  className="h-12 w-auto sm:h-12"
+                  src="/assets/rhw-logo.png"
+                  width="500"
+                  height="500"
+                  alt=""
+                />
                     </div>
                     <div className="-mr-2">
                       <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-red-900">
