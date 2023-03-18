@@ -481,7 +481,7 @@ export default function Home() {
         {/* About us */}
     <div id='about' className="relative bg-white">
       <div className="mx-auto  max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
-        <div className="px-6 pt-10 pb-24 sm:pb-18 lg:col-span-7 lg:px-0 lg:pt-48 lg:pb-56 xl:col-span-6">
+        <div className="px-6 pt-10 pb-12 sm:pb-18 lg:col-span-7 lg:px-0 lg:pt-48 lg:pb-56 xl:col-span-6">
           <div className="mx-auto lg:mt-24 md:mt-2 max-w-2xl lg:mx-0">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               About Us
