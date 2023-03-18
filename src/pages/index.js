@@ -25,7 +25,7 @@ const footerNavigation = {
   social: [
     {
       name: 'Facebook',
-      href: '#',
+      href: 'https://www.facebook.com/Really-Handwritten-117171281322527',
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
