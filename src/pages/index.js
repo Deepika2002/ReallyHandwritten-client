@@ -516,12 +516,12 @@ export default function Home() {
             <a href="#" className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
             Get In Touch <span aria-hidden="true">→</span>
           </a>
-          <a
-            href="#"
+          <Link
+            href="/signup"
             className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
           >
             Get started
-          </a>
+          </Link>
           
         </div>
           
