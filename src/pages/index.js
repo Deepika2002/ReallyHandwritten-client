@@ -58,7 +58,7 @@ const footerNavigation = {
 const stats = [
   { id: 1, name: 'Increased Response Rate', value: '500%' },
   { id: 2, name: 'Open Rates', value: '99%' },
-  { id: 3, name: 'Increased Spend', value: '18%' },
+  { id: 3, name: 'Increased Client Spend', value: '18%' },
   { id: 4, name: 'Increase in Referrals', value: '600%' },
 ]
 const mainFeatures = [
@@ -97,7 +97,7 @@ const features = [
   {
     name: 'Personalization Options',
     description:
-      'create a unique and memorable letter that represents their brand and message. Can select from a range of templates, or create their own letter from scratch.',
+      'Create a unique and memorable letter that represents their brand and message. You can select from a range of templates, or create your own letter from scratch.',
     icon: UsersIcon,
   },
   {
@@ -109,13 +109,13 @@ const features = [
   {
     name: 'Quality Control',
     description:
-      'We make sure all letters meet the highest standards of quality and accuracy. This includes checking for spelling and grammar errors, as well as ensuring that the letter is personalized and tailored to the customer.',
+      'We make sure all letters meet the highest standards of quality and accuracy. This includes checking for spelling and grammar errors.',
     icon: HandThumbUpIcon,
   },
   {
     name: 'Fast Turnaround Time',
     description:
-      'We ensure that customers receive a timely and relevant message. We provide a clear timeline for when letters will be written and sent.',
+      'We ensure that customers receive a timely and relevant message. All letters will be put in the mail within 48 hours of being received.',
     icon: HeartIcon,
   },
   {
@@ -139,7 +139,7 @@ function classNames(...classes) {
 export default function Home() {
   return (
     <div className="bg-white">
-      <header>
+      <header className='fixed bg-white   z-50 w-full '>
         <Popover className="relative bg-white">
           <div className="mx-auto flex max-w-7xl items-center justify-between p-6 md:justify-start md:space-x-10 lg:px-8">
             <div className="flex justify-start lg:w-0 lg:flex-1">
@@ -185,10 +185,10 @@ export default function Home() {
                 Login
               </Link>
               <Link
-                href="/register"
+                href="/signup"
                 className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-red-900 from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
               >
-                Register
+                Sign Up
               </Link>
             </div>
           </div>
@@ -245,10 +245,10 @@ export default function Home() {
                   </div>
                   <div className="mt-6">
                     <a
-                      href="#"
+                      href="/signup"
                       className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-900 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900"
                     >
-                      Register
+                      Sign Up
                     </a>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
                       Existing customer?
@@ -267,7 +267,7 @@ export default function Home() {
       <main>
         {/* Hero section */}
         <div className="bg-white">
-          <div className="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20">
+          <div className="relative pt-32 isolate overflow-hidden bg-gradient-to-b from-indigo-100/20">
             <div className=" md:block lg:flex mx-auto max-w-7xl pt-10 pb-24 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:py-20 lg:px-8">
               <div className="px-6 lg:px-0 lg:pt-4">
                 <div className="mx-auto max-w-2xl">
@@ -280,7 +280,7 @@ export default function Home() {
                     </p>
                     <div className="mt-10 flex items-center gap-x-6">
                       <a
-                        href="#"
+                        href="/signup"
                         className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
                       >
                         Get Started
@@ -292,7 +292,7 @@ export default function Home() {
 
               </div>
               <div >
-                <Image className='max-[730px]:pt-8' src="/assets/bars.png" alt="me" width="640" height="640" />
+                <Image className='max-[730px]:pt-8' src="/assets/open-rates-bymMedium.png" alt="me" width="640" height="640" />
 
               </div>
 
@@ -343,7 +343,7 @@ export default function Home() {
             </p>
             <div className="mt-10 flex items-center gap-x-6">
               <a
-                href="#"
+                href="/signup"
                 className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Get started
@@ -357,7 +357,7 @@ export default function Home() {
               alt=""
               height="1024"
               width="1024"
-              className="mt-6 aspect-[6/5] w-full max-w-lg rounded-2xl object-cover sm:w-full md:w-full md:mx:auto sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
+              className="mt-6  w-full max-w-lg rounded-2xl object-cover sm:w-full md:w-full md:mx:auto sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-6"
             />
         </div>
       </div>
@@ -369,7 +369,7 @@ export default function Home() {
 
 
 
-        <div className="bg-white py-24 sm:py-32">
+        <div className="bg-white py-24 mt-32 sm:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-4xl lg:text-center">
               <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -391,14 +391,7 @@ export default function Home() {
                 ))}
               </dl>
             </div>
-            <div className="mt-20 flex items-center justify-center gap-x-6">
-              <a
-                href="#"
-                className="rounded-md bg-red-900 px-12 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Get started
-              </a>
-            </div>
+            
           </div>
         </div>
 
@@ -408,7 +401,7 @@ export default function Home() {
         <div className="mx-auto max-w-2xl sm:text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Affordable Pricing, Authentic Sentiments</h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-          We believe that personal touch should not be limited to big budgets. That's why we offer cost-effective pricing plan for our handwritten letters service. The pricing is designed to fit the budgets without breaking the bank.
+          We believe that personal touch should not be limited to big budgets. That's why we offer cost-effective pricing plan for our handwritten letter service. The pricing is designed to fit the budgets without breaking the bank.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
@@ -418,7 +411,7 @@ export default function Home() {
             Simplify Your Pricing Woes - One Affordable Plan for Handwritten Letters
             </p>
             <div className="mt-10 flex items-center gap-x-4">
-              <h4 className="flex-none text-sm font-semibold leading-6 text-red-900">What we focus</h4>
+              <h4 className="flex-none text-sm font-semibold leading-6 text-red-900">We make it easy</h4>
               <div className="h-px flex-auto bg-gray-100" />
             </div>
             <ul
@@ -432,20 +425,21 @@ export default function Home() {
                 </li>
               ))}
             </ul>
+            
           </div>
           <div className="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
             <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
               <div className="mx-auto max-w-xs px-8">
                 <p className="text-base font-semibold text-gray-600">Per Card</p>
                 <p className="mt-6 flex items-baseline justify-center gap-x-2">
-                  <span className="text-5xl font-bold tracking-tight text-gray-900">$3.90</span>
+                  <span className="text-5xl font-bold tracking-tight text-gray-900">$4.47</span>
                   <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
                 </p>
                 <a
-                  href="#"
+                  href="/signup"
                   className="mt-10 block w-full rounded-md bg-red-900 px-12 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Get Now
+                  Sign Up
                 </a>
                 
               </div>
@@ -460,7 +454,7 @@ export default function Home() {
         {/* Feature Section */}
 
 
-        <div id='features' className="bg-white py-24 sm:py-32">
+        <div id='features' className="bg-white py-24 sm:py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -485,7 +479,7 @@ export default function Home() {
         {/* About us */}
     <div id='about' className="relative bg-white">
       <div className="mx-auto  max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
-        <div className="px-6 pt-10 pb-12 sm:pb-18 lg:col-span-7 lg:px-0 lg:pt-48 lg:pb-56 xl:col-span-6">
+        <div className="px-6 pt-10 pb-12 sm:pb-18 lg:col-span-7 lg:px-0 lg:pt-32 lg:pb-56 xl:col-span-6">
           <div className="mx-auto lg:mt-24 md:mt-2 max-w-2xl lg:mx-0">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               About Us
@@ -493,17 +487,10 @@ export default function Home() {
             <p className="mt-6 text-base leading-7 text-gray-600">
             Powered by humans, not robots. Really Handwritten was created by the Weiss sisters out of Tampa, FL. The sisters, Micaela, Melanie and Meredith, all happened to be pregnant at the same time and were to be stay at home moms. Eager to continue to work while still spending valuable time with their newborns, Really Handwritten was born. Since then, the sisters have grown to help several businesses retain more clients, gain more referrals, and increase client retention through the power of handwritten notes.
             </p>
-            <div className="mt-10 flex items-center gap-x-6">
-              <a
-                href="#"
-                className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Get started
-              </a>
-            </div>
+            
           </div>
         </div>
-        <div className="relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0">
+        <div className="relative lg:col-span-6 lg:-mr-8 md:w-full  xl:inset-0 xl:left-1/3 xl:mr-0">
         <Image
               src="/assets/Weiss_Sisters.jpg"
               alt=""
@@ -518,21 +505,42 @@ export default function Home() {
 
         {/* CTA Section */}
         <div className="bg-gray-50">
-          <div className="mx-auto max-w-4xl pt-24 py-12 mt-10 px-6 sm:py-16 lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">
+          <div className="mx-auto max-w-4xl pt-24 py-12 mt-10 px-6 sm:py-8 sm:pt-16  lg:flex lg:max-w-7xl lg:items-center lg:justify-between lg:px-8">
             <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               <span className="block">Ready to get started?</span>
               <span className="-mb-1 block bg-red-900 bg-clip-text pb-1 text-transparent">
                 Get in touch or create an account.
               </span>
             </h2>
-            <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
+            <div className="mt-10 flex items-center gap-x-6 lg:mt-0 lg:flex-shrink-0">
+            <a href="#" className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+            Get In Touch <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href="#"
+            className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
+          >
+            Get started
+          </a>
+          
+        </div>
+            {/* <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
               <a
-                href="#"
+                href="/signup"
                 className="flex items-center justify-center rounded-md border border-transparent bg-red-900 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-red-900"
               >
                 Get started
               </a>
             </div>
+            
+            <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
+              <a
+                href="/signup"
+                className="flex items-center justify-center rounded-md border border-transparent bg-red-900 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-red-900"
+              >
+                Get started
+              </a>
+            </div> */}
           </div>
         </div>
       </main>
@@ -553,7 +561,7 @@ export default function Home() {
               ))}
             </div>
             <p className="mt-8 text-base text-gray-400 md:order-1 md:mt-0">
-              &copy; 2020 Your Company, Inc. All rights reserved.
+              &copy; 2023 Really Handwritten. All rights reserved.
             </p>
           </div>
         </div>
