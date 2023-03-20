@@ -279,12 +279,12 @@ export default function Home() {
                       We understand the importance of personal connection in business. Thats why we've made it our mission to help businesses like yours create a lasting impression with your customers through the power of handwritten letters.
                     </p>
                     <div className="mt-10 flex items-center gap-x-6">
-                      <a
+                      <Link
                         href="/signup"
                         className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-900"
                       >
                         Get Started
-                      </a>
+                      </Link>
                     </div>
                   </div>
 
@@ -342,12 +342,12 @@ export default function Home() {
             Our Zapier integration connects our handwritten letter-sending service to over 2,000 web applications, allowing clients to set up custom workflows that automate handwritten letter sending based on triggers. The integration is easy to set up and fully customizable, providing a powerful tool for saving time while maintaining a personal touch with customers.
             </p>
             <div className="mt-10 flex items-center gap-x-6">
-              <a
+              <Link
                 href="/signup"
                 className="rounded-md bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Get started
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -524,23 +524,7 @@ export default function Home() {
           </a>
           
         </div>
-            {/* <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
-              <a
-                href="/signup"
-                className="flex items-center justify-center rounded-md border border-transparent bg-red-900 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-red-900"
-              >
-                Get started
-              </a>
-            </div>
-            
-            <div className="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
-              <a
-                href="/signup"
-                className="flex items-center justify-center rounded-md border border-transparent bg-red-900 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-red-900"
-              >
-                Get started
-              </a>
-            </div> */}
+          
           </div>
         </div>
       </main>
