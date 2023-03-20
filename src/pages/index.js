@@ -244,12 +244,12 @@ export default function Home() {
                     </a>
                   </div>
                   <div className="mt-6">
-                    <a
+                    <Link
                       href="/signup"
                       className="flex w-full items-center justify-center rounded-md border border-transparent bg-red-900 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-900"
                     >
                       Sign Up
-                    </a>
+                    </Link>
                     <p className="mt-6 text-center text-base font-medium text-gray-500">
                       Existing customer?
                       <Link href="/login" className="text-gray-900">
@@ -435,12 +435,12 @@ export default function Home() {
                   <span className="text-5xl font-bold tracking-tight text-gray-900">$4.47</span>
                   <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
                 </p>
-                <a
+                <Link
                   href="/signup"
                   className="mt-10 block w-full rounded-md bg-red-900 px-12 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Sign Up
-                </a>
+                </Link>
                 
               </div>
             </div>
