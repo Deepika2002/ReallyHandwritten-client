@@ -10,14 +10,21 @@ export default function StepForm() {
     const formList = ["welcomeInput", "addressClients", "endearingTerm", "withoutName", "messageInput"];
     const formLength = formList.length;
     
-    const initialValues ={
+    const userpreferences ={
         welcomeInput:"",
         addressClients:"",
         endearingTerm:"",
         withoutName:"",
         messageInput:""
     }
-    const [values, setValues] = useState(initialValues);
+    const [values, setValues] = useState({
+        welcomeInput:"",
+        addressClients:"",
+        endearingTerm:"",
+        withoutName:"",
+        messageInput:""
+    });
+    
 
     const handlePrev = () => {
         setPage(page == 0 ? 0 : page - 1);
@@ -53,10 +60,16 @@ export default function StepForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await setTimeout(() => {
-          console.log("form", values);
-        }, 2000);
-        return response;
+        const response = await fetch('/api/userpreferences', {
+            method: 'POST',
+            body: JSON.stringify(
+             values
+            ),
+
+          });
+       
+          return response
+        
       };
       const onChange = (e) => {
         const { name, value, type, checked } = e.target;

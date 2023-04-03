@@ -3,6 +3,7 @@ import prisma from "./prisma";
 
 // CREATE
 export const createContacts = async (contacts, session) => {
+  console.log(contacts)
   const data = contacts.map(({ firstname, lastname, phone, email, address, agent }) => ({
     firstname,
     lastname,

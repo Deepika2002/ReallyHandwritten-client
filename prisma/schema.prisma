@@ -41,6 +41,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   contacts      Contact[] //add note reference
+  Userpreferences UserPreference?
 }
 
 model VerificationToken {
@@ -62,3 +63,17 @@ model Contact {
   user        User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([id, userId])
 }
+model UserPreference {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  welcomeInput String?
+  addressClients String?
+  endearingTerm String?
+  withoutName String?
+  messageInput String?
+    userId      String? @unique
+  user        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  
+  @@unique([id, userId])
+}
+
