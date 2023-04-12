@@ -292,7 +292,7 @@ export default function Home() {
 
               </div>
               <div >
-                <Image className='max-[730px]:pt-8' src="/assets/powered-by-humans-2.jpg" alt="me" width="640" height="640" />
+                <Image className='max-[730px]:pt-8' src="/assets/powered-by-humans-2.png" alt="me" width="640" height="640" />
 
               </div>
 
