@@ -1,10 +1,10 @@
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://admin-mnw:BMmKk19L9M96wKhm@cluster0.tbdmw2b.mongodb.net/test?retryWrites=true&w=majority"
+  url      = env("MONGODB_URI")
+}
+
+generator client {
+  provider        = "prisma-client-js"
 }
 
 model Account {
@@ -31,17 +31,16 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  contacts      Contact[] //add note reference
-  Userpreferences UserPreference?
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  email           String?   @unique
+  emailVerified   DateTime?
+  image           String?
+  accounts        Account[]
+  sessions        Session[]
+  contacts        Contact[]
+  userPreference  UserPreference[]
 }
 
 model VerificationToken {
@@ -63,17 +62,15 @@ model Contact {
   user        User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([id, userId])
 }
-model UserPreference {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  welcomeInput String?
-  addressClients String?
-  endearingTerm String?
-  withoutName String?
-  messageInput String?
-    userId      String? @unique
-  user        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  
+model UserPreference {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  welcomeInput    String?
+  addressClients  String?
+  endearingTerm   String?
+  withoutName     String?
+  messageInput    String?
+  userId          String? @unique
+  user            User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([id, userId])
 }
-
