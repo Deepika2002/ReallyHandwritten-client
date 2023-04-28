@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react'
+import Image from 'next/image'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   Bars3BottomLeftIcon,
@@ -17,9 +18,9 @@ import { useRouter } from 'next/router';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: false },
-  { name: 'All Contacts', href: '/allcontacts', icon: UserGroupIcon, current: false },
+  { name: 'Cards', href: '/cards', icon: Square2StackIcon, current: false },
   { name: 'Import Contacts', href: '/import', icon: ArrowDownTrayIcon, current: false },
-  { name: 'Templates', href: '/templates', icon: Square2StackIcon, current: false },
+  { name: 'All Contacts', href: '/allcontacts', icon: UserGroupIcon, current: false },
   { name: 'Settings', href: '/settings', icon: Cog6ToothIcon, current: false },
   { name: 'Help', href: '/help', icon: QuestionMarkCircleIcon, current: false } 
 ]
@@ -100,11 +101,13 @@ export default function Sidebarheader() {
                     </div>
                   </Transition.Child>
                   <div className="flex flex-shrink-0 items-center px-4">
-                    <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                      alt="Your Company"
-                    />
+                  <Image
+                  className="h-12 w-auto sm:h-12"
+                  src="/assets/rhw-logo.png"
+                  width="500"
+                  height="500"
+                  alt=""
+                />
                   </div>
                   <div className="mt-5 h-0 flex-1 overflow-y-auto">
                     <nav className="space-y-1 px-2">
@@ -145,11 +148,13 @@ export default function Sidebarheader() {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
             <div className="flex flex-shrink-0 items-center px-4">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt="Your Company"
-              />
+            <Image
+                  className="h-12 w-auto sm:h-12"
+                  src="/assets/rhw-logo.png"
+                  width="500"
+                  height="500"
+                  alt=""
+                />
             </div>
             <div className="flex flex-grow flex-col mt-14">
               <nav className="flex-1 space-y-1 pb-4">
@@ -158,13 +163,13 @@ export default function Sidebarheader() {
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-white text-indigo-500 border-l-4 border-indigo-500' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 ',
+                      item.current ? 'bg-white text-red-900 border-l-4 border-red-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 ',
                       'group flex items-center px-4 py-2 text-sm font-medium border-l-4'
                     )}
                   >
                     <item.icon
                       className={classNames(
-                        item.current ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500',
+                        item.current ? 'text-red-900' : 'text-gray-400 group-hover:text-gray-500',
                         'mr-3 flex-shrink-0 h-6 w-6'
                       )}
                       aria-hidden="true"
