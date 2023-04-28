@@ -10,13 +10,6 @@ export default function StepForm() {
     const formList = ["welcomeInput", "addressClients", "endearingTerm", "withoutName", "messageInput"];
     const formLength = formList.length;
     
-    const userpreferences ={
-        welcomeInput:"",
-        addressClients:"",
-        endearingTerm:"",
-        withoutName:"",
-        messageInput:""
-    }
     const [values, setValues] = useState({
         welcomeInput:"",
         addressClients:"",
@@ -24,6 +17,7 @@ export default function StepForm() {
         withoutName:"",
         messageInput:""
     });
+    
     
 
     const handlePrev = () => {
@@ -71,6 +65,7 @@ export default function StepForm() {
           return response
         
       };
+    
       const onChange = (e) => {
         const { name, value, type, checked } = e.target;
         setValues((prevValues) => ({

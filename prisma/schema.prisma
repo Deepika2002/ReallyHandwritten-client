@@ -64,13 +64,13 @@ model Contact {
 }
 
 model UserPreference {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
   welcomeInput    String?
   addressClients  String?
   endearingTerm   String?
   withoutName     String?
   messageInput    String?
-  userId          String? @unique
-  user            User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  @@unique([id, userId])
+  userId          String?
+  user            User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([userId])
 }
