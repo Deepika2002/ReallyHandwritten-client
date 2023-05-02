@@ -16,11 +16,12 @@ export default function Login() {
 
   const [providers, setproviders] = useState();
   const router = useRouter();
-  const [isloading, setIsloading] = useState(false);
   const [login, setLogin] = useState(false);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [userdata, setUserdata] = useState('');
+  const [ierror, setierror] = useState("");
+  const [isloading, setLoading] = useState(false);
 
 
   const [email, setEmail] = useState("");
@@ -29,7 +30,40 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  }
+    setLoading(true);
+    let userData = {
+      email: email,
+      password: password,
+    };
+    try {
+      //const response = await fetch("https://lic.herokuapp.com/api/user/login", {
+      const response = await fetch("http://localhost:3000/api/user/login/", {
+        method: "POST",
+        body: JSON.stringify(userData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      
+      if(response.ok && data.token){
+        localStorage.setItem("token", data.token)
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 1000);
+      } 
+
+      if (data.message) {
+        setLoading(false);
+        setierror(data.message);
+      } 
+    } catch (ierror) {
+      setLoading(false);
+      setierror("Something went wrong.");
+      console.error(ierror);
+    }
+  };
+  
 
   useEffect(() => {
     const setTheProviders = async () => {
@@ -56,20 +90,11 @@ export default function Login() {
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Sign in to your account
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Or{" "}
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                start your 14-day free trial
-              </a>
-            </p>
           </div>
 
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-              <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label
                     htmlFor="email"
@@ -86,15 +111,14 @@ export default function Login() {
                     </div>
                     <input
                       id="email"
-                      name="email"
+                      fullname="email"
                       type="email"
                       autoComplete="email"
                       placeholder="you@example.com"
-
                       required
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
-                      className="block w-full appearance-none rounded-md border border-gray-300 pr-3 pl-10 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full appearance-none rounded-md border border-gray-300 pr-3 pl-10 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -117,9 +141,8 @@ export default function Login() {
                       onChange={(event) => setPassword(event.target.value)}
                       minLength="8"
                       maxLength="20"
-                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
                     />
-
 
                     <div className=" absolute inset-y-0 right-0 flex items-center pr-3">
                       <div onClick={() => setShowPassword(!showPassword)}>
@@ -154,7 +177,6 @@ export default function Login() {
                         )}
                       </div>
                     </div>
-
                   </div>
                 </div>
 
@@ -164,7 +186,7 @@ export default function Login() {
                       id="remember-me"
                       name="remember-me"
                       type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                     />
                     <label
                       htmlFor="remember-me"
@@ -177,16 +199,15 @@ export default function Login() {
                   <div className="text-sm">
                     <a
                       href="#"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
+                      className="text-sm text-gray-900 hover:text-gray-600"
                     >
                       Forgot your password?
                     </a>
                   </div>
                 </div>
 
-
                 <div className="mt-4">
-                  {error && (
+                  {ierror && (
                     <p className="flex text-sm text-red-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +222,7 @@ export default function Login() {
                         />
                       </svg>
 
-                      {error}
+                      {ierror}
                     </p>
                   )}
                 </div>
@@ -211,7 +232,7 @@ export default function Login() {
                     <button
                       type="submit"
                       disabled
-                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white shadow-sm"
+                      className="flex w-full justify-center rounded-md border border-transparent bg-orange-400 py-2 px-4 text-sm font-medium text-white shadow-sm"
                     >
                       <svg
                         className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -238,7 +259,7 @@ export default function Login() {
                   ) : (
                     <button
                       type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
                     >
                       Login
                     </button>
@@ -272,7 +293,7 @@ export default function Login() {
             </div>
             <div className="mt-5 flex justify-center items-center">
               <p className="text-sm">Don&apos;t have an account?</p>
-              <Link href="/register" className="underline-offset-2 decoration-2 underline font-medium text-indigo-600 hover:text-indigo-500 ml-2">Register</Link>
+              <Link href="/signup" className="underline-offset-2 decoration-2 underline font-medium text-indigo-600 hover:text-indigo-500 ml-2">Register</Link>
             </div>
           </div>
         </div>

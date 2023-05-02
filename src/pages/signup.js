@@ -1,83 +1,103 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from 'next/router'
+import Image from 'next/image'
+import { useRouter } from "next/router";
 import { EnvelopeIcon, UserIcon } from "@heroicons/react/20/solid";
+import { useSession, getProviders, signIn, signOut } from "next-auth/react";
+
 
 export default function Register() {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
 
-  const router = useRouter()
-
-  const [username, setUsername] = useState("");
+  const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [isloading, setLoading] = useState(false);
+  const [providers, setproviders] = useState();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     setLoading(true);
+    setError("");
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
+      setLoading(false);
       return;
     }
 
     let userData = {
-      username: username,
+      fullname: fullname,
       email: email,
       password: password,
     };
 
     try {
-      const response = await fetch("https://lic.herokuapp.com/api/user/register", {
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        // "https://lic.herokuapp.com/api/user/register",
+        "http://localhost:3000/api/user/register/",
+        {
+          method: "POST",
+          body: JSON.stringify(userData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
-      setLoading(false);
-      console.log(data);
 
-      setTimeout(() => {
-        router.push('/login')
-      }, 2000);
+      if (response.ok && data.message) {
+        setSuccess(data.message);
+        setTimeout(() => {
+          router.push("/login");
+        }, 3000);
+      }
 
+      if (!response.ok && data.message) {
+        setLoading(false);
+        setError(data.message);
+      }
     } catch (error) {
       setLoading(false);
-      setError(error.message);
-      
+      setError("Something went wrong.");
       console.error(error);
     }
   };
+  useEffect(() => {
+    const setTheProviders = async () => {
+      const setupProviders = await getProviders();
+      setproviders(setupProviders);
+    };
+    setTheProviders();
+  }, []);
+
+  if (status === "authenticated") {
+    router.push("/dashboard");
+  }
 
   return (
     <>
       <div className="h-screen bg-gray-100">
         <div className="flex min-h-full flex-col justify-start py-12 sm:px-6 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <img
+          <Image
               className="mx-auto h-12 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
+              src="/assets/rhw-logo.png"
+              width="500"
+                  height="500"
+                  alt="Really Hand Written"
             />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Create an account
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Or{" "}
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                start your 14-day free trial
-              </a>
-            </p>
           </div>
 
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -88,7 +108,7 @@ export default function Register() {
                     htmlFor="username"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Username
+                    Fullname
                   </label>
                   <div className="relative mt-1">
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -99,15 +119,17 @@ export default function Register() {
                     </div>
 
                     <input
-                      id="username"
-                      name="username"
+                      id="fullname"
+                      name="fullname"
                       type="text"
                       autoComplete="name"
-                      value={username}
-                      onChange={(event) => setUsername(event.target.value)}
+                      value={fullname}
+                      onChange={(event) => setFullname(event.target.value)}
                       required
+                      minLength="3"
+                      maxLength="20"
                       placeholder="Jane Smith"
-                      className="block w-full appearance-none rounded-md border border-gray-300 pr-3 pl-10 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full appearance-none rounded-md border border-gray-300 pr-3 pl-10 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -135,7 +157,7 @@ export default function Register() {
                       autoComplete="email"
                       required
                       placeholder="you@example.com"
-                      className="block w-full appearance-none rounded-md border border-gray-300 pr-3 pl-10 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full appearance-none rounded-md border border-gray-300 pr-3 pl-10 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -158,7 +180,7 @@ export default function Register() {
                       minLength="8"
                       maxLength="20"
                       required
-                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
                     />
                     <div className=" absolute inset-y-0 right-0 flex items-center pr-3">
                       <div onClick={() => setShowPassword(!showPassword)}>
@@ -216,7 +238,7 @@ export default function Register() {
                       minLength="8"
                       maxLength="20"
                       required
-                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
                     />
                     <div className=" absolute inset-y-0 right-0 flex items-center pr-3">
                       <div
@@ -277,51 +299,65 @@ export default function Register() {
                       {error}
                     </p>
                   )}
+
+                  {success && (
+                    <p className="flex text-sm text-green-600">
+                      <svg
+                        className="w-5 h-5 mr-2 "
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          clipRule="evenodd"
+                          fillRule="evenodd"
+                          d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
+                        ></path>
+                      </svg>
+
+                      {success}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-
-                {loading ? (
-
-                  <button
-                    type="submit"
-                    disabled
-                    className="flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white shadow-sm"
-                  >
-                    <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
+                  {isloading ? (
+                    <button
+                      type="submit"
+                      disabled
+                      className="flex w-full justify-center rounded-md border border-transparent bg-orange-400 py-2 px-4 text-sm font-medium text-white shadow-sm"
                     >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Creating an account..
-                  </button>
-
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Creating an account..
+                    </button>
                   ) : (
-                  
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 "
-                  >
-                    Register
-                  </button>
-
+                    <button
+                      type="submit"
+                      className="flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 "
+                    >
+                      Register
+                    </button>
                   )}
-
                 </div>
               </form>
 
@@ -331,29 +367,29 @@ export default function Register() {
                     <div className="w-full border-t border-gray-300" />
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="bg-white px-2 text-gray-500">
-                      or
-                    </span>
+                    <span className="bg-white px-2 text-gray-500">or</span>
                   </div>
                 </div>
 
-                <div className="mt-5 w-full mx-auto">  
-                    <button onClick={() => signIn(providers.google.id)} className='relative inline-flex w-full justify-center items-center rounded-md border py-2 px-4 text-sm font-medium text-white shadow-sm bg-blue-500'>
+                <div className="mt-5 w-full mx-auto">
+                <button onClick={() => signIn(providers.google.id)} className='relative inline-flex w-full justify-center items-center rounded-md border py-2 px-4 text-sm font-medium text-white shadow-sm bg-blue-500'>
                     <div className="absolute left-2 rounded-sm bg-white p-1">
-                    <svg  height="15" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" width="15" xmlns="http://www.w3.org/2000/svg"><title>Google Logo</title><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4"></path><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853"></path><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05"></path><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335"></path></svg>
+                      <svg height="15" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" width="15" xmlns="http://www.w3.org/2000/svg"><title>Google Logo</title><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4"></path><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853"></path><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05"></path><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335"></path></svg>
                     </div>
-                      Signup with Google
-                    </button>
-                  </div>
+                    Sign Up with Google
+                  </button>
+                </div>
               </div>
-
-              
             </div>
-
             <div className="mt-5 flex justify-center items-center">
-                  <p className="text-sm">Already have an account?</p>
-                  <Link href="/login" className="underline-offset-2 decoration-2 underline font-medium text-indigo-600 hover:text-indigo-500 ml-2">Login</Link>
-                  </div>
+              <p className="text-sm">Already have an account?</p>
+              <Link
+                href="/login"
+                className="underline-offset-2 decoration-2 underline font-medium text-orange-600 hover:text-orange-500 ml-2"
+              >
+                Login
+              </Link>
+            </div>
           </div>
         </div>
       </div>
