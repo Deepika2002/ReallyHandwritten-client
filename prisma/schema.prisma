@@ -31,6 +31,11 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+enum UserRole {
+  ADMIN
+  USER
+}
+
 model User {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
   name            String?
@@ -41,7 +46,10 @@ model User {
   sessions        Session[]
   contacts        Contact[]
   userPreference  UserPreference[]
+  role            UserRole @default(USER)
+
 }
+
 
 model VerificationToken {
   identifier String   @id @default(auto()) @map("_id") @db.ObjectId
