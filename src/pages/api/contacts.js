@@ -6,10 +6,10 @@ export default async function handle(req, res) {
     // Get the current session data with {user, email, id}
     const session = await getSession({ req });
 
-    if (!session) {
-      res.status(401).json({ message: "Unauthorized" });
-      return;
-    }
+    // if (!session) {
+    //   res.status(401).json({ message: "Unauthorized" });
+    //   return;
+    // }
 
     switch (req.method) {
       case "POST": {

@@ -9,6 +9,8 @@ import { useSession, getProviders, signIn, signOut } from "next-auth/react";
 export default function Register() {
   const router = useRouter();
   const { data: session, status } = useSession();
+
+  console.log(session, status);
   const loading = status === "loading";
 
   const [fullname, setFullname] = useState("");
