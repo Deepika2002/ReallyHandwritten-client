@@ -1,88 +1,122 @@
-import { createContacts, updateContact, deleteContact, getContacts } from "../../../prisma/contact";
-import { getSession } from "next-auth/react";
+// import {
+//   createContacts,
+//   updateContact,
+//   deleteContact,
+//   getContacts,
+// } from "../../../prisma/contact";
+// import { getSession } from "next-auth/react";
 
-export default async function handle(req, res) {
-  try {
-    // Get the current session data with {user, email, id}
-    const session = await getSession({ req });
+// import {verify} from 'jsonwebtoken'
 
-    // if (!session) {
-    //   res.status(401).json({ message: "Unauthorized" });
-    //   return;
-    // }
+// export default async function handle(req, res) {
+//   try {
+//     // Get the current session data with {user, email, id}
+//     const session = await getSession({ req });
 
-    switch (req.method) {
-      case "POST": {
-        try {
-          // Get contact title & body from the request body
-          const contacts = req.body;
+//     // if (!session) {
+//     //   res.status(401).json({ message: "Unauthorized" });
+//     //   return;
+//     // }
 
-          // Create a new contact
-          // also pass the session which would be use to get the user information
-          const result = await createContacts(contacts, session);
+//     switch (req.method) {
+//       case "POST": {
+//         try {
+//           // Get contact title & body from the request body
+//           const contacts = req.body;
 
-          // return created contact
-          res.status(200).json({ result });
-        } catch (error) {
-          console.error(error);
-          res.status(500).json({ message: "An error occurred while creating the contact" });
-          return;
-        }
-      }
+//           // Create a new contact
+//           // also pass the session which would be use to get the user information
+//           const result = await createContacts(contacts, session);
 
-      case "PUT": {
-        try {
-          const { id, title, body } = req.body;
+//           // return created contact
+//           res.status(200).json({ result });
+//         } catch (error) {
+//           console.error(error);
+//           res
+//             .status(500)
+//             .json({ message: "An error occurred while creating the contact" });
+//           return;
+//         }
+//       }
 
-          // Update current contact
-          // also pass the session which would be use to get the user information
-          const contact = await updateContact(id, { title, body }, session);
+//       case "PUT": {
+//         try {
+//           const { id, title, body } = req.body;
 
-          // return updated contact
-          return res.json(contact);
-        } catch (error) {
-          console.error(error);
-          res.status(500).json({ message: "An error occurred while updating the contact" });
-          return;
-        }
-      }
+//           // Update current contact
+//           // also pass the session which would be use to get the user information
+//           const contact = await updateContact(id, { title, body }, session);
 
-      case "DELETE": {
-        try {
-          const { id } = req.body;
-          const contact = await deleteContact(id, session);
-      
-          // return deleted contact
-          return res.json(contact);
-        } catch (error) {
-          console.error(error);
-          return res.status(500).json({ message: "An error occurred while deleting the contact" });
-        }
-      }
+//           // return updated contact
+//           return res.json(contact);
+//         } catch (error) {
+//           console.error(error);
+//           res
+//             .status(500)
+//             .json({ message: "An error occurred while updating the contact" });
+//           return;
+//         }
+//       }
 
-      case "GET": {
-        try {
-          const userid = session?.user?.id;
+//       case "DELETE": {
+//         try {
+//           const { id } = req.body;
+//           const contact = await deleteContact(id, session);
+
+//           // return deleted contact
+//           return res.json(contact);
+//         } catch (error) {
+//           console.error(error);
+//           return res
+//             .status(500)
+//             .json({ message: "An error occurred while deleting the contact" });
+//         }
+//       }
+
+//       case "GET": {
+//         try {
+//           const { jwt } = req.headers;
+
+//           console.log(jwt, "jwt token")
+
+
+
+//           const decoded = verify(token, process.env.TOKEN_SECRET);
+//           const userid = decoded.userid;
+
           
-          const contacts = await getContacts(userid);
+//           const user = await prisma.user.findUnique({
+//             where: { userId: userid },
+//           });
 
-          // return all contacts of the current user
-          return res.json(contacts);
-        } catch (error) {
-          console.error(error);
-          res.status(500).json({ message: "An error occurred while retrieving the contacts" });
-          return;
-        }
-      }
+//           if (!user) {
+//             return res.send("No user");
+//           }
+//           const contacts = await getContacts(userid);
 
-      default: {
-        res.status(405).json({ message: "Method not allowed" });
-        return;
-      }
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "An error occurred while processing the request" });
-    return;
-  }
-}
+//           // return all contacts of the current user
+//           return res.json(contacts);
+//         } catch (error) {
+//           console.error(error);
+//           res
+//             .status(500)
+//             .json({
+//               message: "An error occurred while retrieving the contacts",
+//             });
+//           return;
+//         }
+//       }
+
+//       default: {
+//         res.status(405).json({ message: "Method not allowed" });
+//         return;
+//       }
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res
+//       .status(500)
+//       .json({ message: "An error occurred while processing the request" });
+//     return;
+//   }
+// }

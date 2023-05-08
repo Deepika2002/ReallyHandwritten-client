@@ -1,23 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebarheader from "../components/sidebarheader";
 import { useSession } from 'next-auth/react';
+import { useState } from "react";
 import useSWR from 'swr';
 import Cruddatatable from "../components/cruddatatable";
 
+
+
+const fetcher = async (url, token) => {
+  const res = await fetch(url, {
+    headers: {
+      "jwt": token
+    }
+  });
+  return res.json();
+};
+
 export default function Allcontacts () {
 
-  const fetcher = async (url) => {
-    const res = await fetch(url);
-  
-    if (!res.ok) {
-      throw new Error('Failed to fetch data');
+  const [token, setToken] = useState('') 
+
+  useEffect(() => {
+    const tokenExists = localStorage.getItem("token");
+    if (tokenExists) {
+      setToken(tokenExists)
     }
-  
-    return res.json();
-  };
+    console.log(token)
+    },[])
 
 
-  const { data: contacts, error } = useSWR(`/api/contacts/`, fetcher);
+  // const { data: contacts, error } = useSWR(`/api/contacts/`, fetcher);
+  // const { data: contacts, error } = useSWR('/api/contacts', () => fetcher('/api/contacts', token));
 
   if (error) return <div>Error loading posts.</div>;
   if (!contacts) return <div>Loading posts...</div>;
