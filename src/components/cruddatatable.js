@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function Cruddatatable(props) {
-  const { contacts } = props;
+export default function Cruddatatable({ contacts }) {
+  
+
+  console.log(contacts);
+
+  const [mapcontacts, setMapcontacts] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const [visible, setVisible] = useState(false);
+
 
   function click(e) {
     e.preventDefault();
@@ -29,9 +34,6 @@ export default function Cruddatatable(props) {
 
   return (
     <div>
-
-
-
       <div className="mt-8 flow-root">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -71,7 +73,7 @@ export default function Cruddatatable(props) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {contacts.map((person) => (
+                  {contacts && contacts.map((person) => (
                     <tr key={person.email}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         <input
