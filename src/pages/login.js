@@ -1,72 +1,63 @@
-
-import { useState, useEffect, useContext } from "react";
-import Link from "next/link";
-import Image from 'next/image'
-import { useRouter } from "next/router";
-import { EnvelopeIcon, UserIcon } from "@heroicons/react/20/solid";
-import jwt from "jsonwebtoken"
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { EnvelopeIcon, UserIcon } from '@heroicons/react/20/solid';
+import {
+  getSession,
+  useSession,
+  getProviders,
+  signIn,
+  signOut,
+} from 'next-auth/react';
+import { data } from 'autoprefixer';
 
 export default function Login() {
-  
+  const { data: session, status } = useSession();
+  const loading = status === 'loading';
+
+  const [providers, setproviders] = useState();
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [isloading, setIsloading] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const [userdata, setUserdata] = useState('');
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [ierror, setierror] = useState("");
-  const [loading, setLoading] = useState(false);
 
-
-  // login functionality
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
-    let userData = {
-      email: email,
-      password: password,
-    };
+    const payload = { email, password };
     try {
-      //const response = await fetch("https://lic.herokuapp.com/api/user/login", {
-      const response = await fetch("http://localhost:3000/api/user/login/", {
-        method: "POST",
-        body: JSON.stringify(userData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      
-      const data = await response.json();
-      
-      if(response.ok && data.token ){
-        localStorage.setItem("token", data.token)
-        setTimeout(() => {
-          router.push("/dashboard");
-        }, 1000);
-      } 
-
-
-
-      if (data.message) {
-        setLoading(false);
-        setierror(data.message);
-      } 
-    } catch (ierror) {
-      setLoading(false);
-      setierror("Something went wrong.");
-      console.error(ierror);
+      setIsloading(true);
+      await signIn('credentials', { ...payload});
+      setIsloading(false);
+    } catch (error) {
+      setIsloading(false);
+      setError('Invalid email or password.');
     }
   };
 
-  // useEffect(() => {
-  //   const setTheProviders = async () => {
-  //     const setupProviders = await getProviders();
-  //     setproviders(setupProviders);
-  //   };
-  //   setTheProviders();
-  // }, []);
+  useEffect(() => {
+    const setTheProviders = async () => {
+      const setupProviders = await getProviders();
+      setproviders(setupProviders);
+    };
+    setTheProviders();
 
-  // if (status === "authenticated") {
-  //   router.push("/dashboard");
-  // }
+    const fetchSession = async () => {
+      const gsession = await getSession();
+      console.log(gsession);
+      if (gsession) {
+        router.push('/dashboard');
+      }
+    };
+    fetchSession();
+  }, [router]);
+
   return (
     <div className="auth-btn">
       <div className="h-screen bg-gray-100">
@@ -80,11 +71,20 @@ export default function Login() {
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Sign in to your account
             </h2>
+            <p className="mt-2 text-center text-sm text-gray-600">
+              Or{" "}
+              <a
+                href="#"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
+                start your 14-day free trial
+              </a>
+            </p>
           </div>
 
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" onSubmit={handleSubmit}>
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label
                     htmlFor="email"
@@ -101,14 +101,15 @@ export default function Login() {
                     </div>
                     <input
                       id="email"
-                      fullname="email"
+                      name="email"
                       type="email"
                       autoComplete="email"
                       placeholder="you@example.com"
+
                       required
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
-                      className="block w-full appearance-none rounded-md border border-gray-300 pr-3 pl-10 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
+                      className="block w-full appearance-none rounded-md border border-gray-300 pr-3 pl-10 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -131,8 +132,9 @@ export default function Login() {
                       onChange={(event) => setPassword(event.target.value)}
                       minLength="8"
                       maxLength="20"
-                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-orange-500 focus:outline-none focus:ring-orange-500 sm:text-sm"
+                      className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     />
+
 
                     <div className=" absolute inset-y-0 right-0 flex items-center pr-3">
                       <div onClick={() => setShowPassword(!showPassword)}>
@@ -167,6 +169,7 @@ export default function Login() {
                         )}
                       </div>
                     </div>
+
                   </div>
                 </div>
 
@@ -176,7 +179,7 @@ export default function Login() {
                       id="remember-me"
                       name="remember-me"
                       type="checkbox"
-                      className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
+                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                     />
                     <label
                       htmlFor="remember-me"
@@ -189,15 +192,16 @@ export default function Login() {
                   <div className="text-sm">
                     <a
                       href="#"
-                      className="text-sm text-gray-900 hover:text-gray-600"
+                      className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
                       Forgot your password?
                     </a>
                   </div>
                 </div>
 
+
                 <div className="mt-4">
-                  {ierror && (
+                  {error && (
                     <p className="flex text-sm text-red-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -212,7 +216,7 @@ export default function Login() {
                         />
                       </svg>
 
-                      {ierror}
+                      {error}
                     </p>
                   )}
                 </div>
@@ -222,7 +226,7 @@ export default function Login() {
                     <button
                       type="submit"
                       disabled
-                      className="flex w-full justify-center rounded-md border border-transparent bg-orange-400 py-2 px-4 text-sm font-medium text-white shadow-sm"
+                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white shadow-sm"
                     >
                       <svg
                         className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
@@ -249,7 +253,7 @@ export default function Login() {
                   ) : (
                     <button
                       type="submit"
-                      className="flex w-full justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                      className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Login
                     </button>
@@ -270,7 +274,7 @@ export default function Login() {
                 </div>
 
                 <div className="mt-5 w-full mx-auto">
-                <button onClick={() => signIn(providers.google.id)} className='relative inline-flex w-full justify-center items-center rounded-md border py-2 px-4 text-sm font-medium text-white shadow-sm bg-blue-500'>
+                  <button onClick={() => signIn(providers.google.id)} className='relative inline-flex w-full justify-center items-center rounded-md border py-2 px-4 text-sm font-medium text-white shadow-sm bg-blue-500'>
                     <div className="absolute left-2 rounded-sm bg-white p-1">
                       <svg height="15" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" width="15" xmlns="http://www.w3.org/2000/svg"><title>Google Logo</title><path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4"></path><path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853"></path><path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05"></path><path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335"></path></svg>
                     </div>
@@ -283,7 +287,7 @@ export default function Login() {
             </div>
             <div className="mt-5 flex justify-center items-center">
               <p className="text-sm">Don&apos;t have an account?</p>
-              <Link href="/signup" className="underline-offset-2 decoration-2 underline font-medium text-indigo-600 hover:text-indigo-500 ml-2">Register</Link>
+              <Link href="/register" className="underline-offset-2 decoration-2 underline font-medium text-indigo-600 hover:text-indigo-500 ml-2">Register</Link>
             </div>
           </div>
         </div>

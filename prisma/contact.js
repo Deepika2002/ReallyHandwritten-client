@@ -20,6 +20,7 @@ export const createContacts = async (contacts, session) => {
 // READ
 export const getContacts = async (session) => {
   const userid = session?.user?.id;
+  console.log(userid)
   
   return await prisma.contact.findMany({
     where: {

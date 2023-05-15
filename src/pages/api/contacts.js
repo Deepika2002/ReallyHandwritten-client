@@ -1,22 +1,15 @@
-import {
-  createContacts,
-  updateContact,
-  deleteContact,
-  getContacts,
-} from "../../../prisma/contact";
+import { createContacts, updateContact, deleteContact, getContacts } from "../../../prisma/contact";
 import { getSession } from "next-auth/react";
-
-import { verify } from "jsonwebtoken";
 
 export default async function handle(req, res) {
   try {
     // Get the current session data with {user, email, id}
     const session = await getSession({ req });
 
-    // if (!session) {
-    //   res.status(401).json({ message: "Unauthorized" });
-    //   return;
-    // }
+    if (!session) {
+      res.status(401).json({ message: "Unauthorized" });
+      return;
+    }
 
     switch (req.method) {
       case "POST": {
@@ -32,9 +25,7 @@ export default async function handle(req, res) {
           res.status(200).json({ result });
         } catch (error) {
           console.error(error);
-          res
-            .status(500)
-            .json({ message: "An error occurred while creating the contact" });
+          res.status(500).json({ message: "An error occurred while creating the contact" });
           return;
         }
       }
@@ -51,9 +42,7 @@ export default async function handle(req, res) {
           return res.json(contact);
         } catch (error) {
           console.error(error);
-          res
-            .status(500)
-            .json({ message: "An error occurred while updating the contact" });
+          res.status(500).json({ message: "An error occurred while updating the contact" });
           return;
         }
       }
@@ -67,34 +56,24 @@ export default async function handle(req, res) {
           return res.json(contact);
         } catch (error) {
           console.error(error);
-          return res
-            .status(500)
-            .json({ message: "An error occurred while deleting the contact" });
+          return res.status(500).json({ message: "An error occurred while deleting the contact" });
         }
       }
 
       case "GET": {
         try {
-          const { jwt } = req.headers;
-          const decoded = verify(jwt, process.env.TOKEN_SECRET);
-          const userid = decoded.userid;
+          const userid = session?.user?.id;
+          console.log("userid",userid)
 
-          const user = await prisma.user.findUnique({
-            where: { id: userid },
-          });
 
-          if (!user) {
-            return res.send("No user");
-          }
           const contacts = await getContacts(userid);
+          console.log("contacts get request", contacts)
 
           // return all contacts of the current user
           return res.json(contacts);
         } catch (error) {
           console.error(error);
-          res.status(500).json({
-            message: "An error occurred while retrieving the contacts",
-          });
+          res.status(500).json({ message: "An error occurred while retrieving the contacts" });
           return;
         }
       }
@@ -106,9 +85,7 @@ export default async function handle(req, res) {
     }
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({ message: "An error occurred while processing the request" });
+    res.status(500).json({ message: "An error occurred while processing the request" });
     return;
   }
 }

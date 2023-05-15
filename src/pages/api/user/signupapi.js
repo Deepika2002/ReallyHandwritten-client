@@ -1,5 +1,4 @@
 import { hash } from "bcryptjs";
-import { sign } from "jsonwebtoken";
 import prisma from "../../../../prisma/prisma"
 
 
@@ -7,7 +6,9 @@ import prisma from "../../../../prisma/prisma"
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { email, fullname, password } = req.body;
+    const { email, name, password } = req.body;
+
+    
 
     try {
       // check if email exists
@@ -22,13 +23,10 @@ export default async function handler(req, res) {
       const newUser = await prisma.user.create({
         data: {
           email: email,
-          fullname: fullname,
+          name: name,
           password: hashedPassword
         },
       });
-
-      const userid = newUser.id;
-      const emailJWT = sign({ userid }, process.env.EMAIL_TOKEN_SECRET);
 
 
       res.status(200).json({

@@ -1,38 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Sidebarheader from "../components/sidebarheader";
-import { useSession } from "next-auth/react";
-import useSWR from "swr";
+import { useSession } from 'next-auth/react';
+import useSWR from 'swr';
 import Cruddatatable from "../components/cruddatatable";
 
-const fetcher = async (url, token) => {
-  const res = await fetch(url, {
-    headers: {
-      jwt: token,
-    },
-  });
-  return res.json();
-};
-
 export default function Allcontacts() {
-  const [token, setToken] = useState("");
+  const { data: session, status } = useSession();
+  console.log("session contacts", session);
 
-  useEffect(() => {
-    const tokenExists = localStorage.getItem("token");
-    if (tokenExists) {
-      setToken(tokenExists);
+  const fetcher = async (url) => {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error('Failed to fetch data');
     }
-  }, [token]);
+    return res.json();
+  };
 
-  
-  const { data: contacts, error } = useSWR(
-    token ? "/api/contacts" : null,
-    (url) => fetcher(url, token)
-    );
-  
-    console.log(token, contacts);
-    
-  if (error) return <div>Error loading posts.</div>;
-  if (!contacts) return <div>Loading posts...</div>;
+  const { data: contacts, error } = useSWR(`/api/contacts`, fetcher);
+
+  if (error) return <div>Error loading contacts.</div>;
+  if (!contacts) return <div>Loading contacts...</div>;
+
+  const userContacts = contacts.filter((contact) => contact.userId === session?.user?.id);
 
   return (
     <>
@@ -42,14 +31,12 @@ export default function Allcontacts() {
           <div className="py-6">
             {/* Page title */}
             <div className="px-4 sm:px-6 lg:px-8">
-              <h1 className="text-2xl font-semibold text-gray-900">
-                All Contacts
-              </h1>
+              <h1 className="text-2xl font-semibold text-gray-900">All Contacts</h1>
             </div>
 
             {/* Replace with your content */}
             <div className="px-4 sm:px-6 lg:px-8">
-                <Cruddatatable contacts={contacts}/>
+              <Cruddatatable contacts={userContacts} />
             </div>
             {/* /End replace */}
           </div>

@@ -1,7 +1,6 @@
 import { Fragment, useState } from 'react'
 import Image from 'next/image'
 import { Dialog, Menu, Transition } from '@headlessui/react'
-
 import {
   Bars3BottomLeftIcon,
   BellIcon,
