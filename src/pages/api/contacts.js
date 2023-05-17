@@ -1,9 +1,14 @@
 import { createContacts, updateContact, deleteContact, getContacts } from "../../../prisma/contact";
+import prisma from "../../../prisma/prisma";
 import { getSession } from "next-auth/react";
 
 export default async function handle(req, res) {
+  const {
+    query: { id },
+    method,
+    body,
+  } = req;
   try {
-    // Get the current session data with {user, email, id}
     const session = await getSession({ req });
 
     if (!session) {
@@ -14,78 +19,68 @@ export default async function handle(req, res) {
     switch (req.method) {
       case "POST": {
         try {
-          // Get contact title & body from the request body
           const contacts = req.body;
 
-          // Create a new contact
-          // also pass the session which would be use to get the user information
-          const result = await createContacts(contacts, session);
+          const createdContacts = await createContacts(contacts, session);
 
-          // return created contact
-          res.status(200).json({ result });
+          res.status(200).json({ contacts: createdContacts });
         } catch (error) {
           console.error(error);
-          res.status(500).json({ message: "An error occurred while creating the contact" });
-          return;
+          res.status(500).json({ message: "An error occurred while creating the contacts" });
         }
+        break;
       }
 
-      case "PUT": {
+      case "PUT":
+        // Handle PUT request
         try {
-          const { id, title, body } = req.body;
-
-          // Update current contact
-          // also pass the session which would be use to get the user information
-          const contact = await updateContact(id, { title, body }, session);
-
-          // return updated contact
-          return res.json(contact);
+          const updatedContact = await prisma.contact.update({
+            where: {
+              id: parseInt(id),
+            },
+            data: JSON.parse(body),
+          });
+          res.status(200).json(updatedContact);
         } catch (error) {
-          console.error(error);
-          res.status(500).json({ message: "An error occurred while updating the contact" });
-          return;
+          res.status(500).json({ error: "Failed to update contact" });
         }
-      }
-
-      case "DELETE": {
+        break;
+      case "DELETE":
+        // Handle DELETE request
         try {
-          const { id } = req.body;
-          const contact = await deleteContact(id, session);
-
-          // return deleted contact
-          return res.json(contact);
+          const deletedContact = await prisma.contact.delete({
+            where: {
+              id: parseInt(id),
+            },
+          });
+          res.status(200).json(deletedContact);
         } catch (error) {
-          console.error(error);
-          return res.status(500).json({ message: "An error occurred while deleting the contact" });
+          res.status(500).json({ error: "Failed to delete contact" });
         }
-      }
+        break;
 
       case "GET": {
         try {
-          const userid = session?.user?.id;
-          console.log("userid",userid)
+          const userId = session?.user?.id;
 
+          const contacts = await getContacts(userId);
 
-          const contacts = await getContacts(userid);
-          console.log("contacts get request", contacts)
-
-          // return all contacts of the current user
-          return res.json(contacts);
+          res.json(contacts);
         } catch (error) {
           console.error(error);
           res.status(500).json({ message: "An error occurred while retrieving the contacts" });
-          return;
         }
+        break;
       }
 
       default: {
+        res.setHeader("Allow", ["GET", "POST", "PUT", "DELETE"]);
         res.status(405).json({ message: "Method not allowed" });
-        return;
+        break;
       }
     }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "An error occurred while processing the request" });
-    return;
   }
 }

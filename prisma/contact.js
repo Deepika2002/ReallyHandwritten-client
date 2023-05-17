@@ -1,9 +1,11 @@
 // ./prisma/.js
 import prisma from "./prisma";
+import { useSession } from 'next-auth/react';
 
 // CREATE
+
+
 export const createContacts = async (contacts, session) => {
-  console.log(contacts)
   const data = contacts.map(({ firstname, lastname, phone, email, address, agent }) => ({
     firstname,
     lastname,
@@ -17,45 +19,50 @@ export const createContacts = async (contacts, session) => {
   return await prisma.contact.createMany({ data });
 };
 
-// READ
-export const getContacts = async (session) => {
-  const userid = session?.user?.id;
-  console.log(userid)
-  
+export const getContacts = async (userId) => {
   return await prisma.contact.findMany({
     where: {
-      userId: userid,
+      userId: userId,
     },
   });
 };
 
-// UPDATE
 export const updateContact = async (id, data, session) => {
-  const { id: contactId } = await prisma.contact.update({
+  const contact = await prisma.contact.findFirst({
     where: {
-      id_userId: {
-        id,
-        userId: session?.user?.id,
-      },
+      id: id,
+      userId: session?.user?.id,
+    },
+  });
+
+  if (!contact) {
+    throw new Error("Contact not found");
+  }
+
+  const updatedContact = await prisma.contact.update({
+    where: {
+      id: id,
     },
     data,
   });
 
-  return await prisma.contact.findUnique({
+  return updatedContact;
+};
+export const deleteContact = async (id, session) => {
+  const contact = await prisma.contact.findFirst({
     where: {
-      id: contactId,
+      id: id,
+      userId: session?.user?.id,
     },
   });
-};
 
-// DELETE
-export const deleteContact = async (id, session) => {
+  if (!contact) {
+    throw new Error("Contact not found");
+  }
+
   return await prisma.contact.delete({
     where: {
-      id_userId: {
-        id,
-        userId: session?.user?.id,
-      },
+      id: id,
     },
   });
 };

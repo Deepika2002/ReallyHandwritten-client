@@ -32,6 +32,8 @@ export default NextAuth({
         })
         console.log(user)
         const isMatch = await bcrypt.compare(password, user.password);
+
+        console.log(isMatch)
         // console.log({isMatch})
 
         if (!user || !isMatch) {
@@ -67,6 +69,7 @@ export default NextAuth({
       if (token && token.id) {
         // console.log("token id",token.id)
         session.user.id = token.id;
+        console.log(session.user.id)
       }
 
       return session;

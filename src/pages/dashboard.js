@@ -1,27 +1,27 @@
 import React from 'react';
 import Sidebarheader from '../components/sidebarheader';
-import Csvtojson from '../components/csvtojson';
 import { useSession } from 'next-auth/react';
 import useSWR from 'swr';
 
 export default function Dashboard() {
+  const { data: session, status } = useSession();
+  console.log("session contacts", session);
+
   const fetcher = async (url) => {
     const res = await fetch(url);
-
     if (!res.ok) {
       throw new Error('Failed to fetch data');
     }
-
     return res.json();
   };
 
-  const { data: contacts, error } = useSWR('/api/contacts/', fetcher);
+  const { data: contacts, error } = useSWR(`/api/contacts`, fetcher);
 
-// No of contacts in DB
-  const totalContacts = contacts ? contacts.length : 0;
-
-  if (error) return <div>Error loading data.</div>;
-  if (!contacts) return <div>Loading data...</div>;
+  if (error) return <div>Error loading contacts.</div>;
+  if (!contacts) return <div>Loading contacts...</div>;
+  // No of contacts in DB
+  const userContacts = contacts.filter((contact) => contact.userId === session?.user?.id);
+  const totalContacts = userContacts ? userContacts.length : 0;
 
   const stats = [
     { name: 'Total Contacts', stat: totalContacts },
