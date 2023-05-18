@@ -1,7 +1,18 @@
 import React from 'react';
 import Sidebarheader from '../components/sidebarheader';
-import { useSession } from 'next-auth/react';
+import { useSession, getSession } from 'next-auth/react';
 import useSWR from 'swr';
+
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  return {
+    props: {
+      session,
+    },
+  };
+}
 
 export default function Dashboard() {
   const { data: session, status } = useSession();

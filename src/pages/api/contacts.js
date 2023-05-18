@@ -34,9 +34,10 @@ export default async function handle(req, res) {
       case "PUT":
         // Handle PUT request
         try {
-          const updatedContact = await prisma.contact.update({
+          const updatedContact = await updateContact({
             where: {
               id: parseInt(id),
+              userId: session.user.id,
             },
             data: JSON.parse(body),
           });
@@ -48,9 +49,10 @@ export default async function handle(req, res) {
       case "DELETE":
         // Handle DELETE request
         try {
-          const deletedContact = await prisma.contact.delete({
+          const deletedContact = await deleteContact({
             where: {
               id: parseInt(id),
+              userId: session.user.id,
             },
           });
           res.status(200).json(deletedContact);
@@ -61,9 +63,14 @@ export default async function handle(req, res) {
 
       case "GET": {
         try {
-          const userId = session?.user?.id;
+          let contacts;
 
-          const contacts = await getContacts(userId);
+          if (session.user.role === 'ADMIN') {
+            contacts = await getContacts();
+          } else {
+            const userId = session.user.id;
+            contacts = await getContacts(userId);
+          }
 
           res.json(contacts);
         } catch (error) {

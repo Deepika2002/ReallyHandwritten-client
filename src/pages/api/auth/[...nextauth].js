@@ -30,7 +30,7 @@ export default NextAuth({
         const user = await prisma.user.findUnique({
           where: { email }
         })
-        console.log(user)
+        // console.log("user details",user)
         const isMatch = await bcrypt.compare(password, user.password);
 
         console.log(isMatch)
@@ -44,7 +44,7 @@ export default NextAuth({
           // Any object returned will be saved in `user` property of the JWT
           // console.log(user)
 
-          console.log(user.id)
+          // console.log("user details",user)
           return {
             ...user,
             id: user.id,
@@ -69,7 +69,10 @@ export default NextAuth({
       if (token && token.id) {
         // console.log("token id",token.id)
         session.user.id = token.id;
-        console.log(session.user.id)
+        session.user.role = token.role;
+
+        // console.log(session.user.role);
+
       }
 
       return session;
@@ -78,6 +81,7 @@ export default NextAuth({
       // console.log('jwt', { token, user })
       if (token && user && user.id) {
         token.id = user.id;
+        token.role = user.role;
       }
       return token;
     }

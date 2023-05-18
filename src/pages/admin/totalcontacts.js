@@ -1,8 +1,8 @@
 import React from "react";
-import Sidebarheader from "../components/sidebarheader";
+import AdminSidebarheader from "../../components/adminsidebarheader";
 import { useSession, getSession } from 'next-auth/react';
 import useSWR from 'swr';
-import Cruddatatable from "../components/cruddatatable";
+import Cruddatatable from "../../components/cruddatatable";
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -26,16 +26,16 @@ export default function Allcontacts() {
   };
 
   const { data: contacts, error } = useSWR(`/api/contacts`, fetcher);
+  console.log(contacts)
 
   if (error) return <div>Error loading contacts.</div>;
   if (!contacts) return <div>Loading contacts...</div>;
 
-  const userContacts = contacts.filter((contact) => contact.userId === session?.user?.id);
   
 
   return (
     <>
-      <Sidebarheader />
+      <AdminSidebarheader />
       <div className="flex flex-1 flex-col lg:pl-64">
         <main className="flex-1">
           <div className="py-6">
@@ -46,7 +46,7 @@ export default function Allcontacts() {
 
             {/* Replace with your content */}
             <div className="px-4 sm:px-6 lg:px-8">
-              <Cruddatatable contacts={userContacts} />
+              <Cruddatatable contacts={contacts} />
             </div>
             {/* /End replace */}
           </div>
