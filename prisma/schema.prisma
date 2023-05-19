@@ -68,6 +68,7 @@ model Contact {
   email       String
   agent       String
   userId      String?
+  status      String @default("pending")
   user        User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([id, userId])
 }

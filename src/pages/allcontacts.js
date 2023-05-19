@@ -26,6 +26,7 @@ export default function Allcontacts() {
   };
 
   const { data: contacts, error } = useSWR(`/api/contacts`, fetcher);
+  // console.log(contacts)
 
   if (error) return <div>Error loading contacts.</div>;
   if (!contacts) return <div>Loading contacts...</div>;

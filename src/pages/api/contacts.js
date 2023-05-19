@@ -70,6 +70,7 @@ export default async function handle(req, res) {
           } else {
             const userId = session.user.id;
             contacts = await getContacts(userId);
+            console.log(contacts);
           }
 
           res.json(contacts);

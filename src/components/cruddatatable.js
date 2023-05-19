@@ -276,7 +276,7 @@ export default function Cruddatatable(props) {
                       </td>
                       <td className="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                         <span className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                          pending
+                        {person.status}
                         </span>
                       </td>
                       <td className="whitespace-nowrap py-4 px-3 text-sm font-medium sm:pr-6">
