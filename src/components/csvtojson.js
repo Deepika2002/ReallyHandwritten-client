@@ -25,7 +25,7 @@ export default function Csvtojson() {
 
   async function handleSave() {
     
-    console.log(JSON.stringify(contacts ))
+    console.log("stringified contacts",JSON.stringify(contacts ))
 
     const response = await fetch('/api/contacts', {
       method: 'POST',

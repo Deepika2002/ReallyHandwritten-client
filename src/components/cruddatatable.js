@@ -45,7 +45,7 @@ export default function Cruddatatable(props) {
           console.error("Failed to update contact:", updatedContact.status);
         }
       } else {
-        const createdContact = await fetch(`/api/contacts`, {
+        const createdContact = await fetch(`/api/contacts/contacts`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -69,15 +69,17 @@ export default function Cruddatatable(props) {
   const handleDelete = async (event, id) => {
     event.preventDefault();
     try {
-      const response = await fetch(`/api/contacts/${id}`, {
+      const response = await fetch(`/api/contacts/[${id}]`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       });
+      console.log(response)
       if (response.ok) {
         const updatedRows = contacts.filter((row) => row.id !== id);
         setRows(updatedRows);
+
       } else {
         console.error("Failed to delete contact:", response.status);
       }
@@ -168,7 +170,7 @@ export default function Cruddatatable(props) {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                 {currentRows.map((person) => (
-                    <tr key={person.email}>
+                    <tr key={person.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         <input type="checkbox" />
                       </td>
@@ -298,7 +300,7 @@ export default function Cruddatatable(props) {
 
                         <button
                           className="text-red-600 hover:text-red-900"
-                          onClick={(e) => handleDelete(e, person.email)}
+                          onClick={(e) => handleDelete(e, person.id)}
                         >
                           Delete
                         </button>

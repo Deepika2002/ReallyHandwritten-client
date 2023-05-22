@@ -26,7 +26,7 @@ export default function Dashboard() {
     return res.json();
   };
 
-  const { data: contacts, error } = useSWR(`/api/contacts`, fetcher);
+  const { data: contacts, error } = useSWR(`/api/contacts/contacts`, fetcher);
 
   if (error) return <div>Error loading contacts.</div>;
   if (!contacts) return <div>Loading contacts...</div>;
