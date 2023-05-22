@@ -24,16 +24,15 @@ export default function Cruddatatable(props) {
   const handleSave = async (person) => {
     try {
       if (editingRow) {
+        console.log(editingRow)
         const updatedContact = await fetch(`/api/contacts/${editingRow.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            id: editingRow.id,
-            data: editedData,
-          }),
+          body: JSON.stringify(editedData), // Update the request body
         });
+        console.log(updatedContact)
         if (updatedContact.ok) {
           const updatedRows = contacts.map((row) =>
             row.id === editingRow.id ? { ...row, ...editedData } : row
@@ -65,21 +64,21 @@ export default function Cruddatatable(props) {
       console.error("An error occurred while saving the contact:", error);
     }
   };
+  
 
   const handleDelete = async (event, id) => {
     event.preventDefault();
     try {
-      const response = await fetch(`/api/contacts/[${id}]`, {
+      const response = await fetch(`/api/contacts/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       });
-      console.log(response)
+      
       if (response.ok) {
         const updatedRows = contacts.filter((row) => row.id !== id);
         setRows(updatedRows);
-
       } else {
         console.error("Failed to delete contact:", response.status);
       }
@@ -87,6 +86,7 @@ export default function Cruddatatable(props) {
       console.error("An error occurred while deleting the contact:", error);
     }
   };
+  
 
   const totalPages = Math.ceil(contacts.length / rowsPerPage);
 
