@@ -71,7 +71,7 @@ export const getContactById = async (id, userId) => {
   try {
     const contact = await prisma.contact.findFirst({
       where: {
-        id: parseInt(id),
+        id: id,
         userId,
       },
     });

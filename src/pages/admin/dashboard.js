@@ -44,15 +44,17 @@ export default function Dashboard() {
   if (!contacts) return <div>Loading contacts...</div>;
 
   // No of contacts in DB
-  // const userContacts = contacts.filter((contact) => contact.userId === session?.user?.id);
-  // const totalContacts = userContacts ? userContacts.length : 0;
   const totalContacts = contacts ? contacts.length : 0;
-  console.log(totalContacts)
+   // Calculate the length of contacts with status "Sent"
+  const totalCardsSent = contacts ? contacts.filter((contact) => contact.status === "Sent").length : 0;
+
+  // Calculate the length of contacts with status "Pending", null, or empty
+  const pending = contacts ? contacts.filter((contact) => !contact.status || contact.status === "Pending").length : 0;
 
   const stats = [
     { name: 'Total Contacts', stat: totalContacts, link: '/admin/totalcontacts' },
-    { name: 'Total Cards Sent', stat: '58.16%', link: '/admin/sentcards' },
-    { name: 'Pending', stat: '24.57%', link: '/admin/sendcards' },
+    { name: 'Total Cards Sent', stat: totalCardsSent, link: '/admin/sentcards' },
+    { name: 'Pending', stat: pending, link: '/admin/sendcards' },
   ];
 
   const handleButtonClick = (link) => {

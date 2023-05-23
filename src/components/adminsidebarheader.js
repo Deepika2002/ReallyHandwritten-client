@@ -17,8 +17,8 @@ import { useRouter } from 'next/router';
 
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: false },
-  { name: 'Users', href: '/admin/users', icon: UserGroupIcon, current: false },
+  { name: 'Dashboard', href: '/admin/dashboard', icon: HomeIcon, current: false },
+  { name: 'Users', href: '/admin/users/users', icon: UserGroupIcon, current: false },
   { name: 'Send Cards', href: '/admin/sendcards', icon: UserGroupIcon, current: false },
   { name: 'Sent Cards', href: '/admin/sentcards', icon: ArrowDownTrayIcon, current: false },
   { name: 'Settings', href: '/settings', icon: Cog6ToothIcon, current: false },

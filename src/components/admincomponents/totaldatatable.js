@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 export default function Totaldatatable(props) {
   const { contacts } = props;
-  const [selectedRows, setSelectedRows] = useState([]);
-  const [visible, setVisible] = useState(false);
   const [editingRow, setEditingRow] = useState(null);
   const [editedData, setEditedData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,10 +10,13 @@ export default function Totaldatatable(props) {
   const rowsPerPage = 10;
   const { data: session } = useSession();
 
-  const handleRowSelect = (person) => {
-    // Handle row selection logic
-  };
-
+  useEffect(() => {
+    // Update the contacts based on the current page
+    const indexOfLastRow = currentPage * rowsPerPage;
+    const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+    const currentRows = contacts.slice(indexOfFirstRow, indexOfLastRow);
+    setRows(currentRows);
+  }, [currentPage, contacts]);
 
   const totalPages = Math.ceil(contacts.length / rowsPerPage);
 
@@ -28,25 +29,16 @@ export default function Totaldatatable(props) {
     setCurrentPage(pageNumber);
   };
 
-  const indexOfLastRow = currentPage * rowsPerPage;
-  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = contacts.slice(indexOfFirstRow, indexOfLastRow);
-
   return (
     <div>
       <div className="mt-8 flow-root">
         <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-300">
+              <table className="px-6 min-w-full divide-y divide-gray-300">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th
-                      scope="col"
-                      className="py-3.5  px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      <input type="checkbox" />
-                    </th>
+                    
                     <th
                       scope="col"
                       className="py-3.5  px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
@@ -93,11 +85,9 @@ export default function Totaldatatable(props) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                {currentRows.map((person) => (
-                    <tr key={person.email}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                        <input type="checkbox" />
-                      </td>
+                {rows.map((person) => (
+                    <tr key={person.id}>
+                      
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                      
                           <span>{person.firstname}</span>

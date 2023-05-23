@@ -7,12 +7,12 @@ export async function getUsersWithContactCount() {
     },
     
   });
-  console.log("prisma users",users)
 
   const formattedUsers = users.map((user) => ({
     id: user.id,
     name: user.name,
     role: user.role,
+    contacts:user.contacts,
     contactCount: user.contacts.length,
   }));
 

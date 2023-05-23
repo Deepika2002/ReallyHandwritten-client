@@ -32,12 +32,18 @@ export default function Dashboard() {
   if (!contacts) return <div>Loading contacts...</div>;
   // No of contacts in DB
   const userContacts = contacts.filter((contact) => contact.userId === session?.user?.id);
+  //Calculate the length of contacts 
   const totalContacts = userContacts ? userContacts.length : 0;
+   // Calculate the length of contacts with status "Sent"
+  const totalCardsSent = userContacts ? userContacts.filter((contact) => contact.status === "Sent").length : 0;
+
+  // Calculate the length of contacts with status "Pending", null, or empty
+  const pending = userContacts ? userContacts.filter((contact) => !contact.status || contact.status === "Pending").length : 0;
 
   const stats = [
     { name: 'Total Contacts', stat: totalContacts },
-    { name: 'Gift Cards Sent', stat: '58.16%' },
-    { name: 'Pending', stat: '24.57%' },
+    { name: 'Gift Cards Sent', stat: totalCardsSent },
+    { name: 'Pending', stat: pending },
   ];
 
   return (

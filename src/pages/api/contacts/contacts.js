@@ -11,8 +11,8 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
-      const  contacts  = req.body;
-      console.log("req body",contacts)
+      const contacts = req.body;
+      console.log("req body", contacts)
 
       const createdContacts = await createContacts(contacts, session);
 
@@ -23,13 +23,24 @@ export default async function handler(req, res) {
     }
   } else if (req.method === 'GET') {
     try {
+      const { userId } = req.query; // Get the userId from the request query parameter
+
+      // Handle different scenarios based on user role
       let contacts;
       if (session.user.role === 'ADMIN') {
-        contacts = await getContacts();
+        if (userId) {
+          contacts = await getContacts(userId); // Fetch contacts for the specified userId
+        } else {
+          contacts = await getContacts(); // Fetch all contacts for the admin
+        }
       } else {
-        const userId = session.user.id;
-        contacts = await getContacts(userId);
+        const loggedUserId = session.user.id;
+        if (userId && userId !== loggedUserId) {
+          return res.status(401).json({ error: 'Unauthorized' });
+        }
+        contacts = await getContacts(loggedUserId); // Fetch contacts for the logged-in user
       }
+
       res.status(200).json(contacts);
     } catch (error) {
       console.error(error);
