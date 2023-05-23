@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebarheader from '../components/sidebarheader';
 import { useSession, getSession } from 'next-auth/react';
 import useSWR from 'swr';
+import DonutChart from '../components/DonutChart';
 
 
 export async function getServerSideProps(context) {
@@ -67,11 +68,19 @@ export default function Dashboard() {
                         <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">{item.stat}</dd>
                       </div>
                     ))}
+
+
                   </dl>
+                  <DonutChart
+                    totalContacts={totalContacts}
+                    totalCardsSent={totalCardsSent}
+                    pending={pending}
+                  />
                 </div>
               </div>
               {/* /End replace */}
             </div>
+
           </div>
         </main>
       </div>

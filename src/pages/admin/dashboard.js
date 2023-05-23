@@ -4,6 +4,7 @@ import { useSession, getSession } from 'next-auth/react';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import DonutChart from '../../components/DonutChart';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -94,6 +95,11 @@ export default function Dashboard() {
                           </button>
                         ))}
                       </div>
+                      <DonutChart
+                    totalContacts={totalContacts}
+                    totalCardsSent={totalCardsSent}
+                    pending={pending}
+                  />
                     </div>
                   </div>
                 </>
