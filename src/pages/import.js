@@ -53,7 +53,7 @@ export default function Import() {
 
 
     try {
-      const response = await fetch('/api/contacts', {
+      const response = await fetch('/api/contacts/contacts', {
         method: 'POST',
         body: JSON.stringify(
           contacts

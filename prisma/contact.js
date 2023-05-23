@@ -46,6 +46,7 @@ export const getContacts = async (userId) => {
 };
 
 export const createContacts = async (contacts, session) => {
+  console.log("data from prisma",contacts)
   try {
     const data = contacts.map(({ firstname, lastname, phone, email, address, agent }) => ({
       firstname,
@@ -58,6 +59,7 @@ export const createContacts = async (contacts, session) => {
     }));
 
     const createdContacts = await prisma.contact.createMany({ data });
+   
 
     return createdContacts;
   } catch (error) {
@@ -81,9 +83,20 @@ export const getContactById = async (id, userId) => {
 };
 
 export const updateContact = async (contactId, data) => {
+  console.log("data",contactId, data)
   const updatedContact = await prisma.contact.update({
     where: { id: contactId },
-    data,
+    data:{
+      firstname:data.firstname,
+      lastname:data.lastname,
+      phone:data.phone,
+      email:data.email,
+      address:data.address,
+      agent:data.agent,
+      status:data.status
+
+    }
+
   });
   return updatedContact;
 };

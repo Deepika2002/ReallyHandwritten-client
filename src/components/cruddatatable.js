@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 export default function Cruddatatable(props) {
@@ -10,21 +10,26 @@ export default function Cruddatatable(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [rows, setRows] = useState([]);
   const rowsPerPage = 10;
+  const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
 
   const handleRowSelect = (person) => {
     // Handle row selection logic
   };
+  
 
+  
   const handleEdit = (person) => {
     setEditingRow(person);
     setEditedData({ ...person });
   };
+ 
+
 
   const handleSave = async (person) => {
     try {
       if (editingRow) {
-        console.log(editingRow)
+        console.log("editing row", editingRow.id);
         const updatedContact = await fetch(`/api/contacts/${editingRow.id}`, {
           method: "PUT",
           headers: {
@@ -32,7 +37,7 @@ export default function Cruddatatable(props) {
           },
           body: JSON.stringify(editedData), // Update the request body
         });
-        console.log(updatedContact)
+        console.log(updatedContact);
         if (updatedContact.ok) {
           const updatedRows = contacts.map((row) =>
             row.id === editingRow.id ? { ...row, ...editedData } : row
@@ -56,6 +61,7 @@ export default function Cruddatatable(props) {
           setRows(updatedRows);
           setEditingRow(null);
           setEditedData({});
+          loadTableData();
         } else {
           console.error("Failed to create contact:", createdContact.status);
         }
@@ -64,7 +70,6 @@ export default function Cruddatatable(props) {
       console.error("An error occurred while saving the contact:", error);
     }
   };
-  
 
   const handleDelete = async (event, id) => {
     event.preventDefault();
@@ -75,10 +80,11 @@ export default function Cruddatatable(props) {
           "Content-Type": "application/json",
         },
       });
-      
+
       if (response.ok) {
         const updatedRows = contacts.filter((row) => row.id !== id);
         setRows(updatedRows);
+        loadTableData();
       } else {
         console.error("Failed to delete contact:", response.status);
       }
@@ -86,6 +92,7 @@ export default function Cruddatatable(props) {
       console.error("An error occurred while deleting the contact:", error);
     }
   };
+
   
 
   const totalPages = Math.ceil(contacts.length / rowsPerPage);
@@ -98,6 +105,26 @@ export default function Cruddatatable(props) {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  const loadTableData = async () => {
+    try {
+      const response = await fetch("/api/contacts/contacts"); 
+      if (response.ok) {
+        const data = await response.json();
+        setRows(data);
+        
+      } else {
+        console.error("Failed to fetch table data:", response.status);
+      }
+    } catch (error) {
+      console.error("An error occurred while fetching table data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadTableData();
+  }, []);
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;

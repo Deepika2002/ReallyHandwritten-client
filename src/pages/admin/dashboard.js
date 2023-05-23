@@ -17,6 +17,7 @@ export async function getServerSideProps(context) {
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
+  console.log("admin",session)
   const router = useRouter();
   const [showUnauthorized, setShowUnauthorized] = useState(false);
 
@@ -28,7 +29,7 @@ export default function Dashboard() {
     return res.json();
   };
 
-  const { data: contacts, error } = useSWR(`/api/contacts`, fetcher);
+  const { data: contacts, error } = useSWR(`/api/contacts/contacts`, fetcher);
 
   useEffect(() => {
     if (!session || session.user.role !== 'ADMIN') {

@@ -27,14 +27,16 @@ export default function Csvtojson() {
     
     console.log("stringified contacts",JSON.stringify(contacts ))
 
-    const response = await fetch('/api/contacts', {
+    const response = await fetch('/api/contacts/contacts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       
       body: JSON.stringify(contacts)
+      
     });
+    console.log("import response", response)
     const { result } = await response.json();
     console.log(result);
   }
