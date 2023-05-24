@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
+import Sidebarheader from '../sidebarheader';
 
 const nameMethods = [
     { id: 'Yes', title: 'Yes' },
@@ -17,7 +18,13 @@ export default function AddressClients({ handleBack, handleNext, formValues, onC
         handleNext();
       };
   return (
-      <div className="relative isolate overflow-hidden bg-white">
+    <>
+    <Sidebarheader/>
+    <h1 className="mt-10 text-center text-3xl font-bold tracking-tight text-gray-900 lg:pl-64 sm:text-5xl">
+                Welcome to Really Handwritten.{' '}
+        </h1>
+      <div className="lg:pl-64 overflow-hidden bg-white">
+      
           <svg
               className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
               aria-hidden="true"
@@ -36,7 +43,7 @@ export default function AddressClients({ handleBack, handleNext, formValues, onC
               </defs>
               <rect width="100%" height="100%" strokeWidth={0} fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)" />
           </svg>
-          <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
+          <div className="mx-auto max-w-7xl px-6 pb-24 pt-4 sm:pb-32 lg:flex lg:px-8 lg:py-24">
               <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
                   <p className="mt-8 text-2xl leading-8 font-semibold text-gray-900">Great!
 </p>
@@ -105,6 +112,7 @@ export default function AddressClients({ handleBack, handleNext, formValues, onC
               </div>
           </div>
       </div>
+      </>
   )
 }
 

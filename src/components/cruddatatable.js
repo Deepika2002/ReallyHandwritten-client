@@ -3,8 +3,7 @@ import { useSession } from "next-auth/react";
 
 export default function Cruddatatable(props) {
   const { contacts } = props;
-  const [selectedRows, setSelectedRows] = useState([]);
-  const [visible, setVisible] = useState(false);
+
   const [editingRow, setEditingRow] = useState(null);
   const [editedData, setEditedData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,10 +12,6 @@ export default function Cruddatatable(props) {
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
 
-  const handleRowSelect = (person) => {
-    // Handle row selection logic
-  };
-  
 
   
   const handleEdit = (person) => {
@@ -140,12 +135,7 @@ export default function Cruddatatable(props) {
               <table className="min-w-full divide-y divide-gray-300">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th
-                      scope="col"
-                      className="py-3.5  px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      <input type="checkbox" />
-                    </th>
+                    
                     <th
                       scope="col"
                       className="py-3.5  px-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
@@ -199,9 +189,7 @@ export default function Cruddatatable(props) {
                 <tbody className="divide-y divide-gray-200">
                 {currentRows.map((person) => (
                     <tr key={person.id}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                        <input type="checkbox" />
-                      </td>
+                    
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
                         {editingRow === person ? (
                           <input

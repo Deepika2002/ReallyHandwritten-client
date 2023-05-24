@@ -4,6 +4,7 @@ import EndearingTerm from '../components/stepformcomponents/endearingterm';
 import MessageInput from '../components/stepformcomponents/messageinput';
 import WelcomeInput from '../components/stepformcomponents/welcomeinput';
 import WithoutName from '../components/stepformcomponents/withoutname';
+import Sidebarheader from '../components/sidebarheader';
 
 export default function StepForm() {
     const [page, setPage] = useState(0);
@@ -75,11 +76,11 @@ export default function StepForm() {
       };
 
     return (
+       
         <div>
-            <h1 className="mt-10 text-4xl text-center font-bold tracking-tight text-gray-900 sm:text-6xl">
-                Welcome to Really Handwritten.{' '}
-            </h1>
+            
             <div className=' relative'>
+            
                 {handleForm()}
             </div>
         </div>

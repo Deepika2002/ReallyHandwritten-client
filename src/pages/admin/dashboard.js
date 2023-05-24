@@ -50,7 +50,7 @@ export default function Dashboard() {
   const totalCardsSent = contacts ? contacts.filter((contact) => contact.status === "Sent").length : 0;
 
   // Calculate the length of contacts with status "Pending", null, or empty
-  const pending = contacts ? contacts.filter((contact) => !contact.status || contact.status === "Pending").length : 0;
+  const pending = contacts ? contacts.filter((contact) => !contact.status || contact.status === "Pending" ||contact.status === "pending").length : 0;
 
   const stats = [
     { name: 'Total Contacts', stat: totalContacts, link: '/admin/totalcontacts' },

@@ -9,7 +9,6 @@ import {
   ArrowDownTrayIcon,
   UserGroupIcon,
   QuestionMarkCircleIcon,
-  Square2StackIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'

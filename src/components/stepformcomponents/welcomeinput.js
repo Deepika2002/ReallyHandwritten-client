@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
+import Sidebarheader from '../sidebarheader';
 
 
 const nameMethods = [
@@ -16,7 +17,12 @@ export default function WelcomeInput({ handleBack, handleNext, formValues, onCha
         handleNext();
       };
   return (
-      <div className="relative isolate overflow-hidden bg-white">
+    <>
+    <Sidebarheader/>
+    <h1 className="mt-10 text-center text-3xl font-bold tracking-tight text-gray-900 lg:pl-64 sm:text-5xl">
+                Welcome to Really Handwritten.{' '}
+        </h1>
+      <div className="lg:pl-64 overflow-hidden bg-white">
           <svg
               className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
               aria-hidden="true"
@@ -104,5 +110,6 @@ export default function WelcomeInput({ handleBack, handleNext, formValues, onCha
               </div>
           </div>
       </div>
+      </>
   )
 }

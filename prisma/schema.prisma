@@ -68,6 +68,7 @@ model Contact {
   email       String
   agent       String
   userId      String?
+  dateOfImport DateTime? @default(now()) @db.Date
   status      String? @default("Pending")
   user        User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([id, userId])
