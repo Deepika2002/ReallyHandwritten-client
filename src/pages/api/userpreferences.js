@@ -16,6 +16,7 @@ export default async function handler(req, res) {
       try {
         console.log("body:", body);
         const preferences = await createPreferences(body, session);
+        
         res.status(201).json(preferences);
       } catch (error) {
         console.error(error);

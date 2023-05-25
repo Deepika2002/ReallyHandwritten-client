@@ -118,8 +118,8 @@ export default function AllContacts() {
                                       
                                     )}
                                     onClick={(e) => {
-                                      e.preventDefault(); // Prevent the default anchor tag behavior
-                                      router.push("/stepform"); // Manually navigate to the stepform page
+                                      e.preventDefault(); 
+                                      router.push("/stepform"); 
                                     }}
                                   >
                                     Choose Card to Send

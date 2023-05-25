@@ -76,12 +76,15 @@ model Contact {
 
 model UserPreference {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  name            String    @default("Preference")
   welcomeInput    String?
   addressClients  String?
   endearingTerm   String?
   withoutName     String?
   messageInput    String?
-  userId          String?
-  user            User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  @@unique([userId])
+  selectCard      String?
+  userId          String? 
+  user            User?      @relation(fields: [userId], references: [id], onDelete: Cascade) 
+  @@unique([id, userId])
+  
 }

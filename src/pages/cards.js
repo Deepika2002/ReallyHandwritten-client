@@ -13,7 +13,7 @@ const products = [
   },
   {
     id: 2,
-    name: 'Preminum Gold Foil Pressed',
+    name: 'Premium Gold Foil Pressed',
     href: '#',
     price: '$5.60',
     description: 'Walnut',
@@ -41,11 +41,7 @@ export default function Cards() {
             <div key={product.id} className="group relative">
               <div className="aspect-w-4 aspect-h-3 overflow-hidden rounded-lg bg-gray-100">
                 <img src={product.imageSrc} alt={product.imageAlt} className="object-cover object-center" />
-                <div className="flex items-end p-4 opacity-0 group-hover:opacity-100" aria-hidden="true">
-                  <button className="w-full rounded-md bg-red-900 bg-opacity-1 py-2 px-4 text-center text-sm font-medium text-white backdrop-blur backdrop-filter">
-                    Add to Bag
-                  </button>
-                </div>
+                
               </div>
               <div className="mt-4 flex items-center justify-between space-x-8 text-base font-medium text-gray-900">
                 <h3>
@@ -65,35 +61,3 @@ export default function Cards() {
     </div>
   )
 }
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
-
-
-
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/typography'),
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/

@@ -12,7 +12,8 @@ export default function DateContacts({ date, contacts }) {
             {/* Page title */}
             <div className="px-4 sm:px-6 lg:px-8">
               <h1 className="text-2xl font-semibold text-gray-900">
-                Contacts for {date}
+                Contacts for {date.split("T")[0]} at{" "}
+                            {date.split("T")[1].split(".")[0]}
               </h1>
             </div>
 
