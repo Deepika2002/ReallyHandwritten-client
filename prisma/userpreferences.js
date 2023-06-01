@@ -13,7 +13,7 @@ export const createPreferences = async (userpreferences, session) => {
     }
 
     // Retrieve existing preferences for the user
-    const existingPreferences = await prisma.userPreference.findMany({ where: { userId } });
+    const existingPreferences = await prisma.userpreference.findMany({ where: { userId } });
 
     // Calculate the next preference number
     const nextPreferenceNumber = existingPreferences.length + 1;
@@ -28,7 +28,7 @@ export const createPreferences = async (userpreferences, session) => {
       throw new Error("Prisma is not initialized");
     }
 
-    const result = await prisma.userPreference.create({ data });
+    const result = await prisma.userpreference.create({ data });
     console.log("result:", result);
     return result;
   } catch (error) {
@@ -37,10 +37,15 @@ export const createPreferences = async (userpreferences, session) => {
   }
 };
 
-export const updatePreferences = async (id, data) => {
+export const updatePreferences = async (id, data, session) => {
   try {
+    // const userId = session?.user?.id;
+    // console.log(userId)
+    // if (!userId) {
+    //   throw new Error('User not authenticated');
+    // }
 
-    const updatedPreference = await prisma.userPreference.update({
+    const updatedPreference = await prisma.userpreference.update({
       where: { id: id },
       data: {
         name: data.name,
@@ -49,7 +54,7 @@ export const updatePreferences = async (id, data) => {
         endearingTerm: data.endearingTerm ,
         withoutName: data.withoutName ,
         selectCard: data.selectCard ,
-        messageInput: data.messageInput,
+        messageInput: data.messageInput 
       },
     });
 
@@ -70,14 +75,14 @@ export const deletePreferences = async (id, session) => {
       throw new Error('User not authenticated');
     }
 
-    const preference = await prisma.userPreference.findUnique({
+    const preference = await prisma.userpreference.findUnique({
       where: { id_userId: { id, userId } },
     });
     if (!preference) {
       throw new Error("Preference not found");
     }
 
-    const deletedPreference = await prisma.userPreference.delete({
+    const deletedPreference = await prisma.userpreference.delete({
       where: { id: preference.id },
     });
     return deletedPreference;
@@ -93,7 +98,7 @@ export const getPreferences = async (userId) => {
       throw new Error('Invalid user ID');
     }
 
-    const preferences = await prisma.userPreference.findMany({
+    const preferences = await prisma.userpreference.findMany({
       where: { userId },
     });
 
@@ -110,8 +115,8 @@ export const getPreferenceById = async (userId, id) => {
       throw new Error("Invalid user ID");
     }
 
-    const preference = await prisma.userPreference.findUnique({
-      where: { id: id},
+    const preference = await prisma.userpreference.findUnique({
+      where: { id: id, userId: userId },
     });
 
     return preference;

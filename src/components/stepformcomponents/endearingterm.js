@@ -25,32 +25,10 @@ export default function EndearingTerm({
       <h1 className="mt-10 text-center text-3xl font-bold tracking-tight text-gray-900 lg:pl-64 sm:text-5xl">
         Welcome to Really Handwritten.{" "}
       </h1>
-      <div className="lg:pl-64 overflow-hidden bg-white">
-        <svg
-          className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
-          aria-hidden="true"
-        >
-          <defs>
-            <pattern
-              id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
-              width={200}
-              height={200}
-              x="50%"
-              y={-1}
-              patternUnits="userSpaceOnUse"
-            >
-              <path d="M.5 200V.5H200" fill="none" />
-            </pattern>
-          </defs>
-          <rect
-            width="100%"
-            height="100%"
-            strokeWidth={0}
-            fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
-          />
-        </svg>
-        <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-24">
-          <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
+      <div className="lg:pl-64 flex overflow-hidden bg-white">
+        
+        <div className="mx-auto  px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-10">
+          <div className="mx-auto lg:mx-0  lg:flex-shrink-0 lg:pt-8">
             <p className="mt-8 text-2xl font-semibold leading-8 text-gray-900">
               Amazing!
             </p>

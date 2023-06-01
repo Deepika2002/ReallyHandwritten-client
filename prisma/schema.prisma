@@ -47,7 +47,7 @@ model User {
   accounts        Account[]
   sessions        Session[]
   contacts        Contact[]
-  userPreference  UserPreference[]
+  userpreference  Userpreference[]
   role            UserRole @default(USER)
 
 }
@@ -69,17 +69,21 @@ model Contact {
   email       String
   agent       String
   userId      String?
+   userpreferenceIDs String[]   @db.ObjectId
+  userpreference  Userpreference[] @relation(fields: [userpreferenceIDs], references: [id])
   dateOfImport DateTime? @default(now()) @db.Date
   status      String? @default("Pending")
   user        User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([id, userId])
 }
 
-model UserPreference {
+model Userpreference {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
   name            String?    @default("Preference")
   welcomeInput    String?
   addressClients  String?
+  contactIDs String[] @db.ObjectId
+  contacts   Contact[]   @relation(fields: [contactIDs], references: [id])
   endearingTerm   String?
   withoutName     String?
   messageInput    String?

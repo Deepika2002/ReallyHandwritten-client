@@ -156,6 +156,7 @@ export default function Sendcards() {
   const handleExport = () => {
     generateCSV(contacts);
   };
+  console.log(currentRows);
 
   return (
     <>
@@ -223,8 +224,15 @@ export default function Sendcards() {
                             scope="col"
                             className="py-3.5 px-3 text-left text-sm font-semibold text-gray-900"
                           >
+                            Preferences
+                          </th>
+                          <th
+                            scope="col"
+                            className="py-3.5 px-3 text-left text-sm font-semibold text-gray-900"
+                          >
                             Status
                           </th>
+                        
                           <th
                             scope="col"
                             className="py-3.5 px-3 text-left text-sm font-semibold text-gray-900 sm:pr-6"
@@ -250,6 +258,9 @@ export default function Sendcards() {
                             </td>
                             <td className="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                               <span>{person.address}</span>
+                            </td>
+                            <td className="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                              <span>{person.agent}</span>
                             </td>
                             <td className="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                               <span>{person.agent}</span>

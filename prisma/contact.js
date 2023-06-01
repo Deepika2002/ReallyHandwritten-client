@@ -56,6 +56,7 @@ export const createContacts = async (contacts, session) => {
       address,
       agent,
       userId: session.user.id,
+      userpreferenceIDs: "6479211e5c9de5980bc702b6",
     }));
 
     const createdContacts = await prisma.contact.createMany({ data });
@@ -93,7 +94,8 @@ export const updateContact = async (contactId, data) => {
       email:data.email,
       address:data.address,
       agent:data.agent,
-      status:data.status
+      status:data.status,
+      
 
     }
 

@@ -13,8 +13,9 @@ export default async function handler(req, res) {
 
 
   const userId = session.user.id;
+  console.log("user",userId)
   
-  console.log(userId)
+
 
 
   switch (req.method) {
