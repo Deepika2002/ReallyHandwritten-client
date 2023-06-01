@@ -6,7 +6,6 @@ const nameMethods = [
   { id: "Dear", title: "Dear" },
   { id: "Hello", title: "Hello" },
   { id: "Hi", title: "Hi" },
-  { id: "Other", title: "Other" },
   { id: "None", title: "None" },
 ];
 

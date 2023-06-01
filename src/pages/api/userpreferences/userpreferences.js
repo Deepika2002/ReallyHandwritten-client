@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import prisma, { createPreferences, getPreferences, updatePreferences } from "../../../prisma/userpreferences";
+import prisma, { createPreferences, getPreferences, updatePreferences } from "../../../../prisma/userpreferences";
 
 export default async function handler(req, res) {
   const session = await getSession({ req });
@@ -10,6 +10,8 @@ export default async function handler(req, res) {
   }
 
   const { method, body } = req;
+
+  const userId = session.user.id;
 
   switch (method) {
     case "POST":
@@ -26,7 +28,7 @@ export default async function handler(req, res) {
 
     case "GET":
       try {
-        const preferences = await getPreferences(session);
+        const preferences = await getPreferences(userId);
         res.status(200).json(preferences);
       } catch (error) {
         res.status(500).json({ message: error.message });

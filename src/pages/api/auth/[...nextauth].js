@@ -70,6 +70,7 @@ export default NextAuth({
         // console.log("token id",token.id)
         session.user.id = token.id;
         session.user.role = token.role;
+        session.user.verificationCode = token.verificationCode
 
         // console.log(session.user.role);
 
@@ -82,6 +83,7 @@ export default NextAuth({
       if (token && user && user.id) {
         token.id = user.id;
         token.role = user.role;
+        token.verificationCode = user.verificationCode
       }
       return token;
     }

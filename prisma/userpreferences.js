@@ -37,30 +37,31 @@ export const createPreferences = async (userpreferences, session) => {
   }
 };
 
-export const updatePreferences = async (id, data, session) => {
+export const updatePreferences = async (id, data) => {
   try {
-    const userId = session?.user?.id;
-    if (!userId) {
-      throw new Error('User not authenticated');
-    }
-
-    const preference = await prisma.userPreference.findUnique({
-      where: { id_userId: { id, userId } },
-    });
-    if (!preference) {
-      throw new Error("Preference not found");
-    }
 
     const updatedPreference = await prisma.userPreference.update({
-      where: { id: preference.id },
-      data,
+      where: { id: id },
+      data: {
+        name: data.name,
+        welcomeInput: data.welcomeInput ,
+        addressClients: data.addressClients ,
+        endearingTerm: data.endearingTerm ,
+        withoutName: data.withoutName ,
+        selectCard: data.selectCard ,
+        messageInput: data.messageInput,
+      },
     });
+
     return updatedPreference;
   } catch (error) {
-    console.error("updatePreferences error:", error);
+    console.error('updatePreferences error:', error);
     throw error;
   }
 };
+
+
+
 
 export const deletePreferences = async (id, session) => {
   try {
@@ -82,6 +83,40 @@ export const deletePreferences = async (id, session) => {
     return deletedPreference;
   } catch (error) {
     console.error("deletePreferences error:", error);
+    throw error;
+  }
+};
+
+export const getPreferences = async (userId) => {
+  try {
+    if (!userId) {
+      throw new Error('Invalid user ID');
+    }
+
+    const preferences = await prisma.userPreference.findMany({
+      where: { userId },
+    });
+
+    return preferences;
+  } catch (error) {
+    console.error('getPreferences error:', error);
+    throw error;
+  }
+};
+
+export const getPreferenceById = async (userId, id) => {
+  try {
+    if (!userId) {
+      throw new Error("Invalid user ID");
+    }
+
+    const preference = await prisma.userPreference.findUnique({
+      where: { id: id},
+    });
+
+    return preference;
+  } catch (error) {
+    console.error("getPreferenceById error:", error);
     throw error;
   }
 };

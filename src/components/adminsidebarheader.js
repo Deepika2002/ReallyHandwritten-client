@@ -10,9 +10,11 @@ import {
   UserGroupIcon,
   QuestionMarkCircleIcon,
   XMarkIcon,
+  UserCircleIcon
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router';
+
 
 
 const navigation = [
@@ -25,7 +27,6 @@ const navigation = [
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' },
 ]
 
@@ -34,6 +35,8 @@ function classNames(...classes) {
 }
 
 export default function AdminSidebarheader() {
+
+  
 
   const router = useRouter();
 
@@ -45,14 +48,6 @@ export default function AdminSidebarheader() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-40 lg:hidden" onClose={setSidebarOpen}>
@@ -205,6 +200,7 @@ export default function AdminSidebarheader() {
                       className="block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
                       placeholder="Search"
                       type="search"
+                      
                       name="search"
                     />
                   </div>
@@ -213,7 +209,7 @@ export default function AdminSidebarheader() {
               <div className="ml-4 flex items-center lg:ml-6">
                 <button
                   type="button"
-                  className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none"
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -222,12 +218,11 @@ export default function AdminSidebarheader() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none  ">
                       <span className="sr-only">Open user menu</span>
-                      <img
+                      <UserCircleIcon
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
+                        aria-hidden="true" 
                       />
                     </Menu.Button>
                   </div>

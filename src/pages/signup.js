@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { EnvelopeIcon, UserIcon } from "@heroicons/react/20/solid";
 import { useSession, getProviders, signIn, signOut } from "next-auth/react";
 
-
 export default function Register() {
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -44,8 +43,7 @@ export default function Register() {
 
     try {
       const response = await fetch(
-        // "https://lic.herokuapp.com/api/user/register",
-        "http://localhost:3000/api/user/signupapi/",
+        "http://localhost:3000/api/user/userapi/",
         {
           method: "POST",
           body: JSON.stringify(userData),
@@ -58,9 +56,11 @@ export default function Register() {
 
       if (response.ok && data.message) {
         setSuccess(data.message);
-        setTimeout(() => {
-          router.push("/login");
-        }, 3000);
+        signIn("credentials", { redirect: false, email, password });
+        router.push({
+          pathname: "/verification",
+          query: userData, 
+        });
       }
 
       if (!response.ok && data.message) {
@@ -73,6 +73,7 @@ export default function Register() {
       console.error(error);
     }
   };
+
   useEffect(() => {
     const setTheProviders = async () => {
       const setupProviders = await getProviders();
@@ -82,7 +83,7 @@ export default function Register() {
   }, []);
 
   if (status === "authenticated") {
-    router.push("/login");
+    router.push("/verification");
   }
 
   return (
@@ -90,23 +91,16 @@ export default function Register() {
       <div className="h-screen bg-gray-100">
         <div className="flex min-h-full flex-col justify-start py-12 sm:px-6 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <img
-              className="mx-auto h-12 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
+          <Image
+                  className="mx-auto h-12 w-auto"
+                  src="/assets/rhw-logo.png"
+                  width="500"
+                  height="500"
+                  alt="Really Handwritten"
+                />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Create an account
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Or{" "}
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                start your 14-day free trial
-              </a>
-            </p>
           </div>
 
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -344,6 +338,7 @@ export default function Register() {
                   
                   <button
                     type="submit"
+                    
                     className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 "
                   >
                     Register

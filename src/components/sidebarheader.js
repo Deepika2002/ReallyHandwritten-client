@@ -11,6 +11,7 @@ import {
   QuestionMarkCircleIcon,
   Square2StackIcon,
   XMarkIcon,
+  UserCircleIcon
 } from '@heroicons/react/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router';
@@ -18,7 +19,7 @@ import { useRouter } from 'next/router';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: false },
-  { name: 'Cards', href: '/cards', icon: Square2StackIcon, current: false },
+  { name: 'Card Templates', href: '/cardtemplates/templates', icon: Square2StackIcon, current: false },
   { name: 'Import Contacts', href: '/import', icon: ArrowDownTrayIcon, current: false },
   { name: 'All Contacts', href: '/allcontacts', icon: UserGroupIcon, current: false },
   { name: 'Settings', href: '/settings', icon: Cog6ToothIcon, current: false },
@@ -214,7 +215,7 @@ export default function Sidebarheader() {
               <div className="ml-4 flex items-center lg:ml-6">
                 <button
                   type="button"
-                  className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none  "
                 >
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
@@ -223,12 +224,12 @@ export default function Sidebarheader() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none ">
                       <span className="sr-only">Open user menu</span>
-                      <img
+                      <UserCircleIcon
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
+                        aria-hidden="true"
+                        
                       />
                     </Menu.Button>
                   </div>

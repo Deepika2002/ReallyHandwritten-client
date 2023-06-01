@@ -43,7 +43,7 @@ export default function AllContacts() {
   const userContacts = {};
 
   contacts.forEach((contact) => {
-    const date = contact.dateOfImport; // Replace with the actual property name for the date field
+    const date = contact.dateOfImport; 
     if (!userContacts[date]) {
       userContacts[date] = {
         contacts: [],

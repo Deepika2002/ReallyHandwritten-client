@@ -6,6 +6,8 @@ export default function Totaldatatable(props) {
   const [editingRow, setEditingRow] = useState(null);
   const [editedData, setEditedData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+const [filteredRows, setFilteredRows] = useState([]);
   const [rows, setRows] = useState([]);
   const rowsPerPage = 10;
   const { data: session } = useSession();

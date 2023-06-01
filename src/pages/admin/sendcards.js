@@ -159,7 +159,7 @@ export default function Sendcards() {
 
   return (
     <>
-      <AdminSidebarheader />
+      <AdminSidebarheader/>
       <div className="flex flex-1 flex-col lg:pl-64">
         <div className="flex-1 py-6">
           <div className=" flex justify-between py-4">

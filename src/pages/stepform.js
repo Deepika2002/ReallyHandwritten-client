@@ -100,7 +100,7 @@ export default function StepForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/userpreferences", {
+    const response = await fetch("/api/userpreferences/userpreferences", {
       method: "POST",
       body: JSON.stringify(values),
     });
