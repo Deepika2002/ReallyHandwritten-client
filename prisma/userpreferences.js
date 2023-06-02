@@ -39,11 +39,6 @@ export const createPreferences = async (userpreferences, session) => {
 
 export const updatePreferences = async (id, data, session) => {
   try {
-    // const userId = session?.user?.id;
-    // console.log(userId)
-    // if (!userId) {
-    //   throw new Error('User not authenticated');
-    // }
 
     const updatedPreference = await prisma.userpreference.update({
       where: { id: id },
@@ -116,7 +111,7 @@ export const getPreferenceById = async (userId, id) => {
     }
 
     const preference = await prisma.userpreference.findUnique({
-      where: { id: id, userId: userId },
+      where: { id: id },
     });
 
     return preference;

@@ -270,7 +270,7 @@ export default function Csvtojson() {
                   className="-ml-1 mr-2 h-5 w-5"
                   aria-hidden="true"
                 />
-                Import Contacts
+                Submit Contacts
               </button>
             </div>
           </div>

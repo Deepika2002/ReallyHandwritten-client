@@ -1,4 +1,5 @@
 import React, { use, useState } from "react";
+import { useRouter } from "next/router";
 import AddressClients from "../components/stepformcomponents/addressclients";
 import EndearingTerm from "../components/stepformcomponents/endearingterm";
 import MessageInput from "../components/stepformcomponents/messageinput";
@@ -8,6 +9,7 @@ import Sidebarheader from "../components/sidebarheader";
 import SelectCard from "../components/stepformcomponents/selectcard";
 
 export default function StepForm() {
+  const router = useRouter();
   const [page, setPage] = useState(0);
   const formList = [
     "welcomeInput",
@@ -104,6 +106,10 @@ export default function StepForm() {
       method: "POST",
       body: JSON.stringify(values),
     });
+
+    if (response.ok) {
+      // Handle successful update
+      router.push("/cardtemplates/templates");}
 
     return response;
   };

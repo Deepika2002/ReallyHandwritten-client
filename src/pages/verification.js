@@ -70,7 +70,7 @@ useEffect(() => {
         if (response.ok && data.message) {
           setSuccess(data.message);
           setTimeout(() => {
-            router.push("/login");
+            router.push("/stepform");
           }, 2000);
         }
 

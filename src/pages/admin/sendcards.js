@@ -12,14 +12,24 @@ const generateCSV = (contacts) => {
     "Address",
     "Signed Agent",
     "Status",
+    "User Preference ID",
+    "User Preference Name",
+    "User Preference Welcome Input",
+    "User Preference Address Clients",
+    "User Preference Endearing Term",
+    "User Preference Without Name",
+    "User Preference Message Input",
+    "User Preference Select Card"
   ];
-   // Filter the contacts based on the status
-   const filteredContacts = contacts.filter(
+
+  // Filter the contacts based on the status
+  const filteredContacts = contacts.filter(
     (contact) =>
       contact.status === 'Pending' ||
       contact.status === 'In-Progress' ||
       contact.status === null
   );
+
   // Create a CSV string with the contact information
   const csvContent = [
     headers.join(","),
@@ -29,7 +39,13 @@ const generateCSV = (contacts) => {
           contact.email
         },"${contact.address.replace(/"/g, '""')}",${contact.agent},${
           contact.status
-        }`
+        },${contact.userpreference.id},${contact.userpreference.name},"${
+          contact.userpreference.welcomeInput
+        }",${contact.userpreference.addressClients},${
+          contact.userpreference.endearingTerm
+        },"${contact.userpreference.withoutName}","${
+          contact.userpreference.messageInput
+        }","${contact.userpreference.selectCard}"`
     ),
   ].join("\n");
 
@@ -63,7 +79,11 @@ export default function Sendcards() {
     return res.json();
   };
 
-  const { data: contacts, error } = useSWR(`/api/contacts/contacts`, fetcher);
+  const { data:contactsWithUserPreferences, error } = useSWR(`/api/contacts/contacts`, fetcher);
+
+  // console.log("conatcts",data)
+
+
 
   const handleEdit = (person) => {
     setEditingRow(person);
@@ -139,14 +159,14 @@ export default function Sendcards() {
 
   useEffect(() => {
     loadTableData();
-  }, [contacts]);
+  }, [contactsWithUserPreferences]);
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = rows ? rows.slice(indexOfFirstRow, indexOfLastRow) : [];
 
   if (error) return <div>Error loading contacts.</div>;
-  if (!contacts) {
+  if (!contactsWithUserPreferences) {
     return <div>Loading contacts...</div>;
   }
   const statusOptions = ["In-Progress", "Sent", "Pending"];
@@ -154,7 +174,7 @@ export default function Sendcards() {
     setEditedData({ ...editedData, status: event.target.value });
   };
   const handleExport = () => {
-    generateCSV(contacts);
+    generateCSV(contactsWithUserPreferences);
   };
   console.log(currentRows);
 
@@ -177,7 +197,7 @@ export default function Sendcards() {
           </div>
           </div>
           <div >
-            <div className="mt-8 flow-root">
+            <div className="mt-8 px-8 flow-root">
               <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                   <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
@@ -220,12 +240,7 @@ export default function Sendcards() {
                           >
                             Signed Agent
                           </th>
-                          <th
-                            scope="col"
-                            className="py-3.5 px-3 text-left text-sm font-semibold text-gray-900"
-                          >
-                            Preferences
-                          </th>
+                        
                           <th
                             scope="col"
                             className="py-3.5 px-3 text-left text-sm font-semibold text-gray-900"
@@ -262,9 +277,7 @@ export default function Sendcards() {
                             <td className="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                               <span>{person.agent}</span>
                             </td>
-                            <td className="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                              <span>{person.agent}</span>
-                            </td>
+                            
                             <td className="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                               {editingRow === person ? (
                                 <select
@@ -310,7 +323,7 @@ export default function Sendcards() {
               </div>
             </div>
             {/* Pagination */}
-            <div className="mt-4">
+            <div className="mt-4 mr-8">
               <nav className="flex justify-end" aria-label="Pagination">
                 <div className="relative z-0 inline-flex shadow-sm rounded-md">
                   {/* Previous button */}

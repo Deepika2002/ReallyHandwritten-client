@@ -26,8 +26,7 @@ const navigation = [
   { name: 'Help', href: '/help', icon: QuestionMarkCircleIcon, current: false } 
 ]
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
+  { name: 'Your Profile', href: '/settings' },
   { name: 'Sign out', href: '#' },
 ]
 

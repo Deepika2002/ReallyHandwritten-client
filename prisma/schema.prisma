@@ -9,7 +9,7 @@ generator client {
 
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String
+  userId            String @db.ObjectId
   type              String
   provider          String
   providerAccountId String
@@ -27,7 +27,7 @@ model Account {
 model Session {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
-  userId       String
+  userId       String @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -68,27 +68,24 @@ model Contact {
   phone       String?
   email       String
   agent       String
-  userId      String?
-   userpreferenceIDs String[]   @db.ObjectId
-  userpreference  Userpreference[] @relation(fields: [userpreferenceIDs], references: [id])
+  userId       String? @db.ObjectId
+user          User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  userpreferenceid  String?
   dateOfImport DateTime? @default(now()) @db.Date
   status      String? @default("Pending")
-  user        User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@unique([id, userId])
 }
-
 model Userpreference {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
   name            String?    @default("Preference")
   welcomeInput    String?
   addressClients  String?
-  contactIDs String[] @db.ObjectId
-  contacts   Contact[]   @relation(fields: [contactIDs], references: [id])
   endearingTerm   String?
   withoutName     String?
   messageInput    String?
   selectCard      String?
-  userId          String? 
+  userId          String? @db.ObjectId
   user            User?      @relation(fields: [userId], references: [id], onDelete: Cascade) 
   @@unique([id, userId])
   

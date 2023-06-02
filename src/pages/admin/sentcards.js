@@ -12,12 +12,22 @@ const generateCSV = (contacts) => {
     "Address",
     "Signed Agent",
     "Status",
+    "User Preference ID",
+    "User Preference Name",
+    "User Preference Welcome Input",
+    "User Preference Address Clients",
+    "User Preference Endearing Term",
+    "User Preference Without Name",
+    "User Preference Message Input",
+    "User Preference Select Card"
   ];
-   // Filter the contacts based on the status
-   const filteredContacts = contacts.filter(
+
+  // Filter the contacts based on the status
+  const filteredContacts = contacts.filter(
     (contact) =>
-      contact.status === 'Sent'
+      contact.status === 'Sent' 
   );
+
   // Create a CSV string with the contact information
   const csvContent = [
     headers.join(","),
@@ -27,7 +37,13 @@ const generateCSV = (contacts) => {
           contact.email
         },"${contact.address.replace(/"/g, '""')}",${contact.agent},${
           contact.status
-        }`
+        },${contact.userpreference.id},${contact.userpreference.name},"${
+          contact.userpreference.welcomeInput
+        }",${contact.userpreference.addressClients},${
+          contact.userpreference.endearingTerm
+        },"${contact.userpreference.withoutName}","${
+          contact.userpreference.messageInput
+        }","${contact.userpreference.selectCard}"`
     ),
   ].join("\n");
 

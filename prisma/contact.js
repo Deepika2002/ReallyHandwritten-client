@@ -1,34 +1,3 @@
-
-// export const updateContact = async (id, data, session) => {
-//   try {
-//     const contact = await prisma.contact.findFirst({
-//       where: {
-//         id: parseInt(id),
-//         userId: session.user.id,
-//       },
-//     });
-
-//     if (!contact) {
-//       throw new Error('Contact not found');
-//     }
-
-//     const updatedContact = await prisma.contact.update({
-//       where: {
-//         id: parseInt(id),
-//       },
-//       data,
-//     });
-
-//     return updatedContact;
-//   } catch (error) {
-//     throw new Error('Failed to update contact');
-//   }
-// };
-
-
-
-// prisma/contact.js
-
 import prisma from './prisma';
 
 export const getContacts = async (userId) => {
@@ -39,11 +8,37 @@ export const getContacts = async (userId) => {
       },
     });
 
-    return contacts;
+    const userpreferenceIds = contacts
+      .filter((contact) => contact.userpreferenceid !== null) // Filter out contacts without a userpreferenceid
+      .map((contact) => contact.userpreferenceid);
+
+    let userpreferences = [];
+    if (userpreferenceIds.length > 0) {
+      userpreferences = await prisma.userpreference.findMany({
+        where: {
+          id: {
+            in: userpreferenceIds,
+          },
+        },
+      });
+    }
+
+    const contactsWithUserPreferences = contacts.map((contact) => {
+      const userpreference = userpreferences.find(
+        (preference) => preference.id === contact.userpreferenceid
+      );
+      return {
+        ...contact,
+        userpreference,
+      };
+    });
+
+    return contactsWithUserPreferences;
   } catch (error) {
     throw new Error('Failed to fetch contacts');
   }
 };
+
 
 export const createContacts = async (contacts, session) => {
   console.log("data from prisma",contacts)
@@ -56,7 +51,6 @@ export const createContacts = async (contacts, session) => {
       address,
       agent,
       userId: session.user.id,
-      userpreferenceIDs: "6479211e5c9de5980bc702b6",
     }));
 
     const createdContacts = await prisma.contact.createMany({ data });
@@ -95,6 +89,7 @@ export const updateContact = async (contactId, data) => {
       address:data.address,
       agent:data.agent,
       status:data.status,
+      userpreferenceid:data.userpreferenceid
       
 
     }
