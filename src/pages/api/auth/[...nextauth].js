@@ -66,9 +66,9 @@ export default NextAuth({
       }
       return token;
     }
-  }
+  },
   
   
-  
+  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET
 });
 
