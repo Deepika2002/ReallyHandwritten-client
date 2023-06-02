@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSession, getSession } from 'next-auth/react';
-import Sidebarheader from '../components/sidebarheader';
+import Sidebarheader from '../../components/adminsidebarheader';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
