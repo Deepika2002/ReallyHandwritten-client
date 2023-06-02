@@ -490,7 +490,7 @@ export default function Home() {
             
           </div>
         </div>
-        <div className="relative lg:col-span-6 lg:-mr-8 md:w-full  xl:inset-0 xl:left-1/3 xl:mr-0">
+        <div className="relative lg:col-span-6 lg:-mr-8 md:w-full  xl:inset-0  xl:mr-0">
         <Image
               src="/assets/Weiss_Sisters.jpg"
               alt=""
