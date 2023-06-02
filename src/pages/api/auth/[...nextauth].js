@@ -5,7 +5,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import prisma from "../../../../prisma/prisma"
 import bcrypt from "bcrypt"
 
-const options ={
+export default NextAuth({
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
@@ -53,7 +53,6 @@ const options ={
         session.user.role = token.role;
         session.user.verificationCode = token.verificationCode
 
-        // console.log(session.user.role);
 
       }
 
@@ -68,6 +67,8 @@ const options ={
       return token;
     }
   }
+  
+  
+  
+});
 
-}
-export default (req, res) => NextAuth(req, res, options)

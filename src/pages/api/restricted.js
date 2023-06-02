@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth/next"
-import { authOptions } from "./auth/[...nextauth]"
+import { options } from "./auth/[...nextauth]"
 
 export default async function handler(req, res) {
-  const session = await getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, options)
 
   if (session) {
     res.send({
