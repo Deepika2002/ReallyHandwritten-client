@@ -29,8 +29,10 @@ export default NextAuth({
         // console.log({isMatch})
 
         if (!user || !isMatch) {
-          throw new Error('Invalid email or password');
+          // throw new Error('Invalid email or password');
+          return res.status(404).json({message:'Invalid email or password'})
         }
+
   
         if (user && isMatch) {
           
