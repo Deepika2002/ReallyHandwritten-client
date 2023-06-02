@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {  Tab } from "@headlessui/react";
 import Sidebarheader from "../../components/sidebarheader";
+import Image from "next/image";
 
 const card = [
   {
@@ -168,8 +169,11 @@ export default function Template() {
                           <>
                             <span className="sr-only">{image.name}</span>
                             <span className="absolute inset-0 overflow-hidden rounded-md">
-                              <img
+                              <Image
                                 src={image.src}
+                                width="500"
+                  height="500"
+                  
                                 alt=""
                                 className="h-full w-full object-cover object-center"
                               />
@@ -194,7 +198,10 @@ export default function Template() {
                 {filteredCard &&
                   filteredCard.images.map((image) => (
                     <Tab.Panel key={image.id}>
-                      <img
+                      <Image
+                      width="500"
+                      height="500"
+                      
                         src={image.src}
                         alt={image.alt}
                         className="h-full w-full object-cover object-center sm:rounded-lg"
