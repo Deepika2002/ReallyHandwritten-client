@@ -16,6 +16,7 @@ export async function getServerSideProps(context) {
 
 export default function UserContacts({ userId }) {
   const [editingRow, setEditingRow] = useState(null);
+  // const [contacts, setContacts] =useState(null)
   const [editedData, setEditedData] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [rows, setRows] = useState([]);
@@ -31,11 +32,15 @@ export default function UserContacts({ userId }) {
     return res.json();
   };
 
-  const { data: contacts, error } = useSWR(
+  const { data:contacts, error } = useSWR(
     `/api/contacts/contacts?userId=${userId}`,
     fetcher
+  
   );
 
+  // if(data){
+  //   setContacts(data.contacts)
+  // }
   const handleEdit = (person) => {
     setEditingRow(person);
     setEditedData({ ...person });
@@ -84,6 +89,9 @@ export default function UserContacts({ userId }) {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  useEffect(() => {
+    loadTableData();
+  }, [contacts]);
 
   const loadTableData = async () => {
     try {
@@ -101,9 +109,7 @@ export default function UserContacts({ userId }) {
     }
   };
 
-  useEffect(() => {
-    loadTableData();
-  }, [contacts]);
+  
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
