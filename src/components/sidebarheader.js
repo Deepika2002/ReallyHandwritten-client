@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Image from "next/image";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
@@ -16,6 +16,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
+
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: false },
@@ -42,9 +44,9 @@ const navigation = [
 ];
 
 const userNavigation = [
-  { name: 'Your Profile', href: '/settings' },
-  { name: 'Sign out', href: '#' },
-]
+  { name: "Your Profile", href: "/settings" },
+  { name: "Sign out", href: "#" },
+];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -52,18 +54,21 @@ function classNames(...classes) {
 
 export default function Sidebarheader() {
   const router = useRouter();
+  const { status, data } = useSession();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.replace("/login");
+    } else if (status === "authenticated") {
+      router.replace("dashboard");
+    }
+  }, [status]);
 
   navigation.forEach((item) => {
     item.current = item.href === router.pathname;
   });
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const HandleLogout = () => {
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("token");
-      router.push("/login");
-    }
-  };
 
   return (
     <>
@@ -212,7 +217,7 @@ export default function Sidebarheader() {
                   </a>
                 ))}
                 <a
-                  onClick={HandleLogout}
+                  onClick={() => signOut()}
                   className="group cursor-pointer flex items-center px-4 py-2 text-gray-600 text-md font-medium border-l-4 border-transparent hover:border-l-4 hover:bg-gray-100 hover:text-gray-900"
                 >
                   <ArrowRightOnRectangleIcon

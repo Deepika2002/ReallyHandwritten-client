@@ -16,6 +16,14 @@ export default function Login() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.replace("/login");
+    } else if (status === "authenticated") {
+      router.replace("dashboard");
+    }
+  }, [status]);
+
   const [providers, setproviders] = useState();
   const router = useRouter();
   const [isloading, setIsloading] = useState(false);
@@ -30,14 +38,17 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // const payload = { email, password };
     try {
       setIsloading(true);
-      await signIn("credentials", { 
+
+      const res = await signIn("credentials", { 
         email: email,
         password: password,
-       });
+        redirect: false,
+      });
+
       setIsloading(false);
+    
     } catch (error) {
       setIsloading(false);
       setError("Invalid email or password.");
@@ -51,23 +62,9 @@ export default function Login() {
       setproviders(setupProviders);
     };
     setTheProviders();
-
-    const fetchSession = async () => {
-      const gsession = await getSession();
-
-      if (!gsession) {
-        // If session is not available, redirect to login page
-        router.push("/login");
-      } 
-      // else if (gsession.user.role === "ADMIN") {
-      //   router.push("/admin/dashboard");
-      // } 
-       {
-        router.push("/dashboard");
-      }
-    };
-    fetchSession();
   }, []);
+
+  
 
   return (
     <div className="auth-btn">
