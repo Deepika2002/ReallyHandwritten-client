@@ -27,19 +27,19 @@ export default async function handler(req, res) {
 
       // Handle different scenarios based on user role
       let contacts;
-      // if (session.user.role === 'ADMIN') {
-      //   if (userId) {
-      //     contacts = await getContacts(userId); // Fetch contacts for the specified userId
-      //   } else {
-      //     contacts = await getContacts(); // Fetch all contacts for the admin
-      //   }
-      // } else {
-      //   const loggedUserId = session.user.id;
-      //   if (userId && userId !== loggedUserId) {
-      //     return res.status(401).json({ error: 'Unauthorized' });
-      //   }
-      //   contacts = await getContacts(loggedUserId); // Fetch contacts for the logged-in user
-      // }
+      if (session.user.role === 'ADMIN') {
+        if (userId) {
+          contacts = await getContacts(userId); // Fetch contacts for the specified userId
+        } else {
+          contacts = await getContacts(); // Fetch all contacts for the admin
+        }
+      } else {
+        const loggedUserId = session.user.id;
+        if (userId && userId !== loggedUserId) {
+          return res.status(401).json({ error: 'Unauthorized' });
+        }
+        contacts = await getContacts(loggedUserId); // Fetch contacts for the logged-in user
+      }
 
       const loggedUserId = session.user.id;
         if (userId && userId !== loggedUserId) {
