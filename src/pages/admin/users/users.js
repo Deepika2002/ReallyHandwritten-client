@@ -31,9 +31,9 @@ export default function Users() {
 
   const { data: users, error } = useSWR(`/api/users/users`, fetcher);
 
-  const handleUserClick = (userId) => {
-    router.push(`/admin/users/${userId}/contacts`);
-  };
+  // const handleUserClick = (userId) => {
+  //   router.push(`/admin/users/${userId}/contacts`);
+  // };
 
   useEffect(() => {
     if (!session || session.user.role !== "ADMIN") {

@@ -3,9 +3,11 @@ import csv from "csvtojson";
 import Datatable from "./datatable";
 import { XCircleIcon, CheckCircleIcon } from "@heroicons/react/20/solid";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
+import { useSession } from "next-auth/react";
 
 export default function Csvtojson() {
   const [csvData, setCsvData] = useState("");
+  const { data: session, status } = useSession();
   const [contacts, setcontacts] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [dragging, setDragging] = useState(false);
@@ -27,7 +29,8 @@ export default function Csvtojson() {
     
     console.log("stringified contacts",JSON.stringify(contacts ))
 
-    const response = await fetch('/api/contacts/contacts', {
+    const response = await fetch(`/api/contacts/contacts?userId=${session?.user?.id}`, {
+    
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

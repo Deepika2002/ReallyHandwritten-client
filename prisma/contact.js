@@ -40,7 +40,7 @@ export const getContacts = async (userId) => {
 };
 
 
-export const createContacts = async (contacts, session) => {
+export const createContacts = async (contacts, userId) => {
   console.log("data from prisma",contacts)
   try {
     const data = contacts.map(({ firstname, lastname, phone, email, address, agent }) => ({
@@ -50,7 +50,7 @@ export const createContacts = async (contacts, session) => {
       email,
       address,
       agent,
-      userId: session.user.id,
+      userId: userId
     }));
 
     const createdContacts = await prisma.contact.createMany({ data });

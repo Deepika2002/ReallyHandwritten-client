@@ -4,8 +4,9 @@ export default async function handler(req, res) {
   
   if (req.method === "POST") {
     try {
+      const { userId } = req.query;
       const contacts = req.body;
-      const createdContacts = await createContacts(contacts, session);
+      const createdContacts = await createContacts(contacts,userId);
       res.status(201).json({ createdContacts });
 
     } catch (error) {
