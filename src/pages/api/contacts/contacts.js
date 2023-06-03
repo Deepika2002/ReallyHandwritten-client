@@ -25,7 +25,6 @@ export default async function handler(req, res) {
     try {
       const { userId } = req.query; // Get the userId from the request query parameter
       const loggedUserId = session.user.id;
-
       if (userId && userId !== loggedUserId) {
         return res.status(401).json({ error: "Unauthorized" });
       }
