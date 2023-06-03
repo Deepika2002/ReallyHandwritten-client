@@ -36,6 +36,7 @@ export default function Verification() {
 useEffect(() => {
   if (session && session.user) {
     setVerificationcode(session.user.verificationCode);
+    console.log(session)
     setUseremail(session.user.email);
   }
 }, [session]);

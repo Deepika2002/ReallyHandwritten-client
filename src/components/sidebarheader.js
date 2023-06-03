@@ -1,6 +1,6 @@
-import { Fragment, useState } from 'react'
-import Image from 'next/image'
-import { Dialog, Menu, Transition } from '@headlessui/react'
+import { Fragment, useState } from "react";
+import Image from "next/image";
+import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   Bars3BottomLeftIcon,
   BellIcon,
@@ -11,38 +11,59 @@ import {
   QuestionMarkCircleIcon,
   Square2StackIcon,
   XMarkIcon,
-  UserCircleIcon
-} from '@heroicons/react/24/outline'
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
-import { useRouter } from 'next/router';
-
+  UserCircleIcon,
+  ArrowRightOnRectangleIcon,
+} from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { useRouter } from "next/router";
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: false },
-  { name: 'Card Templates', href: '/cardtemplates/templates', icon: Square2StackIcon, current: false },
-  { name: 'Import Contacts', href: '/import', icon: ArrowDownTrayIcon, current: false },
-  { name: 'All Contacts', href: '/allcontacts', icon: UserGroupIcon, current: false },
-  { name: 'Settings', href: '/settings', icon: Cog6ToothIcon, current: false },
-  { name: 'Help', href: '/help', icon: QuestionMarkCircleIcon, current: false } 
-]
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: false },
+  {
+    name: "Card Templates",
+    href: "/cardtemplates/templates",
+    icon: Square2StackIcon,
+    current: false,
+  },
+  {
+    name: "Import Contacts",
+    href: "/import",
+    icon: ArrowDownTrayIcon,
+    current: false,
+  },
+  {
+    name: "All Contacts",
+    href: "/allcontacts",
+    icon: UserGroupIcon,
+    current: false,
+  },
+  { name: "Settings", href: "/settings", icon: Cog6ToothIcon, current: false },
+  { name: "Help", href: "/help", icon: QuestionMarkCircleIcon, current: false },
+];
+
 const userNavigation = [
   { name: 'Your Profile', href: '/settings' },
   { name: 'Sign out', href: '#' },
 ]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Sidebarheader() {
-
   const router = useRouter();
 
-  navigation.forEach(item => {
+  navigation.forEach((item) => {
     item.current = item.href === router.pathname;
   });
 
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const HandleLogout = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+      router.push("/login");
+    }
+  };
 
   return (
     <>
@@ -56,7 +77,11 @@ export default function Sidebarheader() {
       */}
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
-          <Dialog as="div" className="relative z-40 lg:hidden" onClose={setSidebarOpen}>
+          <Dialog
+            as="div"
+            className="relative z-40 lg:hidden"
+            onClose={setSidebarOpen}
+          >
             <Transition.Child
               as={Fragment}
               enter="transition-opacity ease-linear duration-300"
@@ -96,18 +121,21 @@ export default function Sidebarheader() {
                         onClick={() => setSidebarOpen(false)}
                       >
                         <span className="sr-only">Close sidebar</span>
-                        <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                        <XMarkIcon
+                          className="h-6 w-6 text-white"
+                          aria-hidden="true"
+                        />
                       </button>
                     </div>
                   </Transition.Child>
                   <div className="flex flex-shrink-0 items-center px-4">
-                  <Image
-                  className="h-12 w-auto sm:h-12"
-                  src="/assets/rhw-logo.png"
-                  width="500"
-                  height="500"
-                  alt=""
-                />
+                    <Image
+                      className="h-12 w-auto sm:h-12"
+                      src="/assets/rhw-logo.png"
+                      width="500"
+                      height="500"
+                      alt=""
+                    />
                   </div>
                   <div className="mt-5 h-0 flex-1 overflow-y-auto">
                     <nav className="space-y-1 px-2">
@@ -117,15 +145,17 @@ export default function Sidebarheader() {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? 'bg-gray-100 text-gray-900'
-                              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                            'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                            "group flex items-center px-2 py-2 text-base font-medium rounded-md"
                           )}
                         >
                           <item.icon
                             className={classNames(
-                              item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                              'mr-4 flex-shrink-0 h-6 w-6'
+                              item.current
+                                ? "text-gray-500"
+                                : "text-gray-400 group-hover:text-gray-500",
+                              "mr-4 flex-shrink-0 h-6 w-6"
                             )}
                             aria-hidden="true"
                           />
@@ -148,13 +178,13 @@ export default function Sidebarheader() {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 pt-5">
             <div className="flex flex-shrink-0 items-center px-4">
-            <Image
-                  className="h-12 w-auto sm:h-12"
-                  src="/assets/rhw-logo.png"
-                  width="500"
-                  height="500"
-                  alt=""
-                />
+              <Image
+                className="h-12 w-auto sm:h-12"
+                src="/assets/rhw-logo.png"
+                width="500"
+                height="500"
+                alt=""
+              />
             </div>
             <div className="flex flex-grow flex-col mt-14">
               <nav className="flex-1 space-y-1 pb-4">
@@ -163,20 +193,34 @@ export default function Sidebarheader() {
                     key={item.name}
                     href={item.href}
                     className={classNames(
-                      item.current ? 'bg-white text-red-900 border-l-4 border-red-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 ',
-                      'group flex items-center px-4 py-2 text-sm font-medium border-l-4'
+                      item.current
+                        ? "bg-white text-red-900 border-l-4 border-red-900"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 ",
+                      "group flex items-center px-4 py-2 text-sm font-medium border-l-4"
                     )}
                   >
                     <item.icon
                       className={classNames(
-                        item.current ? 'text-red-900' : 'text-gray-400 group-hover:text-gray-500',
-                        'mr-3 flex-shrink-0 h-6 w-6'
+                        item.current
+                          ? "text-red-900"
+                          : "text-gray-400 group-hover:text-gray-500",
+                        "mr-3 flex-shrink-0 h-6 w-6"
                       )}
                       aria-hidden="true"
                     />
                     {item.name}
                   </a>
                 ))}
+                <a
+                  onClick={HandleLogout}
+                  className="group cursor-pointer flex items-center px-4 py-2 text-gray-600 text-md font-medium border-l-4 border-transparent hover:border-l-4 hover:bg-gray-100 hover:text-gray-900"
+                >
+                  <ArrowRightOnRectangleIcon
+                    className="hover:text-orange-500 text-gray-400 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6"
+                    aria-hidden="true"
+                  />
+                  Log out
+                </a>
               </nav>
             </div>
           </div>
@@ -199,7 +243,10 @@ export default function Sidebarheader() {
                   </label>
                   <div className="relative w-full text-gray-400 focus-within:text-gray-600">
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-                      <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
+                      <MagnifyingGlassIcon
+                        className="h-5 w-5"
+                        aria-hidden="true"
+                      />
                     </div>
                     <input
                       id="search-field"
@@ -228,7 +275,6 @@ export default function Sidebarheader() {
                       <UserCircleIcon
                         className="h-8 w-8 rounded-full"
                         aria-hidden="true"
-                        
                       />
                     </Menu.Button>
                   </div>
@@ -248,8 +294,8 @@ export default function Sidebarheader() {
                             <a
                               href={item.href}
                               className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
                               {item.name}
@@ -263,10 +309,8 @@ export default function Sidebarheader() {
               </div>
             </div>
           </div>
-
-          
         </div>
       </div>
     </>
-  )
+  );
 }

@@ -50,7 +50,7 @@ export default function Login() {
 
     const fetchSession = async () => {
       const gsession = await getSession();
-      console.log("login session", gsession);
+      // console.log("login session", gsession);
 
       if (!gsession) {
         // If session is not available, redirect to login page
@@ -62,7 +62,7 @@ export default function Login() {
       }
     };
     fetchSession();
-  }, [router]);
+  }, []);
 
   return (
     <div className="auth-btn">
@@ -255,8 +255,6 @@ export default function Login() {
                   )}
                 </div>
               </form>
-
-              
             </div>
             <div className="mt-5 flex justify-center items-center">
               <p className="text-sm">Don&apos;t have an account?</p>
