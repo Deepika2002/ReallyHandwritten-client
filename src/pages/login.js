@@ -54,7 +54,6 @@ export default function Login() {
 
     const fetchSession = async () => {
       const gsession = await getSession();
-      // console.log("login session", gsession);
 
       if (!gsession) {
         // If session is not available, redirect to login page

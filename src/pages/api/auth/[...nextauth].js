@@ -13,9 +13,8 @@ export default NextAuth({
     CredentialsProvider({
       type: "credentials",
       credentials: {},
-      
+
       async authorize(credentials, req) {
-        
         const { email, password } = credentials;
 
         const user = await prisma.user.findUnique({
@@ -29,11 +28,10 @@ export default NextAuth({
         }
 
         if (user && isMatch) {
-          // return {
-          //   ...user,
-          //   id: user.id,
-          // };
-          return user;
+          return {
+            ...user,
+            id: user.id,
+          };
         }
       },
     }),
