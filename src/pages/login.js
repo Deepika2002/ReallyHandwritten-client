@@ -20,7 +20,7 @@ export default function Login() {
     if (status === "unauthenticated") {
       router.replace("/login");
     } else if (status === "authenticated") {
-      router.replace("dashboard");
+      router.replace("/dashboard");
     }
   }, [status]);
 

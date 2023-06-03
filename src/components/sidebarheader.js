@@ -16,8 +16,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
-
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: false },
@@ -54,15 +53,6 @@ function classNames(...classes) {
 
 export default function Sidebarheader() {
   const router = useRouter();
-  const { status, data } = useSession();
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.replace("/login");
-    } else if (status === "authenticated") {
-      router.replace("dashboard");
-    }
-  }, [status]);
 
   navigation.forEach((item) => {
     item.current = item.href === router.pathname;
@@ -72,14 +62,6 @@ export default function Sidebarheader() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
