@@ -28,7 +28,7 @@ export default function Dashboard() {
     return res.json();
   };
 
-  const { data: contacts, error } = useSWR(`/api/contacts/contacts?userId=${session.user.id}`, fetcher);
+  const { data: contacts, error } = useSWR(`/api/contacts/contacts?userId=${session?.user?.id}`, fetcher);
 
   // if (error) return <div>Error loading contacts.</div>;
   // if (!contacts) return <div>Loading contacts...</div>;
