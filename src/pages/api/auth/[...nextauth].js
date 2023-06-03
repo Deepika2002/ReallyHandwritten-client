@@ -11,13 +11,15 @@ export default NextAuth({
   },
   providers: [
     CredentialsProvider({
-      name: "Credentials",
-
+      type: "credentials",
+      credentials: {},
+      
       async authorize(credentials, req) {
+        
         const { email, password } = credentials;
 
         const user = await prisma.user.findUnique({
-          where: { email },
+          where: { email }
         });
 
         const isMatch = await bcrypt.compare(password, user.password);
@@ -43,7 +45,6 @@ export default NextAuth({
         session.user.role = token.role;
         session.user.verificationCode = token.verificationCode;
       }
-
       return session;
     },
     async jwt({ token, user }) {

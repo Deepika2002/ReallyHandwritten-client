@@ -30,10 +30,13 @@ export default function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const payload = { email, password };
+    // const payload = { email, password };
     try {
       setIsloading(true);
-      await signIn("credentials", { ...payload });
+      await signIn("credentials", { 
+        email: email,
+        password: password,
+       });
       setIsloading(false);
     } catch (error) {
       setIsloading(false);
@@ -44,6 +47,7 @@ export default function Login() {
   useEffect(() => {
     const setTheProviders = async () => {
       const setupProviders = await getProviders();
+      console.log(setupProviders)
       setproviders(setupProviders);
     };
     setTheProviders();
