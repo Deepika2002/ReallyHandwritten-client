@@ -58,9 +58,11 @@ export default function Login() {
       if (!gsession) {
         // If session is not available, redirect to login page
         router.push("/login");
-      } else if (gsession.user.role === "ADMIN") {
-        router.push("/admin/dashboard");
-      } else {
+      } 
+      // else if (gsession.user.role === "ADMIN") {
+      //   router.push("/admin/dashboard");
+      // } 
+       {
         router.push("/dashboard");
       }
     };

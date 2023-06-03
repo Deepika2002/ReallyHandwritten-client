@@ -13,15 +13,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
 
-  return {
-    props: {
-      session,
-    },
-  };
-}
 
 export default function AllContacts() {
   const { data: session, status } = useSession();

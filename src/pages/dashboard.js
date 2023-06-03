@@ -5,15 +5,7 @@ import useSWR from 'swr';
 import DonutChart from '../components/DonutChart';
 
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
 
-  return {
-    props: {
-      session,
-    },
-  };
-}
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
