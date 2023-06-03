@@ -22,19 +22,20 @@ export default async function handler(req, res) {
       res.status(500).json({ error: "Failed to create contacts" });
     }
   } else if (req.method === "GET") {
-    try {
-      const { userId } = req.query; // Get the userId from the request query parameter
-      const loggedUserId = session.user.id;
-      if (userId && userId !== loggedUserId) {
-        return res.status(401).json({ error: "Unauthorized" });
-      }
+    // try {
+    //   const { userId } = req.query; // Get the userId from the request query parameter
+    //   const loggedUserId = session.user.id;
+    //   if (userId && userId !== loggedUserId) {
+    //     return res.status(401).json({ error: "Unauthorized" });
+    //   }
 
-      let contacts = await getContacts(loggedUserId); // Fetch contacts for the logged-in user
-      res.status(200).json(contacts);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Failed to fetch contacts" });
-    }
+    //   let contacts = await getContacts(loggedUserId); // Fetch contacts for the logged-in user
+    //   res.status(200).json(contacts);
+    // } catch (error) {
+    //   console.error(error);
+    //   res.status(500).json({ error: "Failed to fetch contacts" });
+    // }
+    console.log("get contacts");
   } else {
     res.status(405).json({ error: "Method Not Allowed" });
   }
