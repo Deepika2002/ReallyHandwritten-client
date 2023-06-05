@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import {  Tab } from "@headlessui/react";
 import Sidebarheader from "../../components/sidebarheader";
 import Image from "next/image";
+import { useSession, getSession } from 'next-auth/react';
+
 
 const card = [
   {
@@ -67,6 +69,7 @@ function classNames(...classes) {
 
 export default function Template() {
     const [preferenceData, setPreferenceData] = useState(null);
+    const { data: session } = useSession();
     const [selectedCard, setSelectedCard] = useState(null);
     const [welcomeInput, setWelcomeInput] = useState(null);
     const [addressClients, setaddressClients] = useState(null);
@@ -96,7 +99,7 @@ export default function Template() {
   
     const fetchPreferenceData = async () => {
       try {
-        const response = await fetch(`/api/userpreferences/${preferenceId}`);
+        const response = await fetch(`/api/userpreferences/${preferenceId}?userId=${session?.user?.id}`);
         if (response.ok) {
           const preference = await response.json();
           setPreferenceData(preference);

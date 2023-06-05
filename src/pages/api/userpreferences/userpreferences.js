@@ -2,22 +2,18 @@ import { getSession } from "next-auth/react";
 import prisma, { createPreferences, getPreferences, updatePreferences } from "../../../../prisma/userpreferences";
 
 export default async function handler(req, res) {
-  const session = await getSession({ req });
-
-  if (!session) {
-    res.status(401).json({ message: "Unauthorized" });
-    return;
-  }
 
   const { method, body } = req;
 
-  const userId = session.user.id;
+  const { userId } = req.query;
+  console.log(req.query)
 
   switch (method) {
     case "POST":
       try {
+        
         console.log("body:", body);
-        const preferences = await createPreferences(body, session);
+        const preferences = await createPreferences(body, userId);
         
         res.status(201).json(preferences);
       } catch (error) {
@@ -37,7 +33,9 @@ export default async function handler(req, res) {
 
     case "PUT":
       try {
-        const preferences = await updatePreferences(req.query.id, body, session);
+        const updateId = req.query.userpreferencesid;
+        console.log(req.query)
+        const preferences = await updatePreferences((updateId), body);
         res.status(200).json(preferences);
       } catch (error) {
         res.status(500).json({ message: error.message });

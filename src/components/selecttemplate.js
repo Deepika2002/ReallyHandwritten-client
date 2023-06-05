@@ -34,6 +34,7 @@ export async function getServerSideProps(context) {
 
 export default function SelectTemplate({ openBox, onClose,onPreferenceSelect }) {
   const [open, setOpen] = useState(openBox);
+
   const [userPreferences, setUserPreferences] = useState([]);
   const [editingPreference, setEditingPreference] = useState(null);
   const { data: session } = useSession();
@@ -45,7 +46,7 @@ export default function SelectTemplate({ openBox, onClose,onPreferenceSelect }) 
 
   const fetchUserPreferences = async () => {
     try {
-      const response = await fetch("/api/userpreferences/userpreferences");
+      const response = await fetch(`/api/userpreferences/userpreferences?userId=${session?.user?.id}`);
       if (response.ok) {
         const preferences = await response.json();
         setUserPreferences(preferences);

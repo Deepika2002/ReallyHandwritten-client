@@ -1,23 +1,15 @@
 // pages/api/contacts/[contactId].js
 
-import { getSession } from 'next-auth/react';
 import { getContactById, updateContact, deleteContact } from '../../../../prisma/contact';
 
 export default async function handler(req, res) {
-  const session = await getSession({ req });
-  console.log("id check",session)
 
-  if (!session) {
-    res.status(401).json({ message: 'Unauthorized' });
-    return;
-  }
-
-  const { contactId } = req.query;
+  const { contactId,userId } = req.query;
 
   if (req.method === 'GET') {
     // Get contact by ID logic
     try {
-      const contact = await getContactById(parseInt(contactId), session.user.id);
+      const contact = await getContactById(parseInt(contactId), userId);
       if (contact) {
         res.status(200).json(contact);
       } else {

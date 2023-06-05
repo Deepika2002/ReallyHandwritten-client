@@ -27,7 +27,7 @@ export default function CardTemplates() {
 
   const fetchUserPreferences = async () => {
     try {
-      const response = await fetch("/api/userpreferences/userpreferences");
+      const response = await fetch(`/api/userpreferences/userpreferences?userId=${session?.user?.id}`);
       if (response.ok) {
         const preferences = await response.json();
         setUserPreferences(preferences);

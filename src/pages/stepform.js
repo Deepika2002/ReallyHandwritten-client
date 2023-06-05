@@ -7,9 +7,24 @@ import WelcomeInput from "../components/stepformcomponents/welcomeinput";
 import WithoutName from "../components/stepformcomponents/withoutname";
 import Sidebarheader from "../components/sidebarheader";
 import SelectCard from "../components/stepformcomponents/selectcard";
+import { useSession, getSession } from "next-auth/react";
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  return {
+    props: {
+      session,
+    },
+  };
+}
 
 export default function StepForm() {
+  
+  const { data: session, status } = useSession();
+  console.log(session)
   const router = useRouter();
+
   const [page, setPage] = useState(0);
   const formList = [
     "welcomeInput",
@@ -102,7 +117,7 @@ export default function StepForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/userpreferences/userpreferences", {
+    const response = await fetch(`/api/userpreferences/userpreferences?userId=${session?.user?.id}`, {
       method: "POST",
       body: JSON.stringify(values),
     });

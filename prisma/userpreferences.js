@@ -1,16 +1,13 @@
 import prisma from "./prisma";
 
-export const createPreferences = async (userpreferences, session) => {
+export const createPreferences = async (userpreferences, userId) => {
   try {
     const parsedPreferences = JSON.parse(userpreferences);
     if (!parsedPreferences.welcomeInput || !parsedPreferences.addressClients || !parsedPreferences.endearingTerm || !parsedPreferences.withoutName || !parsedPreferences.selectCard || !parsedPreferences.messageInput) {
       throw new Error('Invalid preferences data');
     }
 
-    const userId = session?.user?.id;
-    if (!userId) {
-      throw new Error('User not authenticated');
-    }
+
 
     // Retrieve existing preferences for the user
     const existingPreferences = await prisma.userpreference.findMany({ where: { userId } });
@@ -37,7 +34,7 @@ export const createPreferences = async (userpreferences, session) => {
   }
 };
 
-export const updatePreferences = async (id, data, session) => {
+export const updatePreferences = async (id, data, userId) => {
   try {
 
     const updatedPreference = await prisma.userpreference.update({

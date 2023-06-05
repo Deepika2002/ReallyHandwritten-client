@@ -2,18 +2,9 @@ import { getSession } from "next-auth/react";
 import { getPreferenceById, updatePreferences } from "../../../../prisma/userpreferences";
 
 export default async function handler(req, res) {
-  const session = await getSession({ req });
-
-  if (!session) {
-    res.status(401).json({ message: "Unauthorized" });
-    return;
-  }
 
 
-
-
-  const userId = session.user.id;
-  console.log("user",userId)
+ 
   
 
 
@@ -22,6 +13,7 @@ export default async function handler(req, res) {
     case "GET":
       try {
         const id = req.query.userpreferencesid
+        const userId = req.query.userId
         console.log("getid",id)
  
         const preference = await getPreferenceById(userId, (id));

@@ -1,6 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import Sidebarheader from "../components/sidebarheader";
-import { useSession, getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import useSWR from "swr";
 import DonutChart from "../components/DonutChart";
 import { useRouter } from "next/router";

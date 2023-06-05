@@ -9,15 +9,6 @@ import {
   ShieldCheckIcon,
 } from "@heroicons/react/20/solid";
 
-export async function getServerSideProps(context) {
-    const session = await getSession(context);
-  
-    return {
-      props: {
-        session,
-      },
-    };
-  }
 
 
 export default function Verification() {
