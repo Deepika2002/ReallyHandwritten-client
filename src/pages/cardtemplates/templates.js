@@ -19,6 +19,7 @@ export default function CardTemplates() {
   const [userPreferences, setUserPreferences] = useState([]);
   const [editingPreference, setEditingPreference] = useState(null);
   const { data: session } = useSession();
+  console.log("use pref",session)
   const router = useRouter();
 
   useEffect(() => {

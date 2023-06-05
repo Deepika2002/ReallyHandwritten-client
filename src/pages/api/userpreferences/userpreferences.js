@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
     case "PUT":
       try {
-        const updateId = req.query.userpreferencesid;
+  
         console.log(req.query)
         const preferences = await updatePreferences((updateId), body);
         res.status(200).json(preferences);
