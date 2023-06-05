@@ -17,6 +17,7 @@ function classNames(...classes) {
 
 export default function AllContacts() {
   const { data: session, status } = useSession();
+  console.log("session",session)
   const [selectedDate, setSelectedDate] = useState(null);
   const [showSelectTemplate, setShowSelectTemplate] = useState(false); // State variable to control rendering of SelectTemplate
   const [selectedPreferenceId, setSelectedPreferenceId] = useState(null);
@@ -30,7 +31,7 @@ export default function AllContacts() {
     return res.json();
   };
 
-  const { data: contacts, error } = useSWR(`/api/contacts/contacts`, fetcher);
+  const { data: contacts, error } = useSWR(`/api/contacts/contacts?userId=${session?.user?.id}`, fetcher);
 
   if (error) return <div>Error loading contacts.</div>;
   if (!contacts) return <div>Loading contacts...</div>;

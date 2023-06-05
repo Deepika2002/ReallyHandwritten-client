@@ -16,6 +16,7 @@ export default async function handler(req, res) {
   } else if (req.method === "GET") {
     try {
       const { userId } = req.query;
+      console.log(req.query.userId)
       let contacts = await getContacts(userId);
       res.status(200).json(contacts);
     } catch (error) {
