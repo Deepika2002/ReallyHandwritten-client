@@ -6,8 +6,6 @@ import DonutChart from "../components/DonutChart";
 import { useRouter } from "next/router";
 import {
   ExclamationCircleIcon,
-  EnvelopeIcon,
-  UserIcon,
 } from "@heroicons/react/20/solid";
 
 export default function Dashboard() {
@@ -59,6 +57,9 @@ export default function Dashboard() {
     { name: "Gift Cards Sent", stat: totalCardsSent },
     { name: "Pending", stat: pending },
   ];
+
+  if (error) return <div>Error loading contacts.</div>;
+  if (!contacts) return <div>Loading contacts...</div>;
 
   return (
     <>

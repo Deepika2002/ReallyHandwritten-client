@@ -13,6 +13,7 @@ import {
   XMarkIcon,
   UserCircleIcon,
   ArrowRightOnRectangleIcon,
+  RectangleStackIcon
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
@@ -21,7 +22,19 @@ import { useSession, signOut } from "next-auth/react";
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: false },
   {
-    name: "Card Templates",
+    name: "All Contacts",
+    href: "/allcontacts",
+    icon: UserGroupIcon,
+    current: false,
+  },
+  {
+    name: "Contact Groups",
+    href: "/contactgroups",
+    icon: RectangleStackIcon,
+    current: false,
+  },
+  {
+    name: "Templates",
     href: "/cardtemplates/templates",
     icon: Square2StackIcon,
     current: false,
@@ -32,12 +45,7 @@ const navigation = [
     icon: ArrowDownTrayIcon,
     current: false,
   },
-  {
-    name: "All Contacts",
-    href: "/allcontacts",
-    icon: UserGroupIcon,
-    current: false,
-  },
+  
   { name: "Settings", href: "/settings", icon: Cog6ToothIcon, current: false },
   { name: "Help", href: "/help", icon: QuestionMarkCircleIcon, current: false },
 ];
