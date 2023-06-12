@@ -14,9 +14,13 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (status !== "authenticated") {
-      router.replace("/login");
+      const redirectTimer = setTimeout(() => {
+        router.replace("/login");
+      }, 3000); // 3000 milliseconds = 3 seconds
+
+      return () => clearTimeout(redirectTimer); // Clear the timeout if the component unmounts before the delay is completed
     }
-  }, [status]);
+  }, [status, router]);
 
   const fetcher = async (url) => {
     const res = await fetch(url);
